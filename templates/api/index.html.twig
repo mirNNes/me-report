@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}API Landningssida{% endblock %}
+
+{% block body %}
+    <h1>API: Slumpar fram roliga citat</h1>
+    <ul>
+        {% for route in routes %}
+            <li><a href="{{ route.path }}">{{ route.name }}</a> → <code>{{ route.path }}</code></li>
+        {% endfor %}
+    </ul>
+     <a href="{{ asset('/img/funny.jpg') }}">
+        <img src="{{ asset('/img/funny.jpg') }}" alt="">
+    </a>
+{% endblock %}

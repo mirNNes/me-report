@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Från Sörbäcken till servern</h1>
+    <p>Vi är två lätt förvirrade (eller som man säger hemma i Sörbäcken – lengräddade) bröder, Leif och Billy. Vi kommer från de norrländska skogarna och har levt ett liv som ständigt arbetslösa och mer eller mindre panka.
+
+Men nu har vi fått nog.
+
+Vi bestämde oss för att ta tag i livet och börja plugga. Valet föll på webbutveckling – någon sa att det är bra betalt och att man kan jobba hemifrån, vilket lät alldeles för bra för att inte prova.
+
+Nu ger vi det en chans. Vi får väl se hur länge vi håller ut!</p>
+    <a href="{{ asset('/img/vi.jpg') }}">
+        <img src="{{ asset('/img/vi.jpg') }}" alt="">
+    </a>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Min Symfony-sajt{% endblock %}</title>
+        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="site-header">
+            <span class="site-title"> Symfony nr. 9 by Mirnes van Beethoven</span>
+        </header>
+
+        <nav class="site-nav">
+            <ul>
+                <li>
+                    <a href="{{ path('home') }}" class="{{ app.request.attributes.get('_route') == 'home' ? 'active' : '' }}">Hem</a>
+                </li>
+                <li>
+                    <a href="{{ path('about') }}" class="{{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}">Om Kursen</a>
+                </li>
+                <li>
+                    <a href="{{ path('report') }}" class="{{ app.request.attributes.get('_route') starts with 'report' ? 'active' : '' }}">Redovisning</a>
+                </li>
+                <li>
+                    <a href="{{ path('lucky') }}" class="{{ app.request.attributes.get('_route') == 'lucky' ? 'active' : '' }}">Lucky</a>
+                </li>
+                <li>
+                    <a href="{{ path('api') }}" class="{{ app.request.attributes.get('_route') == 'api' ? 'active' : '' }}">Api</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="site-content">
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <p>© 2025 | Mirnes BTH | DV1608 V25 lp4 Objektorienterade webbteknologier </p>
+        </footer>
+    </body>
+</html>

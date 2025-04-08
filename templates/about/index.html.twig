@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <h1>Objektorienterade webteknologier (MVC)</h1>
+    <p>Kursen "Objektorienterade webbteknologier", som vi internt kallar mvc, fokuserar på objektorienterad programmering i PHP med hjälp av välkända webbramverk. I kursen behandlas även enhetstestning, kodkvalitet samt databaskopplingar via objekt-relationell mappning (ORM).
+
+Kursansvarig och examinator är Mikael Roos. Undervisningen leds av Mikael tillsammans med Marie Grahn.
+
+Kursen är uppdelad i sex moment, där varje moment ska genomföras och lämnas in. Kursen avslutas med ett examinerande moment (kmom07/10), som sammanfattar och bedömer de kunskaper som inhämtats under kursens gång.</p>
+    <a href="{{ asset('/img/about.jpg') }}">
+        <img src="{{ asset('/img/about.jpg') }}" alt="">
+    </a>
+{% endblock %}
