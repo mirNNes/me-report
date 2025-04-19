@@ -35,12 +35,25 @@
                 <li>
                     <a href="{{ path('api') }}" class="{{ app.request.attributes.get('_route') == 'api' ? 'active' : '' }}">Api</a>
                 </li>
+                <li>
+                    <a href="{{ path('card_card') }}" class="{{ app.request.attributes.get('_route') starts with 'card' ? 'active' : '' }}">Card game</a>
+
+
+                </li>
             </ul>
         </nav>
 
         <main class="site-content">
-            {% block body %}{% endblock %}
-        </main>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    {% block body %}{% endblock %}
+</main>
+
 
         <footer class="site-footer">
             <p>© 2025 | Mirnes BTH | DV1608 V25 lp4 Objektorienterade webbteknologier </p>
