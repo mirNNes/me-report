@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Drog Flera Kort{% endblock %}
+
+{% block body %}
+    <h1>Drog Flera Kort</h1>
+    <ul>
+        {% for card in drawnCards %} {# Använd 'drawnCards' här #}
+            {% include 'card/_card.html.twig' with { card: card } %}
+        {% endfor %}
+    </ul>
+    <p>Antal kort kvar: {{ remaining }}</p>
+{% endblock %}

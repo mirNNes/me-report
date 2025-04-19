@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blandad Kortlek{% endblock %}
+
+{% block body %}
+    <h1>Blandad Kortlek</h1>
+    <ul>
+        {% for card in deck %}
+            {% include 'card/_card.html.twig' with { card: card } %}
+        {% endfor %}
+    </ul>
+{% endblock %}

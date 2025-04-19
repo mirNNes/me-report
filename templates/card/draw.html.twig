@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Drog Kort{% endblock %}
+
+{% block body %}
+    <h1>Drog Kort</h1>
+
+    <div class="card-container">
+        {% for card in drawnCards %}
+            {% include 'card/_card.html.twig' with { card: card } %}
+        {% endfor %}
+    </div>
+
+    <p>Antal kort kvar: {{ remaining }}</p>
+{% endblock %}
