@@ -5,6 +5,7 @@ namespace App\Game;
 class Card
 {
     protected string $suit;
+    protected int $value;
 
     public function __construct(string $suit, int $value)
     {

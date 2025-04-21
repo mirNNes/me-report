@@ -2,6 +2,10 @@
 <html lang="sv">
     <head>
         <meta charset="UTF-8">
+        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
         <title>{% block title %}Min Symfony-sajt{% endblock %}</title>
         
         {% block stylesheets %}
@@ -36,7 +40,7 @@
                     <a href="{{ path('api') }}" class="{{ app.request.attributes.get('_route') == 'api' ? 'active' : '' }}">Api</a>
                 </li>
                 <li>
-                    <a href="{{ path('card_card') }}" class="{{ app.request.attributes.get('_route') starts with 'card' ? 'active' : '' }}">Card game</a>
+                    <a href="{{ path('card_card') }}" class="{{ app.request.attributes.get('_route') starts with 'card' ? 'active' : '' }}">Kortlek</a>
 
 
                 </li>

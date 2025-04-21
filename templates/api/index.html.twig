@@ -3,13 +3,42 @@
 {% block title %}API Landningssida{% endblock %}
 
 {% block body %}
-    <h1>API: Slumpar fram roliga citat</h1>
-    <ul>
-        {% for route in routes %}
-            <li><a href="{{ route.path }}">{{ route.name }}</a> → <code>{{ route.path }}</code></li>
-        {% endfor %}
-    </ul>
-     <a href="{{ asset('/img/funny.jpg') }}">
-        <img src="{{ asset('/img/funny.jpg') }}" alt="">
+    <h1>API: Kortleksfunktioner</h1>
+
+    <div class="route-group">
+        <form method="get" action="/api/quote">
+            <button type="submit" class="api-button">📜 Dagens citat</button>
+        </form>
+    </div>
+
+    <div class="route-group">
+        <form method="get" action="/api/deck">
+            <button type="submit" class="api-button">🗂️ Visa sorterad kortlek</button>
+        </form>
+    </div>
+
+    <div class="route-group">
+        <form method="post" action="/api/deck/shuffle">
+            <button type="submit" class="api-button">🔀 Blanda kortleken</button>
+        </form>
+    </div>
+
+    <div class="route-group">
+        <form method="post" action="/api/deck/draw">
+            <button type="submit" class="api-button">🃏 Dra 1 kort</button>
+        </form>
+    </div>
+
+    <div class="route-group">
+        <form method="post" action="/api/deck/draw/3">
+            <button type="submit" class="api-button">🃏🃏🃏 Dra 3 kort</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <h2>Bonusbild!</h2>
+    <a href="{{ asset('/img/funny.jpg') }}">
+        <img src="{{ asset('/img/funny.jpg') }}" alt="funny" style="max-width: 300px;">
     </a>
 {% endblock %}

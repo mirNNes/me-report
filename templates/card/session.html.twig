@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Session Debug{% endblock %}
+
+{% block body %}
+
+    {# Flash-meddelande #}
+    {% for message in app.flashes('success') %}
+        <div style="background-color: #d4edda; padding: 1em; border-radius: 5px; color: #155724;">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h2>Sessionsinnehåll:</h2>
+    <pre>{{ dump(sessionData) }}</pre>
+
+{% endblock %}

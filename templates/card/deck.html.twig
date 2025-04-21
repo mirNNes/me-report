@@ -1,17 +1,16 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Kortspel{% endblock %}
+{% block title %}Kortlek{% endblock %}
 
 {% block body %}
-    <h1>Kortlek</h1>
-    <ul>
-        {% for card in deck %}
-            {% include 'card/_card.html.twig' with { card: card } %}
-        {% endfor %}
-    </ul>
-    
-    <div class="actions">
-        <a href="{{ path('card_deck_shuffle') }}">Blanda kortleken</a>
-        <a href="{{ path('card_deck_draw', { 'number': 1 }) }}">Dra ett kort</a>
+    <div class="deck-page">
+        <h1>Kortlek</h1>
+
+        <div class="card-container">
+            {% for card in deck %}
+                {% include 'card/_card.html.twig' with { card: card } %}
+            {% endfor %}
+        </div>
+        
     </div>
 {% endblock %}
