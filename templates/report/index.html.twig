@@ -21,8 +21,43 @@ objektorientering fungerar i PHP. </p> <h3>PHPs modell för klasser och objekt �
    lite tuffare utmaningar senare i kursen. </p>
     <section>
      <h2>kmom02</h2>
-    <p></p>
-    </section>
+<p>
+    <strong>Vad är arv, komposition, interface och trait?</strong><br>
+    Arv betyder att en klass kan ärva (ta) funktioner och egenskaper från en annan klass. I min kod är <code>CardGraphic</code> en klass som ärver från <code>Card</code>. Den får allt som <code>Card</code> har, och lägger till mer.<br><br>
+
+    Komposition betyder att en klass använder andra objekt. Till exempel använder <code>DeckOfCards</code> många <code>Card</code>-objekt för att skapa en kortlek. Även <code>CardHand</code> använder flera kort.<br><br>
+
+    Interface är som ett "avtal" som säger vilka metoder en klass måste ha. Jag använde inte interface i denna uppgift, men jag förstår hur man kan använda det om flera klasser ska ha samma funktioner.<br><br>
+
+    Trait är ett sätt att återanvända kod i flera klasser. Jag använde inte trait i denna uppgift, men det kan vara bra om man vill dela kod mellan flera klasser.
+</p>
+
+<p>
+    <strong>Min kod och hur jag löste uppgiften</strong><br>
+    Jag har skapat dessa klasser:<br><br>
+    <ul>
+        <li><strong>Card:</strong> Ett vanligt kort med färg och värde.</li>
+        <li><strong>CardGraphic:</strong> En klass som ärver från <code>Card</code>. Den visar kortet med symboler (♥, ♠, ♦, ♣).</li>
+        <li><strong>DeckOfCards:</strong> Skapar en kortlek, blandar och låter spelaren dra kort.</li>
+        <li><strong>CardHand:</strong> Sparar kort som spelaren har dragit.</li>
+    </ul>
+</p>
+
+<p>
+    Jag tycker att min lösning blev ganska bra. Koden fungerar och jag lärde mig mycket. Jag återanvände delar av kod och struktur från övningen med "Pig" och "Dice", vilket hjälpte mig att komma igång snabbare.
+    Jag funderade på att dela upp min CSS i flera filer, men jag valde att inte göra det. Jag var orolig att det skulle bli för många filer, eftersom jag redan har många controllers, klasser och Twig-mallar. Därför behöll jag allt i en fil, för att hålla det enklare just nu.
+</p>
+
+<p>
+    <strong>Att jobba med Symfony och MVC</strong><br>
+    Symfony är ett stort ramverk, men det hjälper till att hålla ordning på koden. Det finns andra ramverk som kanske har mer funktioner eller är enklare på vissa sätt. Men för mig som nybörjare känns Symfony lagom. Det är tydligt hur man delar upp koden i <strong>Model</strong>, <strong>View</strong> och <strong>Controller</strong>, och det gör det lättare att förstå hur allt hänger ihop.
+</p>
+
+<p>
+    <strong>TIL – Today I Learned</strong><br>
+    Jag lärde mig mer om hur man använder klasser i PHP, hur man skapar objekt, och hur man visar information i Twig (HTML). Jag förstod också bättre hur man sparar data i sessioner och visar den senare. Symfony känns lite lättare nu.
+</p>
+
     <section>
      <h2>kmom03</h2>
     <p></p>
