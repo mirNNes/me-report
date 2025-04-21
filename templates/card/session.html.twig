@@ -4,12 +4,7 @@
 
 {% block body %}
 
-    {# Flash-meddelande #}
-    {% for message in app.flashes('success') %}
-        <div style="background-color: #d4edda; padding: 1em; border-radius: 5px; color: #155724;">
-            {{ message }}
-        </div>
-    {% endfor %}
+    {% include 'flash.html.twig' %}  {# Inkluderar flash-meddelanden #}
 
     <h2>Sessionsinnehåll:</h2>
     <pre>{{ dump(sessionData) }}</pre>

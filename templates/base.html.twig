@@ -48,17 +48,9 @@
         </nav>
 
         <main class="site-content">
-
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-info">{{ message }}</div>
-        {% endfor %}
-    {% endfor %}
-
+        {% include 'flash.html.twig' %} 
     {% block body %}{% endblock %}
-</main>
-
-
+         </main>
         <footer class="site-footer">
             <p>© 2025 | Mirnes BTH | DV1608 V25 lp4 Objektorienterade webbteknologier </p>
         </footer>
