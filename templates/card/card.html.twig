@@ -16,4 +16,42 @@
             </ul>
         </div>
     </nav>
+
+    <section>
+        <h2>Beskrivning av klasser</h2>
+
+        <img src="{{ asset('/img/uml.png') }}" alt="">
+
+        <h3>Card (App\Game\Card)</h3>
+        <p>
+            Denna klass representerar ett kort i en kortlek. Ett kort har två huvudsakliga attribut:
+            <strong>suit</strong> (färg) och <strong>value</strong> (värde). 
+            Färgen på kortet kan vara exempelvis hjärter, spader, ruter eller klöver, 
+            och värdet kan vara från 2 till 10 samt de fyra kungliga korten: knekt, dam, kung och ess.
+        </p>
+
+        <h3>CardGraphic (App\Card\CardGraphic)</h3>
+        <p>
+            CardGraphic är en subklass till Card och tillhandahåller en grafisk representation 
+            av kortet. Den använder en konstant lista med symboler för varje färg och har 
+            en metod <code>__toString()</code> som returnerar kortets värde och symbol i grafisk form.
+            Detta gör det möjligt att visa kortet visuellt på användargränssnittet.
+        </p>
+
+        <h3>CardHand (App\Game\CardHand)</h3>
+        <p>
+            CardHand representerar en hand av kort. Den innehåller en array av <code>Card</code>-objekt 
+            och har metoder för att lägga till kort i handen och hämta alla kort. Handen kan användas 
+            för att hålla de kort som en spelare har dragit under en spelomgång.
+        </p>
+
+        <h3>DeckOfCards (App\Game\DeckOfCards)</h3>
+        <p>
+            DeckOfCards representerar en kortlek och innehåller en array av <code>Card</code>-objekt. 
+            Den har metoder för att skapa kortleken, blanda korten, dra kort samt räkna antalet kort i leken. 
+            DeckOfCards använder <code>Card</code> för att skapa varje kort i kortleken och säkerställer att 
+            korten hanteras på ett korrekt sätt genom hela spelet.
+        </p>
+    </section>
+
 {% endblock %}
