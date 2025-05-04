@@ -6,37 +6,37 @@
     <h1>API:</h1>
 
     <div class="route-group">
-        <form method="get" action="/api/quote">
+        <form method="get" action="{{ path('api_quote') }}">
             <button type="submit" class="api-button">📜 Dagens citat</button>
         </form>
     </div>
 
     <div class="route-group">
-        <form method="get" action="/api/deck">
+        <form method="get" action="{{ path('api_deck') }}">
             <button type="submit" class="api-button">🗂️ Visa sorterad kortlek</button>
         </form>
     </div>
 
     <div class="route-group">
-        <form method="post" action="/api/deck/shuffle">
+        <form method="post" action="{{ path('api_deck_shuffle') }}">
             <button type="submit" class="api-button">🔀 Blanda kortleken</button>
         </form>
     </div>
 
     <div class="route-group">
-        <form method="post" action="/api/deck/draw">
+        <form method="post" action="{{ path('api_deck_draw_one') }}">
             <button type="submit" class="api-button">🃏 Dra 1 kort</button>
         </form>
     </div>
 
     <div class="route-group">
-        <form method="post" action="/api/deck/draw/3">
+        <form method="post" action="{{ path('api_deck_draw_many', {'number': 3}) }}">
             <button type="submit" class="api-button">🃏🃏🃏 Dra 3 kort</button>
         </form>
     </div>
 
     <hr>
-    <a href="{{ asset('/img/funny.jpg') }}">
-        <img src="{{ asset('/img/funny.jpg') }}" alt="funny" style="max-width: 300px;">
+    <a href="{{ asset('img/funny.jpg') }}">
+        <img src="{{ asset('img/funny.jpg') }}" alt="funny" style="max-width: 300px;">
     </a>
 {% endblock %}

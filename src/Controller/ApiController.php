@@ -20,7 +20,7 @@ class ApiController extends AbstractController
                 ['name' => 'Visa sorterad kortlek', 'path' => '/api/deck'],
                 ['name' => 'Blanda kortlek', 'path' => '/api/deck/shuffle'],
                 ['name' => 'Dra ett kort', 'path' => '/api/deck/draw'],
-                ['name' => 'Dra flera kort', 'path' => '/api/deck/draw/3'], // exempel med 3 kort
+                ['name' => 'Dra flera kort', 'path' => '/api/deck/draw/3'],
             ],
         ]);
     }
