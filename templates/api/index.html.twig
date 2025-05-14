@@ -3,7 +3,7 @@
 {% block title %}API Landningssida{% endblock %}
 
 {% block body %}
-    <h1>API:</h1>
+    <h1>API</h1>
 
     <div class="route-group">
         <form method="get" action="{{ path('api_quote') }}">
@@ -34,6 +34,13 @@
             <button type="submit" class="api-button">🃏🃏🃏 Dra 3 kort</button>
         </form>
     </div>
+
+    <div class="route-group">
+    <form method="get" action="{{ path('api_game21') }}">
+        <button type="submit" class="api-button">🧠 Visa 21-spelstatus</button>
+    </form>
+</div>
+
 
     <hr>
     <a href="{{ asset('img/funny.jpg') }}">

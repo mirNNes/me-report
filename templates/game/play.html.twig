@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spela 21{% endblock %}
+
+{% block body %}
+    <h1>Spel: 21</h1>
+
+    <h2>Spelarens hand : {{ playerScore }} </h2>
+    
+    <div class="card-container">
+        {% for card in playerHand %}
+            {% include 'card/_card.html.twig' with { card: card } %}
+        {% endfor %}
+    </div>
+
+    {% if gameOver %}
+        <h2>Bankens hand : {{ bankScore }} </h2>
+        <div class="card-container">
+            {% for card in bankHand %}
+                {% include 'card/_card.html.twig' with { card: card } %}
+            {% endfor %}
+        </div>
+
+        <h3>Vinnare: {{ winner }}</h3>
+
+        <div class="actions">
+            <a class="btn btn-primary" href="{{ path('game_start') }}">Ny omgång</a>
+        </div>
+    {% else %}
+        <div class="actions">
+            <form method="post" action="{{ path('game_draw') }}">
+                <button type="submit" class="btn btn-primary">Ta kort</button>
+            </form>
+
+            <form method="post" action="{{ path('game_stay') }}">
+                <button type="submit" class="btn btn-primary">Stanna</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

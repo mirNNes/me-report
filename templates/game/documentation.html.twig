@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dokumentation – Kortspel 21{% endblock %}
+
+{% block body %}
+    <h1>Dokumentation för spelet 21</h1>
+
+    <h2>Flödesschema</h2>
+    <p>Se hur spelet fungerar i denna förenklade bild:</p>
+    <img src="{{ asset('build/images/flowchart21.png') }}" alt="Flödesschema för spelet 21" style="max-width: 500px;">
+
+    <h2>Pseudokod</h2>
+    <pre>
+starta spel
+spelare får två kort
+så länge spelare vill:
+    dra kort
+    om poäng > 21:
+        banken vinner
+när spelare stannar:
+    bankens tur
+    dra kort tills bankens poäng >= 17
+    jämför poäng och avgör vinnare
+    </pre>
+
+    <h2>Klasser</h2>
+    <ul>
+        <li><strong>Card</strong>: Representerar ett enskilt kort.</li>
+        <li><strong>CardHand</strong>: En spelares eller bankens kort.</li>
+        <li><strong>DeckOfCards</strong>: Kortleken som används för att dra kort.</li>
+        <li><strong>Game21</strong>: Håller i spelrundan och logik.</li>
+    </ul>
+
+    <p><a href="{{ path('game_intro') }}">Tillbaka till spelet</a></p>
+{% endblock %}

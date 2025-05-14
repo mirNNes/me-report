@@ -51,6 +51,12 @@
 
         "csfix": "PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests",
         "csfix:dry": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src testsfix src --dry-run -v",
+        "phpmd": "tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml || true",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon.dist || true",
+        "lint": [
+            "@phpmd",
+            "@phpstan"
+        ],
 
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
@@ -74,6 +80,8 @@
         }
     },
     "require-dev": {
+        "phpmd/phpmd": "^2.15",
+        "phpstan/phpstan": "^2.1",
         "symfony/maker-bundle": "^1.62",
         "symfony/web-profiler-bundle": "6.4.*"
     }

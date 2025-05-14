@@ -5,7 +5,6 @@
         <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
         <title>{% block title %}Min Symfony-sajt{% endblock %}</title>
         
         {% block stylesheets %}
@@ -19,7 +18,7 @@
     </head>
     <body>
         <header class="site-header">
-            <span class="site-title"> Symfony nr. 9 by Mirnes van Beethoven</span>
+            <span class="site-title">Symfony nr. 9 by Mirnes van Beethoven</span>
         </header>
 
         <nav class="site-nav">
@@ -41,16 +40,18 @@
                 </li>
                 <li>
                     <a href="{{ path('card_card') }}" class="{{ app.request.attributes.get('_route') starts with 'card' ? 'active' : '' }}">Kortlek</a>
-
-
+                </li>
+                <li>
+                    <a href="{{ path('game_intro') }}" class="{{ app.request.attributes.get('_route') starts with 'game' ? 'active' : '' }}">Kortspel 21</a>
                 </li>
             </ul>
         </nav>
 
         <main class="site-content">
-        {% include 'flash.html.twig' %} 
-    {% block body %}{% endblock %}
-         </main>
+            {% include 'flash.html.twig' %} 
+            {% block body %}{% endblock %}
+        </main>
+
         <footer class="site-footer">
             <p>© 2025 | Mirnes BTH | DV1608 V25 lp4 Objektorienterade webbteknologier </p>
         </footer>

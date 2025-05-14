@@ -25,7 +25,9 @@ class DeckOfCards
 
     public function draw(int $number = 1): array
     {
-        return array_splice($this->deck, 0, $number);
+        $cardsDrawn = array_splice($this->deck, 0, $number);
+
+        return $cardsDrawn;
     }
 
     public function getDeck(): array

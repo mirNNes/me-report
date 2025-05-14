@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kortspel 21 – Start{% endblock %}
+
+{% block body %}
+    <h1>Kortspel: 21</h1>
+
+    <p>Målet med spelet är att komma så nära 21 som möjligt utan att gå över. Ess är värda 1 eller 14 poäng. Klädda kort (knekt, dam, kung) är värda 10.</p>
+
+    <h2>Regler</h2>
+    <ul>
+        <li>Du börjar med två kort och kan välja att ta fler ("ta kort") eller stanna.</li>
+        <li>Om du går över 21 så vinner banken automatiskt.</li>
+        <li>När du stannar spelar banken. Banken drar kort tills den har 17 eller mer.</li>
+        <li>Vid lika vinner banken.</li>
+    </ul>
+
+    <a class="btn btn-primary" href="{{ path('game_play') }}">Starta spelet</a><br><br>
+    <a class="btn btn-primary" href="{{ path('game_documentation') }}">Läs dokumentation</a>
+{% endblock %}

@@ -11,6 +11,11 @@ body {
     color: #333;
 }
 
+h1, h2, h3 {
+    text-align: center;
+}
+
+
 .site-header {
     background-image: url('../img/background.jpg');
     background-size: cover;
@@ -421,3 +426,29 @@ form {
     border-radius: 5px;
     margin-bottom: 1em;
 }
+
+.btn.btn-primary {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    background-color: #193146; /* Blå färg */
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.btn.btn-primary:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+}
+
+.btn.btn-primary:active {
+    background-color: #0d47a1;
+    transform: translateY(0);
+}
+

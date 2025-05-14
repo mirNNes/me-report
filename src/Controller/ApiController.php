@@ -98,4 +98,28 @@ class ApiController extends AbstractController
             'remaining_cards' => $deck->count(),
         ]);
     }
+
+    #[Route('/api/game21', name: 'api_game21')]
+    public function game21Status(SessionInterface $session): JsonResponse
+    {
+        $playerHand = $session->get('playerHand', []);
+        $bankHand = $session->get('bankHand', []);
+        $playerScore = $session->get('playerScore', 0);
+        $bankScore = $session->get('bankScore', null);
+        $gameOver = $session->get('gameOver', false);
+        $winner = $session->get('winner', null);
+
+        $playerHandStrings = array_map(fn ($card) => $card->getAsString(), $playerHand);
+        $bankHandStrings = array_map(fn ($card) => $card->getAsString(), $bankHand);
+
+        return $this->json([
+            'player_hand' => $playerHandStrings,
+            'player_score' => $playerScore,
+            'bank_hand' => $bankHandStrings,
+            'bank_score' => $bankScore,
+            'game_over' => $gameOver,
+            'winner' => $winner,
+        ]);
+    }
+
 }
