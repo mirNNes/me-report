@@ -451,4 +451,57 @@ form {
     background-color: #0d47a1;
     transform: translateY(0);
 }
+.documentation-page h1,
+.documentation-page h2 {
+    color: #1e1e2f;
+    margin-bottom: 1rem;
+}
+
+.documentation-page pre {
+    background-color: #f1f1f1;
+    border-left: 4px solid #1e1e2f;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin: 1rem 0;
+}
+
+.documentation-page ul {
+    background: #fff;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid #007BFF;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    list-style-type: square;
+    margin-bottom: 2rem;
+}
+
+.documentation-page ul li {
+    margin: 0.5rem 0;
+}
+
+.documentation-page img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.documentation-page a {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border 0.2s;
+}
+
+.documentation-page a:hover {
+    border-bottom: 2px solid #007bff;
+}
 

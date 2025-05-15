@@ -3,11 +3,12 @@
 {% block title %}Dokumentation – Kortspel 21{% endblock %}
 
 {% block body %}
+<div class="documentation-page">
     <h1>Dokumentation för spelet 21</h1>
 
     <h2>Flödesschema</h2>
     <p>Se hur spelet fungerar i denna förenklade bild:</p>
-    <img src="{{ asset('build/images/flowchart21.png') }}" alt="Flödesschema för spelet 21" style="max-width: 500px;">
+    <img src="{{ asset('build/images/flowchart21.png') }}" alt="Flödesschema för spelet 21">
 
     <h2>Pseudokod</h2>
     <pre>
@@ -31,5 +32,7 @@ när spelare stannar:
         <li><strong>Game21</strong>: Håller i spelrundan och logik.</li>
     </ul>
 
-    <p><a href="{{ path('game_intro') }}">Tillbaka till spelet</a></p>
+    <p>
+    <a class="btn btn-primary" href="{{ path('game_intro') }}">Tillbaka till spelet</a></p>
+</div>
 {% endblock %}

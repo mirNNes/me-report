@@ -3,6 +3,7 @@
 {% block title %}Kortspel 21 – Start{% endblock %}
 
 {% block body %}
+<div class="documentation-page">
     <h1>Kortspel: 21</h1>
 
     <p>Målet med spelet är att komma så nära 21 som möjligt utan att gå över. Ess är värda 1 eller 14 poäng. Klädda kort (knekt, dam, kung) är värda 10.</p>
@@ -17,4 +18,5 @@
 
     <a class="btn btn-primary" href="{{ path('game_play') }}">Starta spelet</a><br><br>
     <a class="btn btn-primary" href="{{ path('game_documentation') }}">Läs dokumentation</a>
+    </div>
 {% endblock %}

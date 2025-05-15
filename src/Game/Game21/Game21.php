@@ -22,37 +22,45 @@ class Game21
 
     public function startGame(): void
     {
-        $this->playerHand->addCard($this->deck->draw()[0]);
-        $this->playerHand->addCard($this->deck->draw()[0]);
+        $this->drawCardToPlayer();
+        $this->drawCardToPlayer();
     }
 
     public function playerDraw(): void
     {
-        $this->playerHand->addCard($this->deck->draw()[0]);
+        $this->drawCardToPlayer();
+    }
+
+    public function playerDrawAndCheck(): void
+    {
+        $this->playerDraw();
+        if ($this->getPlayerScore() > 21) {
+            $this->bankTurn();
+        }
     }
 
     public function bankTurn(): void
     {
-        $this->bankHand->addCard($this->deck->draw()[0]);
-        $this->bankHand->addCard($this->deck->draw()[0]);
+        $this->drawCardToBank();
+        $this->drawCardToBank();
 
         while ($this->getBankScore() < 17) {
-            $this->bankHand->addCard($this->deck->draw()[0]);
+            $this->drawCardToBank();
         }
 
         $this->isGameOver = true;
     }
 
-
-
-    public function getPlayerHand(): CardHand
+    public function getGameState(): array
     {
-        return $this->playerHand;
-    }
-
-    public function getBankHand(): CardHand
-    {
-        return $this->bankHand;
+        return [
+            'playerHand' => $this->playerHand->getCards(),
+            'playerScore' => $this->getPlayerScore(),
+            'bankHand' => $this->isGameOver ? $this->bankHand->getCards() : [],
+            'bankScore' => $this->isGameOver ? $this->getBankScore() : null,
+            'gameOver' => $this->isGameOver,
+            'winner' => $this->isGameOver ? $this->determineWinner() : null,
+        ];
     }
 
     public function getPlayerScore(): int
@@ -65,9 +73,16 @@ class Game21
         return $this->bankHand->getScore();
     }
 
-    public function isGameOver(): bool
+    private function drawCardToPlayer(): void
     {
-        return $this->isGameOver;
+        $card = $this->deck->draw()[0];
+        $this->playerHand->addCard($card);
+    }
+
+    private function drawCardToBank(): void
+    {
+        $card = $this->deck->draw()[0];
+        $this->bankHand->addCard($card);
     }
 
     public function determineWinner(): string
