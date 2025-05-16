@@ -100,30 +100,30 @@ class ApiController extends AbstractController
     }
 
     #[Route('/api/game21', name: 'api_game21')]
-public function game21Status(SessionInterface $session): JsonResponse
-{
-    $game = $session->get('game21');
+    public function game21Status(SessionInterface $session): JsonResponse
+    {
+        $game = $session->get('game21');
 
-    if (!$game) {
+        if (!$game) {
+            return $this->json([
+                'message' => 'Spelet har inte startat.'
+            ]);
+        }
+
+        $state = $game->getGameState();
+
+        $playerHand = array_map(fn ($card) => $card->getAsString(), $state['playerHand']);
+        $bankHand = array_map(fn ($card) => $card->getAsString(), $state['bankHand']);
+
         return $this->json([
-            'message' => 'Spelet har inte startat.'
+            'player_hand' => $playerHand,
+            'player_score' => $state['playerScore'],
+            'bank_hand' => $bankHand,
+            'bank_score' => $state['bankScore'],
+            'game_over' => $state['gameOver'],
+            'winner' => $state['winner'],
         ]);
     }
-
-    $state = $game->getGameState();
-
-    $playerHand = array_map(fn($card) => $card->getAsString(), $state['playerHand']);
-    $bankHand = array_map(fn($card) => $card->getAsString(), $state['bankHand']);
-
-    return $this->json([
-        'player_hand' => $playerHand,
-        'player_score' => $state['playerScore'],
-        'bank_hand' => $bankHand,
-        'bank_score' => $state['bankScore'],
-        'game_over' => $state['gameOver'],
-        'winner' => $state['winner'],
-    ]);
-}
 
 
 }

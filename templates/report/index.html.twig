@@ -6,61 +6,115 @@
     <h1>Report</h1>
 
     <section>
-    <h2>kmom01</h2>
-<h3>Förkunskaper och tidigare erfarenheter kring objektorientering</h3> <p> Den enda objektorienterade programmering jag gjort innan den här kursen är i oopythonkursen. 
-Kenneth nämnde det kort i JavaScript-kursen, men då var det inte aktuellt så jag la inte så mycket märke till det. Det ska bli intressant att börja koppla ihop det jag lärde mig i Python med hur 
-objektorientering fungerar i PHP. </p> <h3>PHPs modell för klasser och objekt – grunder för att komma igång</h3> <p> Klasser i PHP fungerar som en mall för att skapa objekt. Det är ett sätt att organisera
- kod som hör ihop – både data (attribut) och funktionalitet (metoder). Objekt är instanser av en klass, vilket gör det möjligt att återanvända kod på ett strukturerat sätt. </p> <p> En viktig del är 
- konstruktorn <code>__construct</code>, som körs automatiskt när ett objekt skapas. Attributen kan vara <code>public</code>, <code>private</code> eller <code>protected</code>, beroende på hur åtkomsten 
- till dem ska begränsas. Det är också bra att känna till hur man skapar getter- och setter-metoder för att hämta eller ändra egenskaper. </p> <h3>Reflektion kring kodbasen för <code>me/report</code></h3> 
- <p> Kodbasen och strukturen i <code>me/report</code> påminner mycket om det vi jobbade med i webdesign-kursen. Det känns lite krångligt att vara beroende av så mycket extern programvara, särskilt när den
-  inte alltid fungerar felfritt. </p> <p> Men det känns ändå bekant – jag tänkte nog likadant under designkursen i början, och det blev ju riktigt roligt när man väl förstod hur allt hängde ihop. </p> 
-  <h3>Reflektion över “PHP The Right Way”</h3> <p> Just nu känns mycket av innehållet i artikeln som en massa torra termer. Men jag kan tänka mig att den kommer bli mer användbar längre fram, när man stöter
-   på problem och behöver slå upp specifika saker. </p> <h3>TIL (“Today I Learned”) för detta kmom</h3> <p> Jag har lärt mig hur man installerar Symfony och börjat förstå hur man kan bygga en hel webbplats 
-   med hjälp av ramverket. Det känns som ett spännande verktyg, särskilt nu i början när uppgifterna är ganska enkla och allt fungerar som det ska. </p> <p> Vi får se hur det känns när det börjar dyka upp 
-   lite tuffare utmaningar senare i kursen. </p>
-    <section>
-     <h2>kmom02</h2>
-<p>
-    <strong>Vad är arv, komposition, interface och trait?</strong><br>
-    Arv betyder att en klass kan ärva (ta) funktioner och egenskaper från en annan klass. I min kod är <code>CardGraphic</code> en klass som ärver från <code>Card</code>. Den får allt som <code>Card</code> har, och lägger till mer.<br><br>
+        <h2>kmom01</h2>
 
-    Komposition betyder att en klass använder andra objekt. Till exempel använder <code>DeckOfCards</code> många <code>Card</code>-objekt för att skapa en kortlek. Även <code>CardHand</code> använder flera kort.<br><br>
+        <h3>Förkunskaper och tidigare erfarenheter kring objektorientering</h3>
+        <p>
+            Den enda objektorienterade programmering jag gjort innan den här kursen var i oopython-kursen. Kenneth nämnde det också lite i JavaScript-kursen, men då var det inte så relevant så jag tänkte inte mycket på det. 
+            Det ska bli intressant att koppla ihop det jag lärde mig i Python med hur objektorientering fungerar i PHP.
+        </p>
 
-    Interface är som ett "avtal" som säger vilka metoder en klass måste ha. Jag använde inte interface i denna uppgift, men jag förstår hur man kan använda det om flera klasser ska ha samma funktioner.<br><br>
+        <h3>PHPs modell för klasser och objekt – grunder för att komma igång</h3>
+        <p>
+            Klasser i PHP är som mallar för att skapa objekt. De samlar kod som hör ihop – både data (attribut) och funktioner (metoder). Objekt är instanser av en klass och det gör det lätt att återanvända kod.
+        </p>
+        <p>
+            En viktig del är konstruktorn <code>__construct</code> som körs automatiskt när objektet skapas. Attributen kan vara <code>public</code>, <code>private</code> eller <code>protected</code>, beroende på hur man vill begränsa åtkomst. 
+            Getter- och setter-metoder används för att läsa eller ändra attribut.
+        </p>
 
-    Trait är ett sätt att återanvända kod i flera klasser. Jag använde inte trait i denna uppgift, men det kan vara bra om man vill dela kod mellan flera klasser.
-</p>
+        <h3>Reflektion kring kodbasen för <code>me/report</code></h3>
+        <p>
+            Strukturen påminner mycket om den från webdesign-kursen. Det känns ibland krångligt med all extern programvara, särskilt när något inte fungerar direkt. Men samtidigt känns det bekant – det var likadant i början av designkursen och då blev det kul när man började förstå.
+        </p>
 
-<p>
-    <strong>Min kod och hur jag löste uppgiften</strong><br>
-    Jag har skapat dessa klasser:<br><br>
-    <ul>
-        <li><strong>Card:</strong> Ett vanligt kort med färg och värde.</li>
-        <li><strong>CardGraphic:</strong> En klass som ärver från <code>Card</code>. Den visar kortet med symboler (♥, ♠, ♦, ♣).</li>
-        <li><strong>DeckOfCards:</strong> Skapar en kortlek, blandar och låter spelaren dra kort.</li>
-        <li><strong>CardHand:</strong> Sparar kort som spelaren har dragit.</li>
-    </ul>
-</p>
+        <h3>Reflektion över “PHP The Right Way”</h3>
+        <p>
+            Just nu känns innehållet ganska torrt, men jag tror att det kommer vara mer användbart senare när man stöter på problem och behöver slå upp saker.
+        </p>
 
-<p>
-    Jag tycker att min lösning blev ganska bra. Koden fungerar och jag lärde mig mycket. Jag återanvände delar av kod och struktur från övningen med "Pig" och "Dice", vilket hjälpte mig att komma igång snabbare.
-    Jag funderade på att dela upp min CSS i flera filer, men jag valde att inte göra det. Jag var orolig att det skulle bli för många filer, eftersom jag redan har många controllers, klasser och Twig-mallar. Därför behöll jag allt i en fil, för att hålla det enklare just nu.
-</p>
-
-<p>
-    <strong>Att jobba med Symfony och MVC</strong><br>
-    Symfony är ett stort ramverk, men det hjälper till att hålla ordning på koden. Det finns andra ramverk som kanske har mer funktioner eller är enklare på vissa sätt. Men för mig som nybörjare känns Symfony lagom. Det är tydligt hur man delar upp koden i <strong>Model</strong>, <strong>View</strong> och <strong>Controller</strong>, och det gör det lättare att förstå hur allt hänger ihop.
-</p>
-
-<p>
-    <strong>TIL – Today I Learned</strong><br>
-    Jag lärde mig mer om hur man använder klasser i PHP, hur man skapar objekt, och hur man visar information i Twig (HTML). Jag förstod också bättre hur man sparar data i sessioner och visar den senare. Symfony känns lite lättare nu.
-</p>
+        <h3>TIL (“Today I Learned”) för detta kmom</h3>
+        <p>
+            Jag har lärt mig hur man installerar Symfony och hur man kan bygga en webbplats med hjälp av ramverket. Det känns spännande, särskilt nu i början när allt fungerar som det ska. Det ska bli intressant att se hur det känns när det blir svårare.
+        </p>
+    </section>
 
     <section>
-     <h2>kmom03</h2>
-    <p></p>
+        <h2>kmom02</h2>
+
+        <h3>Vad är arv, komposition, interface och trait?</h3>
+        <p>
+            <strong>Arv:</strong> En klass kan ärva från en annan. Till exempel ärver <code>CardGraphic</code> från <code>Card</code> och lägger till funktionalitet.<br><br>
+            <strong>Komposition:</strong> En klass kan använda andra objekt. <code>DeckOfCards</code> innehåller till exempel många <code>Card</code>-objekt. <code>CardHand</code> fungerar på liknande sätt.<br><br>
+            <strong>Interface:</strong> Ett interface är som ett kontrakt – det talar om vilka metoder en klass måste ha. Jag använde inte interface i denna uppgift, men jag förstår hur det kan användas.<br><br>
+            <strong>Trait:</strong> Ett trait är ett sätt att återanvända kod mellan olika klasser. Jag använde det inte här, men det kan vara användbart i framtiden.
+        </p>
+
+        <h3>Min kod och hur jag löste uppgiften</h3>
+        <p>
+            Jag skapade följande klasser:
+        </p>
+        <ul>
+            <li><strong>Card:</strong> Ett vanligt kort med färg och värde.</li>
+            <li><strong>CardGraphic:</strong> Ärver från <code>Card</code> och visar kortet med symboler (♥, ♠, ♦, ♣).</li>
+            <li><strong>DeckOfCards:</strong> Skapar en kortlek, blandar den och låter spelaren dra kort.</li>
+            <li><strong>CardHand:</strong> Sparar kort som spelaren dragit.</li>
+        </ul>
+
+        <p>
+            Jag är nöjd med min lösning. Koden fungerar och jag lärde mig mycket. Jag återanvände delar av kod och struktur från övningarna med Pig och Dice, vilket gjorde det enklare att komma igång.
+        </p>
+        <p>
+            Jag funderade på att dela upp min CSS i flera filer, men valde att ha allt i en fil för att inte få för många filer – jag har redan flera controllers, klasser och templates. Det kändes enklast just nu.
+        </p>
+
+        <h3>Att jobba med Symfony och MVC</h3>
+        <p>
+            Symfony är ett stort ramverk, men det hjälper till att hålla struktur på koden. För mig som nybörjare känns det lagom avancerat. Det är tydligt hur man delar upp Model, View och Controller, vilket gör allt lättare att förstå.
+        </p>
+
+        <h3>TIL – Today I Learned</h3>
+        <p>
+            Jag lärde mig mer om hur man använder klasser i PHP, hur man skapar objekt och hur man visar data med Twig. Jag blev också bättre på att spara och hämta data från sessionen. Symfony känns lite lättare nu.
+        </p>
+    </section>
+
+    <section>
+        <h2>kmom03</h2>
+
+        <h3>Hur kändes det att modellera ett kortspel med flödesdiagram och pseudokod?</h3>
+        <p>
+            Det kändes bra. Flödesdiagram och pseudokod hjälpte mig att planera hur spelet skulle fungera. Det gjorde det lättare att strukturera koden och tänka logiskt kring hur spelet ska byggas upp.
+        </p>
+
+        <h3>Berätta om din implementation. Är du nöjd? Vad kan förbättras?</h3>
+        <p>
+            Jag håll mig till KISS-principen – "Keep it simple, stupid" och jag är väldigt nöjd med koden. Jag återanvände mycket, både i PHP och CSS, vilket sparade mycket tid.
+        </p>
+        <p>
+            Frånbörjan min controller blev lite för tjock. Klasserna var ganska tunna i början, men efter att jag gjorde några ändringar blev det mer balanserat. Jag försökte hålla det så enkelt som möjligt.
+        </p>
+
+        <h3>Hur känns det att koda i Symfony så här långt in i kursen?</h3>
+        <p>
+            Jag gillar att jobba i Symfony. Det är roligt att arbeta med controllers och template-filer.
+        </p>
+
+        <h3>TIL – Today I Learned</h3>
+        <p>
+            Jag lärde mig inte något helt nytt just i detta moment, men jag övade mycket på att använda det vi lärt oss i tidigare delar av kursen. Det var en bra övning för att sammanfatta kunskapen.
+        </p>
+
+        <h3>Extra reflektioner</h3>
+        <ul>
+            <li>Att återanvända klasser vi redan hade var väldigt hjälpsamt – särskilt för mig som ofta ligger lite efter.</li>
+            <li>Jag började med en enkel version av spelet, vilket gjorde arbetet mycket lättare.</li>
+            <li>Att UML-diagram var frivilligt minskade min stress, så jag kunde fokusera mer på koden.</li>
+        </ul>
+        <p>
+            Jag blev lite nervös när Mikael sa att det skulle vara ett projekt över två veckor, men det var faktiskt inte så farligt. Nu får vi se om lärarna blir nöjda!
+        </p>
+    </section>
     </section>
     <section>
      <h2>kmom04</h2>
