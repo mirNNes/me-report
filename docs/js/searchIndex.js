@@ -278,62 +278,62 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21",
             "name": "Game21",
-            "summary": "Game21\u0020hanterar\u0020logiken\u0020f\u00F6r\u0020ett\u0020kortspel\u0020d\u00E4r\u0020m\u00E5let\u0020\u00E4r\u0020att\u0020komma\u0020s\u00E5\u0020n\u00E4ra\u002021\u0020som\u0020m\u00F6jligt\u0020utan\u0020att\u0020g\u00E5\u0020\u00F6ver.",
+            "summary": "Game21\u0020handles\u0020the\u0020logic\u0020for\u0020a\u0020card\u0020game\u0020where\u0020the\u0020goal\u0020is\u0020to\u0020get\u0020as\u0020close\u0020to\u002021\u0020as\u0020possible\u0020without\u0020going\u0020over.",
             "url": "classes/App-Game-Game21-Game21.html"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Konstruktor\u003A\u0020Initierar\u0020spelet\u0020med\u0020en\u0020kortlek\u0020och\u0020tomma\u0020h\u00E4nder\u0020f\u00F6r\u0020spelare\u0020och\u0020bank.",
+            "summary": "Constructor\u003A\u0020Initializes\u0020the\u0020game\u0020with\u0020a\u0020shuffled\u0020deck\u0020and\u0020empty\u0020hands\u0020for\u0020player\u0020and\u0020bank.",
             "url": "classes/App-Game-Game21-Game21.html#method___construct"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AstartGame\u0028\u0029",
             "name": "startGame",
-            "summary": "Startar\u0020spelet\u0020genom\u0020att\u0020dra\u0020tv\u00E5\u0020kort\u0020till\u0020spelaren.",
+            "summary": "Starts\u0020the\u0020game\u0020by\u0020drawing\u0020two\u0020cards\u0020for\u0020the\u0020player.",
             "url": "classes/App-Game-Game21-Game21.html#method_startGame"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AplayerDraw\u0028\u0029",
             "name": "playerDraw",
-            "summary": "Spelaren\u0020drar\u0020ett\u0020kort.",
+            "summary": "The\u0020player\u0020draws\u0020a\u0020card.",
             "url": "classes/App-Game-Game21-Game21.html#method_playerDraw"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AplayerDrawAndCheck\u0028\u0029",
             "name": "playerDrawAndCheck",
-            "summary": "Spelaren\u0020drar\u0020ett\u0020kort\u0020och\u0020om\u0020po\u00E4ngen\u0020\u00F6verstiger\u002021\u0020s\u00E5\u0020spelar\u0020banken\u0020sin\u0020tur.",
+            "summary": "The\u0020player\u0020draws\u0020a\u0020card\u0020and\u0020if\u0020the\u0020score\u0020exceeds\u002021,\u0020the\u0020bank\u0020takes\u0020its\u0020turn.",
             "url": "classes/App-Game-Game21-Game21.html#method_playerDrawAndCheck"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AbankTurn\u0028\u0029",
             "name": "bankTurn",
-            "summary": "Bankens\u0020tur\u0020att\u0020dra\u0020kort\u0020tills\u0020minst\u002017\u0020po\u00E4ng\u0020uppn\u00E5tts\u0020eller\u0020spelaren\u0020bustat.",
+            "summary": "The\u0020bank\u0027s\u0020turn\u0020to\u0020draw\u0020cards\u0020until\u0020at\u0020least\u002017\u0020points\u0020are\u0020reached\u0020or\u0020the\u0020player\u0020busts.",
             "url": "classes/App-Game-Game21-Game21.html#method_bankTurn"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AgetGameState\u0028\u0029",
             "name": "getGameState",
-            "summary": "Returnerar\u0020spelets\u0020aktuella\u0020tillst\u00E5nd\u0020inklusive\u0020kort,\u0020po\u00E4ng\u0020och\u0020eventuell\u0020vinnare.",
+            "summary": "Returns\u0020the\u0020current\u0020state\u0020of\u0020the\u0020game,\u0020including\u0020cards,\u0020scores,\u0020and\u0020the\u0020winner\u0020if\u0020the\u0020game\u0020is\u0020over.",
             "url": "classes/App-Game-Game21-Game21.html#method_getGameState"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AgetPlayerScore\u0028\u0029",
             "name": "getPlayerScore",
-            "summary": "H\u00E4mtar\u0020spelarens\u0020po\u00E4ng.",
+            "summary": "Gets\u0020the\u0020player\u0027s\u0020score.",
             "url": "classes/App-Game-Game21-Game21.html#method_getPlayerScore"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AgetBankScore\u0028\u0029",
             "name": "getBankScore",
-            "summary": "H\u00E4mtar\u0020bankens\u0020po\u00E4ng.",
+            "summary": "Gets\u0020the\u0020bank\u0027s\u0020score.",
             "url": "classes/App-Game-Game21-Game21.html#method_getBankScore"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AdrawCardToPlayer\u0028\u0029",
             "name": "drawCardToPlayer",
-            "summary": "Drar\u0020ett\u0020kort\u0020till\u0020spelaren.",
+            "summary": "Draws\u0020a\u0020card\u0020to\u0020the\u0020player.",
             "url": "classes/App-Game-Game21-Game21.html#method_drawCardToPlayer"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AdrawCardToBank\u0028\u0029",
             "name": "drawCardToBank",
-            "summary": "Drar\u0020ett\u0020kort\u0020till\u0020banken.",
+            "summary": "Draws\u0020a\u0020card\u0020to\u0020the\u0020bank.",
             "url": "classes/App-Game-Game21-Game21.html#method_drawCardToBank"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003AdetermineWinner\u0028\u0029",
             "name": "determineWinner",
-            "summary": "Avg\u00F6r\u0020vem\u0020som\u0020vinner\u0020spelet.",
+            "summary": "Determines\u0020the\u0020winner\u0020of\u0020the\u0020game.",
             "url": "classes/App-Game-Game21-Game21.html#method_determineWinner"
         },                {
             "fqsen": "\\App\\Game\\Game21\\Game21\u003A\u003A\u0024deck",

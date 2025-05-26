@@ -6,32 +6,32 @@ use App\Game\DeckOfCards;
 use App\Game\CardHand;
 
 /**
- * Game21 hanterar logiken för ett kortspel där målet är att komma så nära 21 som möjligt utan att gå över.
+ * Game21 handles the logic for a card game where the goal is to get as close to 21 as possible without going over.
  */
 class Game21
 {
     /**
-     * @var DeckOfCards Kortleken som används i spelet.
+     * @var DeckOfCards The deck used in the game.
      */
     private DeckOfCards $deck;
 
     /**
-     * @var CardHand Spelarens hand.
+     * @var CardHand The player's hand.
      */
     private CardHand $playerHand;
 
     /**
-     * @var CardHand Bankens hand.
+     * @var CardHand The bank's hand.
      */
     private CardHand $bankHand;
 
     /**
-     * @var bool Huruvida spelet är slut eller ej.
+     * @var bool Indicates whether the game is over.
      */
     private bool $isGameOver = false;
 
     /**
-     * Konstruktor: Initierar spelet med en kortlek och tomma händer för spelare och bank.
+     * Constructor: Initializes the game with a shuffled deck and empty hands for player and bank.
      */
     public function __construct()
     {
@@ -42,7 +42,7 @@ class Game21
     }
 
     /**
-     * Startar spelet genom att dra två kort till spelaren.
+     * Starts the game by drawing two cards for the player.
      */
     public function startGame(): void
     {
@@ -51,7 +51,7 @@ class Game21
     }
 
     /**
-     * Spelaren drar ett kort.
+     * The player draws a card.
      */
     public function playerDraw(): void
     {
@@ -59,7 +59,7 @@ class Game21
     }
 
     /**
-     * Spelaren drar ett kort och om poängen överstiger 21 så spelar banken sin tur.
+     * The player draws a card and if the score exceeds 21, the bank takes its turn.
      */
     public function playerDrawAndCheck(): void
     {
@@ -70,7 +70,7 @@ class Game21
     }
 
     /**
-     * Bankens tur att dra kort tills minst 17 poäng uppnåtts eller spelaren bustat.
+     * The bank's turn to draw cards until at least 17 points are reached or the player busts.
      */
     public function bankTurn(): void
     {
@@ -85,7 +85,7 @@ class Game21
     }
 
     /**
-     * Returnerar spelets aktuella tillstånd inklusive kort, poäng och eventuell vinnare.
+     * Returns the current state of the game, including cards, scores, and the winner if the game is over.
      *
      * @return array{
      *     playerHand: array,
@@ -109,7 +109,7 @@ class Game21
     }
 
     /**
-     * Hämtar spelarens poäng.
+     * Gets the player's score.
      *
      * @return int
      */
@@ -119,7 +119,7 @@ class Game21
     }
 
     /**
-     * Hämtar bankens poäng.
+     * Gets the bank's score.
      *
      * @return int
      */
@@ -129,7 +129,7 @@ class Game21
     }
 
     /**
-     * Drar ett kort till spelaren.
+     * Draws a card to the player.
      */
     private function drawCardToPlayer(): void
     {
@@ -138,7 +138,7 @@ class Game21
     }
 
     /**
-     * Drar ett kort till banken.
+     * Draws a card to the bank.
      */
     private function drawCardToBank(): void
     {
@@ -147,9 +147,9 @@ class Game21
     }
 
     /**
-     * Avgör vem som vinner spelet.
+     * Determines the winner of the game.
      *
-     * @return string "Spelare" eller "Bank"
+     * @return string "Player" or "Bank"
      */
     public function determineWinner(): string
     {
@@ -161,7 +161,7 @@ class Game21
         }
 
         if ($bank > 21 || $player > $bank) {
-            return "Spelare";
+            return "Player";
         }
 
         return "Bank";
