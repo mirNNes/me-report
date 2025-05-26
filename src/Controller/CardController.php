@@ -18,18 +18,18 @@ class CardController extends AbstractController
 
     #[Route('/card/deck', name: 'card_deck')]
     public function deck(SessionInterface $session): Response
-    {
-        if (!$session->has('deck')) {
-            $deck = new DeckOfCards();
-            $session->set('deck', $deck);
-        } else {
-            $deck = $session->get('deck');
-        }
-
-        return $this->render('card/deck.html.twig', [
-            'deck' => $deck->getDeck(),
-        ]);
+{
+    if (!$session->has('deck')) {
+        $deck = new DeckOfCards();
+        $session->set('deck', $deck);
     }
+
+    $deck = $session->get('deck');
+
+    return $this->render('card/deck.html.twig', [
+        'deck' => $deck->getDeck(),
+    ]);
+}
 
     #[Route('/card/deck/shuffle', name: 'card_deck_shuffle')]
     public function shuffle(SessionInterface $session): Response

@@ -1,0 +1,2 @@
+/Users/mirnesmrso/dbwebb-kurser/mvc/me/report/src/Controller/ApiController.php:40   MissingImport   Missing class import via use statement (line '40', column '20').
+/Users/mirnesmrso/dbwebb-kurser/mvc/me/report/src/Controller/CardController.php:25  ElseExpression  The method deck uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.

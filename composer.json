@@ -1,86 +1,94 @@
 {
+    "name": "mirnesmrso/report",
+    "description": "Ett projekt från dbwebb MVC-kursen byggt med Symfony, Twig och moderna verktyg.",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
-        "ext-ctype": "*",
-        "ext-iconv": "*",
-        "symfony/asset": "6.4.*",
-        "symfony/asset-mapper": "6.4.*",
-        "symfony/console": "6.4.*",
-        "symfony/dotenv": "6.4.*",
-        "symfony/flex": "^2",
-        "symfony/framework-bundle": "6.4.*",
-        "symfony/runtime": "6.4.*",
-        "symfony/twig-bundle": "6.4.*",
-        "symfony/webpack-encore-bundle": "^2.2",
-        "symfony/yaml": "6.4.*",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+      "php": "^7.4 || ^8.0",
+      "ext-ctype": "*",
+      "ext-iconv": "*",
+      "symfony/asset": "6.4.*",
+      "symfony/asset-mapper": "6.4.*",
+      "symfony/console": "6.4.*",
+      "symfony/dotenv": "6.4.*",
+      "symfony/flex": "^2",
+      "symfony/framework-bundle": "6.4.*",
+      "symfony/runtime": "6.4.*",
+      "symfony/twig-bundle": "6.4.*",
+      "symfony/webpack-encore-bundle": "^2.2",
+      "symfony/yaml": "6.4.*",
+      "twig/extra-bundle": "^2.12|^3.0",
+      "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
         "phpmd/phpmd": "^2.15",
         "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^9.6",
+        "symfony/browser-kit": "6.4.*",
+        "symfony/css-selector": "6.4.*",
         "symfony/maker-bundle": "^1.62",
+        "symfony/phpunit-bridge": "^7.2",
         "symfony/web-profiler-bundle": "6.4.*"
     },
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "php-http/discovery": true,
-            "symfony/flex": true,
-            "symfony/runtime": true
-        }
+      "sort-packages": true,
+      "allow-plugins": {
+        "php-http/discovery": true,
+        "symfony/flex": true,
+        "symfony/runtime": true
+      }
     },
     "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
+      "psr-4": {
+        "App\\": "src/"
+      }
     },
     "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
+      "psr-4": {
+        "App\\Tests\\": "tests/"
+      }
     },
     "replace": {
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php73": "*",
-        "symfony/polyfill-php74": "*",
-        "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*"
+      "symfony/polyfill-ctype": "*",
+      "symfony/polyfill-iconv": "*",
+      "symfony/polyfill-php72": "*",
+      "symfony/polyfill-php73": "*",
+      "symfony/polyfill-php74": "*",
+      "symfony/polyfill-php80": "*",
+      "symfony/polyfill-php81": "*"
     },
     "scripts": {
-        "csfix": "PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests",
-        "csfix:dry": "PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests --dry-run -v",
-        "phpmd": "tools/phpmd/vendor/bin/phpmd src text phpmd.xml || true",
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon || true",
-        "lint": [
-            "@phpmd",
-            "@phpstan"
-        ],
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
+      "csfix": "PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests",
+      "csfix:dry": "PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests --dry-run -v",
+      "phpmd": "tools/phpmd/vendor/bin/phpmd src text phpmd.xml || true",
+      "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon || true",
+      "phpdoc": "tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml",
+      "lint": [
+        "@phpmd",
+        "@phpstan"
+      ],
+      "auto-scripts": {
+        "cache:clear": "symfony-cmd",
+        "assets:install %PUBLIC_DIR%": "symfony-cmd",
+        "importmap:install": "symfony-cmd"
+      },
+      "post-install-cmd": [
+        "@auto-scripts"
+      ],
+      "post-update-cmd": [
+        "@auto-scripts"
+      ]
     },
     "conflict": {
-        "symfony/symfony": "*"
+      "symfony/symfony": "*"
     },
     "extra": {
-        "symfony": {
-            "allow-contrib": false,
-            "require": "6.4.*"
-        }
+      "symfony": {
+        "allow-contrib": false,
+        "require": "6.4.*"
+      }
     }
-}
+  }
