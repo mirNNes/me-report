@@ -7,33 +7,33 @@ use App\Game\Card;
 
 class CardTest extends TestCase
 {
-    public function testCardInitialization()
+    public function testCardInitialization(): void
     {
         $card = new Card('Hearts', 1);
         $this->assertEquals('Hearts', $card->getSuit());
         $this->assertEquals('A', $card->getValue());
     }
 
-    public function testNumericCard()
+    public function testNumericCard(): void
     {
         $card = new Card('Spades', 7);
         $this->assertEquals('7', $card->getValue());
     }
 
-    public function testFaceCards()
+    public function testFaceCards(): void
     {
         $this->assertEquals('J', (new Card('Clubs', 11))->getValue());
         $this->assertEquals('Q', (new Card('Diamonds', 12))->getValue());
         $this->assertEquals('K', (new Card('Hearts', 13))->getValue());
     }
 
-    public function testGetAsString()
+    public function testGetAsString(): void
     {
         $card = new Card('Hearts', 1);
         $this->assertEquals('[A♥]', $card->getAsString());
     }
 
-    public function testSuitSymbol()
+    public function testSuitSymbol(): void
     {
         $symbols = [
             'hearts' => '♥',

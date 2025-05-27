@@ -8,7 +8,7 @@ use App\Game\CardHand;
 
 class CardHandTest extends TestCase
 {
-    public function testAddAndGetCards()
+    public function testAddAndGetCards(): void
     {
         $hand = new CardHand();
         $card1 = new Card('Hearts', 2);
@@ -21,7 +21,7 @@ class CardHandTest extends TestCase
         $this->assertSame($card1, $hand->getCards()[0]);
     }
 
-    public function testGetScoreWithoutAces()
+    public function testGetScoreWithoutAces(): void
     {
         $hand = new CardHand();
         $hand->addCard(new Card('Hearts', 10));
@@ -30,7 +30,7 @@ class CardHandTest extends TestCase
         $this->assertEquals(19, $hand->getScore());
     }
 
-    public function testGetScoreWithAceUnder21()
+    public function testGetScoreWithAceUnder21(): void
     {
         $hand = new CardHand();
         $hand->addCard(new Card('Hearts', 1));
@@ -39,7 +39,7 @@ class CardHandTest extends TestCase
         $this->assertEquals(19, $hand->getScore());
     }
 
-    public function testGetScoreWithAceOver21()
+    public function testGetScoreWithAceOver21(): void
     {
         $hand = new CardHand();
         $hand->addCard(new Card('Hearts', 1));

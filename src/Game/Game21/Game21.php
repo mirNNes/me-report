@@ -88,9 +88,9 @@ class Game21
      * Returns the current state of the game, including cards, scores, and the winner if the game is over.
      *
      * @return array{
-     *     playerHand: array,
+     *     playerHand: list<\App\Game\Card>,
      *     playerScore: int,
-     *     bankHand: array,
+     *     bankHand: list<\App\Game\Card>,
      *     bankScore: int|null,
      *     gameOver: bool,
      *     winner: string|null
@@ -99,14 +99,16 @@ class Game21
     public function getGameState(): array
     {
         return [
-            'playerHand' => $this->playerHand->getCards(),
+            'playerHand' => array_values($this->playerHand->getCards()),
             'playerScore' => $this->getPlayerScore(),
-            'bankHand' => $this->isGameOver ? $this->bankHand->getCards() : [],
+            'bankHand' => $this->isGameOver ? array_values($this->bankHand->getCards()) : [],
             'bankScore' => $this->isGameOver ? $this->getBankScore() : null,
             'gameOver' => $this->isGameOver,
             'winner' => $this->isGameOver ? $this->determineWinner() : null,
         ];
     }
+
+
 
     /**
      * Gets the player's score.

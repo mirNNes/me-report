@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Game\DeckOfCards;
+use App\Game\Game21\Game21;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -103,9 +104,10 @@ class ApiController extends AbstractController
     #[Route('/api/game21', name: 'api_game21')]
     public function game21Status(SessionInterface $session): JsonResponse
     {
+        /** @var Game21|null $game */
         $game = $session->get('game21');
 
-        if (!$game) {
+        if (!$game instanceof Game21) {
             return $this->json([
                 'message' => 'Spelet har inte startat.'
             ]);
@@ -125,6 +127,4 @@ class ApiController extends AbstractController
             'winner' => $state['winner'],
         ]);
     }
-
-
 }

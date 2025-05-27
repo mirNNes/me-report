@@ -24,7 +24,13 @@ class CardController extends AbstractController
             $session->set('deck', $deck);
         }
 
+        /** @var DeckOfCards|null $deck */
         $deck = $session->get('deck');
+
+        if (!$deck instanceof DeckOfCards) {
+            $deck = new DeckOfCards();
+            $session->set('deck', $deck);
+        }
 
         return $this->render('card/deck.html.twig', [
             'deck' => $deck->getDeck(),
@@ -34,10 +40,10 @@ class CardController extends AbstractController
     #[Route('/card/deck/shuffle', name: 'card_deck_shuffle')]
     public function shuffle(SessionInterface $session): Response
     {
+        /** @var DeckOfCards $deck */
         $deck = $session->get('deck', new DeckOfCards());
 
         $deck->shuffle();
-
         $session->set('deck', $deck);
 
         return $this->render('card/deck.html.twig', [
@@ -46,12 +52,12 @@ class CardController extends AbstractController
     }
 
     #[Route('/card/deck/draw/{number}', name: 'card_deck_draw')]
-    public function draw(int $number = 1, SessionInterface $session): Response
+    public function draw(SessionInterface $session, int $number = 1): Response
     {
+        /** @var DeckOfCards $deck */
         $deck = $session->get('deck', new DeckOfCards());
 
         $drawnCards = $deck->draw($number);
-
         $session->set('deck', $deck);
 
         return $this->render('card/draw.html.twig', [
@@ -74,11 +80,8 @@ class CardController extends AbstractController
     public function deleteSession(SessionInterface $session): Response
     {
         $session->clear();
-
         $this->addFlash('success', 'Sessionen har raderats.');
 
         return $this->redirectToRoute('session');
     }
-
-
 }

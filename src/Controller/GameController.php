@@ -29,6 +29,7 @@ class GameController extends AbstractController
     #[Route('/game/play', name: 'game_play')]
     public function play(SessionInterface $session): Response
     {
+        /** @var Game21|null $game */
         $game = $session->get('game21');
         if (!$game) {
             return $this->redirectToRoute('game_start');
@@ -40,18 +41,26 @@ class GameController extends AbstractController
     #[Route('/game/draw', name: 'game_draw', methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
+        /** @var Game21|null $game */
         $game = $session->get('game21');
-        $game->playerDrawAndCheck();
-        $session->set('game21', $game);
+        if ($game) {
+            $game->playerDrawAndCheck();
+            $session->set('game21', $game);
+        }
+
         return $this->redirectToRoute('game_play');
     }
 
     #[Route('/game/stay', name: 'game_stay', methods: ['POST'])]
     public function stay(SessionInterface $session): Response
     {
+        /** @var Game21|null $game */
         $game = $session->get('game21');
-        $game->bankTurn();
-        $session->set('game21', $game);
+        if ($game) {
+            $game->bankTurn();
+            $session->set('game21', $game);
+        }
+
         return $this->redirectToRoute('game_play');
     }
 

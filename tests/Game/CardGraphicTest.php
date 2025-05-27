@@ -7,7 +7,7 @@ use App\Game\CardGraphic;
 
 class CardGraphicTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         $card = new CardGraphic('hearts', 12);
         $this->assertEquals('[Q♥]', (string)$card);

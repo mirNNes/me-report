@@ -101,8 +101,11 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Card
+    CardGraphic
 
+        <span class="phpdocumentor-element__extends">
+        extends <a href="classes/App-Game-Card.html"><abbr title="\App\Game\Card">Card</abbr></a>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -120,15 +123,17 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Card.php"><a href="files/src-game-card.html"><abbr title="src/Game/Card.php">Card.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/CardGraphic.php"><a href="files/src-game-cardgraphic.html"><abbr title="src/Game/CardGraphic.php">CardGraphic.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">9</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Represents a standard playing card with a suit and value.</p>
+            <p class="phpdocumentor-summary">A card that can be represented graphically as a string with suit symbol.</p>
 
 
+    <section class="phpdocumentor-description"><p>Inherits suit and value from Card.</p>
+</section>
 
 
 
@@ -138,7 +143,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/App-Game-Card.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/App-Game-CardGraphic.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -148,11 +153,25 @@
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/App-Game-CardGraphic.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/App-Game-CardGraphic.html#constant_SUIT_SYMBOLS">SUIT_SYMBOLS</a>
+    <span>
+        &nbsp;= [&#039;hearts&#039; =&gt; &#039;♥&#039;, &#039;spades&#039; =&gt; &#039;♠&#039;, &#039;diamonds&#039; =&gt; &#039;♦&#039;, &#039;clubs&#039; =&gt; &#039;♣&#039;]                            </span>
+</dt>
+<dd>Unicode symbols for suits.</dd>
+
+    </dl>
 
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/App-Game-Card.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/App-Game-CardGraphic.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -172,7 +191,7 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/App-Game-Card.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/App-Game-CardGraphic.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -182,6 +201,13 @@
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>Constructor for Card.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Game-CardGraphic.html#method___toString">__toString()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Returns the card as a string in format like [Q♦].</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Game-Card.html#method_getAsString">getAsString()</a>
@@ -223,12 +249,51 @@
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/App-Game-CardGraphic.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_SUIT_SYMBOLS">
+        SUIT_SYMBOLS
+        <a href="classes/App-Game-CardGraphic.html#constant_SUIT_SYMBOLS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/CardGraphic.php"><a href="files/src-game-cardgraphic.html"><abbr title="src/Game/CardGraphic.php">CardGraphic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unicode symbols for suits.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SUIT_SYMBOLS</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;hearts&#039; =&gt; &#039;♥&#039;, &#039;spades&#039; =&gt; &#039;♠&#039;, &#039;diamonds&#039; =&gt; &#039;♦&#039;, &#039;clubs&#039; =&gt; &#039;♣&#039;]</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/App-Game-Card.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/App-Game-CardGraphic.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -312,7 +377,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/App-Game-Card.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/App-Game-CardGraphic.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -370,6 +435,45 @@
     
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___toString">
+        __toString()
+        <a href="classes/App-Game-CardGraphic.html#method___toString" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/CardGraphic.php"><a href="files/src-game-cardgraphic.html"><abbr title="src/Game/CardGraphic.php">CardGraphic.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the card as a string in format like [Q♦].</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -592,7 +696,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Game/Card.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Game/CardGraphic.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -691,10 +795,17 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/App-Game-Card.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/App-Game-Card.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/App-Game-CardGraphic.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/App-Game-CardGraphic.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/App-Game-CardGraphic.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/App-Game-CardGraphic.html#constant_SUIT_SYMBOLS">SUIT_SYMBOLS</a></li>
+                                            </ul>
+                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
@@ -708,6 +819,7 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/App-Game-Card.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/App-Game-CardGraphic.html#method___toString">__toString()</a></li>
                                             <li class=""><a href="classes/App-Game-Card.html#method_getAsString">getAsString()</a></li>
                                             <li class=""><a href="classes/App-Game-Card.html#method_getNumericValue">getNumericValue()</a></li>
                                             <li class=""><a href="classes/App-Game-Card.html#method_getSuit">getSuit()</a></li>
@@ -732,7 +844,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/App-Game-Card.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/App-Game-CardGraphic.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
