@@ -44,6 +44,10 @@
                 <li>
                     <a href="{{ path('game_intro') }}" class="{{ app.request.attributes.get('_route') starts with 'game' ? 'active' : '' }}">Kortspel 21</a>
                 </li>
+                <li>
+                    <a href="{{ path('app_book_index') }}" class="{{ app.request.attributes.get('_route') starts with 'app_book' ? 'active' : '' }}">Library</a>
+
+                </li>
             </ul>
         </nav>
 

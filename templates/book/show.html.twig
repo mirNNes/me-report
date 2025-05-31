@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+<div class="site-content">
+
+    <h1 style="text-align: center; font-size: 2rem; margin-bottom: 1rem;">
+        {{ book.title }}
+    </h1>
+
+    <div class="actions" style="text-align: center; margin-bottom: 2rem;">
+        <a href="{{ path('app_book_list') }}" class="btn btn-secondary">⬅ Tillbaka</a>
+        <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-primary">✏️ Redigera</a>
+    </div>
+
+    {% if book.image %}
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="{{ asset('img/books/' ~ book.image) }}" alt="{{ book.title }}"
+                 style="max-width: 200px; border-radius: 6px;">
+        </div>
+    {% endif %}
+
+    <table class="table" style="margin: 0 auto; width: auto;">
+        <tbody>
+            <tr><th>Id:</th><td>{{ book.id }}</td></tr>
+            <tr><th>ISBN:</th><td>{{ book.isbn }}</td></tr>
+            <tr><th>Författare:</th><td>{{ book.author }}</td></tr>
+        </tbody>
+    </table>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}"
+              onsubmit="return confirm('Är du säker på att du vill ta bort den här boken?');"
+              style="display: inline;">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+            <button type="submit" class="btn btn-danger">🗑️ Radera</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Redigera bok{% endblock %}
+
+{% block body %}
+    <div class="site-content">
+        <h1>Redigera bok</h1>
+
+        {{ include('book/_form.html.twig', {'button_label': 'Uppdatera'}) }}
+
+        <div class="actions" style="margin-top: 1.5rem;">
+            <a href="{{ path('app_book_list') }}" 
+               style="text-decoration: none; padding: 0.5rem 1rem; background-color: #6c757d; color: white; border-radius: 5px; margin-right: 1rem;">
+               ⬅ Tillbaka
+            </a>
+            {{ include('book/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

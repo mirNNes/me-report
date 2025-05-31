@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Välkommen{% endblock %}
+
+{% block body %}
+    <div class="site-content" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 2rem;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">
+            2025 i böcker: Det här vill du inte missa
+        </h1>
+        <p style="font-size: 1.1rem; color: #555; margin-bottom: 2rem;">
+            Årets bästa böcker enligt <strong>Bästaböckerna.se</strong>
+        </p>
+
+        <a href="{{ asset('/img/library.jpg') }}">
+            <img src="{{ asset('/img/library.jpg') }}" alt="Bibliotek" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+        </a>
+
+        <div class="actions" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="{{ path('app_book_list') }}" style="text-decoration: none; padding: 0.6rem 1.2rem; background-color: #007BFF; color: white; border-radius: 5px;">
+                📖 Se alla böcker
+            </a>
+            <a href="{{ path('app_book_new') }}" style="text-decoration: none; padding: 0.6rem 1.2rem; background-color: #28a745; color: white; border-radius: 5px;">
+                ➕ Lägg till ny bok
+            </a>
+            <a href="{{ path('api_library_books') }}" style="text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid #007BFF; color: #007BFF; border-radius: 5px;">
+                📚 Hämta alla böcker i JSON
+            </a>
+            <a href="{{ path('api_library_book_by_isbn', {'isbn': '9789180238885'}) }}" style="text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid #007BFF; color: #007BFF; border-radius: 5px;">
+                🔍 Min favorit i JSON
+            </a>
+        </div>
+    </div>
+{% endblock %}

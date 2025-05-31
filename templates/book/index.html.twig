@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bokgalleriet 2025{% endblock %}
+
+{% block body %}
+<div class="site-content">
+    <h1 style="text-align: center; font-size: 2.2rem; margin-bottom: 2rem;">
+        Sida för sida: Årets bästa läsupplevelser 2025
+    </h1>
+
+    <div class="book-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; justify-items: center;">
+        {% for book in books %}
+            <div class="book-card" style="text-align: center; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; max-width: 200px;">
+                {% if book.image %}
+                    <a href="{{ path('app_book_show', {'id': book.id}) }}" class="book-image-link" style="display: block;">
+                        <img src="{{ asset('img/books/' ~ book.image) }}" alt="{{ book.title }}" style="max-width: 100%; border-radius: 6px;">
+                    </a>
+                {% else %}
+                    <div class="no-image" style="font-style: italic; color: #888;">Ingen bild</div>
+                {% endif %}
+                <div class="book-info" style="margin-top: 0.5rem;">
+                    <h2 style="font-size: 1.1rem; margin: 0.5rem 0 0.2rem;">{{ book.title }}</h2>
+                    <p style="font-size: 0.9rem; color: #666; margin: 0;">{{ book.author }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p class="no-books" style="text-align: center; color: #999;">Inga böcker hittades</p>
+        {% endfor %}
+    </div>
+
+    <div class="actions" style="text-align: center; margin-top: 2.5rem;">
+        <a href="{{ path('app_book_new') }}" 
+           style="font-size: 1rem; padding: 0.6rem 1.2rem; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+           ➕ Lägg till ny bok
+        </a>
+    </div>
+</div>
+{% endblock %}
