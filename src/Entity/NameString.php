@@ -9,9 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 class NameString
 {
 /**
- * @phpstan-ignore-next-line
+ * @var int|null
  */
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column(type: "integer")]
 private $id;
+
+
 
     #[ORM\Column]
     private ?int $value = null;
