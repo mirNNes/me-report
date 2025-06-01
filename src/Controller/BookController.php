@@ -28,7 +28,6 @@ final class BookController extends AbstractController
         ]);
     }
 
-
     #[Route('/new', name: 'app_book_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -40,7 +39,7 @@ final class BookController extends AbstractController
             $entityManager->persist($book);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_book_show', ['id' => $book->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('book/new.html.twig', [
@@ -66,7 +65,7 @@ final class BookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_book_show', ['id' => $book->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('book/edit.html.twig', [
@@ -78,11 +77,15 @@ final class BookController extends AbstractController
     #[Route('/{id}', name: 'app_book_delete', methods: ['POST'])]
     public function delete(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->getPayload()->getString('_token'))) {
+        $bookId = $book->getId();
+
+        if ($this->isCsrfTokenValid('delete'.$bookId, $request->getPayload()->getString('_token'))) {
             $entityManager->remove($book);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_book_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_book_show', ['id' => $bookId], Response::HTTP_SEE_OTHER);
     }
 }
