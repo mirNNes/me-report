@@ -16,26 +16,26 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-/**
- * Find all products having a value above the specified one with SQL.
- *
- * @param float|int $value
- * @return array<array<string, mixed>> Array of associative arrays
- */
-public function findByMinimumValue2(int|float $value): array
-{
-    $conn = $this->getEntityManager()->getConnection();
+    /**
+     * Find all products having a value above the specified one with SQL.
+     *
+     * @param float|int $value
+     * @return array<array<string, mixed>> Array of associative arrays
+     */
+    public function findByMinimumValue2(int|float $value): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-    $sql = '
+        $sql = '
         SELECT * FROM product AS p
         WHERE p.value >= :value
         ORDER BY p.value ASC
     ';
 
-    $resultSet = $conn->executeQuery($sql, ['value' => $value]);
+        $resultSet = $conn->executeQuery($sql, ['value' => $value]);
 
-    return $resultSet->fetchAllAssociative();
-}
+        return $resultSet->fetchAllAssociative();
+    }
 
 
     //    /**

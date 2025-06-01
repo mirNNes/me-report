@@ -8,13 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
-/**
- * @var int|null
- */
-#[ORM\Id]
-#[ORM\GeneratedValue]
-#[ORM\Column(type: "integer")]
-private $id;
+    /**
+     * @var int|null
+     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
+    private $id;
 
 
 
