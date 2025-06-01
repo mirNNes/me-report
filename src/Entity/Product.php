@@ -9,8 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
 /**
- * @phpstan-ignore-next-line
+ * @var int|null
  */
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column(type: "integer")]
 private $id;
 
     #[ORM\Column(length: 255)]
