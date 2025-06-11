@@ -5,25 +5,16 @@ filter:
     excluded_paths: [vendor/*, test/*]
 
 build:
-    image: default-bionic
+    image: default
 
     nodes:
-        my-tests:
-            environment:
-                php:
-                    version: 8.3.3
-                    # version: 8.1.13
-                    # version: 8.1.17
-                    # version: 8.2.4
         analysis:
+            project_setup:
+                override:
+                    - 'composer install'
             tests:
                 override:
-                    - php-scrutinizer-run
-                    #- phpcs-run # Not used, missing config file
-    tests:
-        override:
-            -   command: "composer phpunit"
-                # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-                coverage:
-                    file: "docs/coverage.clover"
-                    format: "php-clover"
+                    - command: 'vendor/bin/phpunit --coverage-clover=docs/coverage.clover'
+                      coverage:
+                          file: 'docs/coverage.clover'
+                          format: 'php-clover'
