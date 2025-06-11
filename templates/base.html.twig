@@ -42,7 +42,10 @@
                     <a href="{{ path('card_card') }}" class="{{ app.request.attributes.get('_route') starts with 'card' ? 'active' : '' }}">Kortlek</a>
                 </li>
                 <li>
-                    <a href="{{ path('game_intro') }}" class="{{ app.request.attributes.get('_route') starts with 'game' ? 'active' : '' }}">Kortspel 21</a>
+                <li>
+                 <a href="{{ path('metrics') }}" class="{{ app.request.attributes.get('_route') == 'metrics' ? 'active' : '' }}">Metrics</a>
+                </li>
+                <a href="{{ path('game_intro') }}" class="{{ app.request.attributes.get('_route') starts with 'game' ? 'active' : '' }}">Kortspel 21</a>
                 </li>
                 <li>
                     <a href="{{ path('app_book_index') }}" class="{{ app.request.attributes.get('_route') starts with 'app_book' ? 'active' : '' }}">Library</a>

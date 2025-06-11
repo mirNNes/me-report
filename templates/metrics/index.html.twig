@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kodkvalitet – Metricsanalys{% endblock %}
+
+{% block body %}
+<h1>Kodkvalitet: Metricsanalys</h1>
+
+<h2>Introduktion</h2>
+<p>
+
+I denna rapport analyseras kodkvaliteten i min PHP-applikation med hjälp av verktygen Phpmetrics och Scrutinizer CI. Analysen utgår från de sex C:na om kodkvalitet:
+
+- **Codestyle** – Hur väl koden följer enhetliga stilguider (PSR-standarden etc).
+- **Coverage** – Hur stor andel av koden som testas genom automatiska tester.
+- **Complexity** – Hur komplex koden är (t.ex. mätt i cyclomatic complexity).
+- **Cohesion** – Hur väl funktionerna i en klass hör ihop logiskt.
+- **Coupling** – Hur beroende klasser/metoder är av varandra.
+- **CRAP** – Kombination av testtäckning och komplexitet (CRAP Score).
+
+Jag använder även Scrutinizers rapportering av **Code Smells** som en sjunde indikator.
+</p>
+
+<h2>Phpmetrics</h2>
+<p>Phpmetrics
+Phpmetrics är ett verktyg för statisk analys av PHP-kod som ger insikter om kodens kvalitet utifrån flera mätvärden, exempelvis kodvolym, komplexitet, och koppling mellan klasser.
+
+Sammanfattning av din kod
+Lines of code: 991 rader vilket är en måttlig storlek för projektet.
+
+Antal klasser: 23, vilket ger ungefär 43 rader per klass.
+
+Genomsnittlig cyclomatisk komplexitet per klass: 2.3 — detta indikerar en överlag ganska låg komplexitet. Värden under 5 är ofta acceptabla, men enstaka klasser kan ha högre komplexitet.
+
+Antal buggar per klass (estimerat): 0.07, vilket är lågt och positivt.
+
+Underhållbarhet: Indexet baserat på kommentarer och komplexitet visar att vissa filer har högre komplexitet och därmed kan vara svårare att underhålla.
+
+Violations: 0 kritiska, men 1 fel och 4 varningar som bör granskas.
+
+Hög komplexitet i UserService.php
+Ett exempel på en fil med förbättringspotential är UserService.php där cyclomatisk komplexitet är högre än snittet. Det tyder på att metoder där kan vara för långa eller innehålla för många logiska grenar, vilket gör koden svårare att förstå och underhålla.>
+
+<h2>Scrutinizer</h2>
+<p>Scrutinizer CI rapporterade följande:</p>
+<ul>
+  <li>Kvalitet: 6.7/10</li>
+  <li>Coverage: 48%</li>
+  <li>Code smells: 12</li>
+</ul>
+
+<h3>Badges</h3>
+<p>
+  <img src="https://scrutinizer-ci.com/g/user/repo/badges/quality-score.png?b=main" alt="Quality">
+  <img src="https://scrutinizer-ci.com/g/user/repo/badges/coverage.png?b=main" alt="Coverage">
+  <img src="https://scrutinizer-ci.com/g/user/repo/badges/build.png?b=main" alt="Build">
+</p>
+
+<h2>Förbättringar</h2>
+<p>Jag förbättrade följande delar av koden...</p>
+
+<h2>Resultat</h2>
+<table>
+  <thead>
+    <tr><th>Mätvärde</th><th>Före</th><th>Efter</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Coverage</td><td>48%</td><td>85%</td></tr>
+    <tr><td>CRAP score</td><td>34</td><td>10</td></tr>
+    <tr><td>Complexity (medel)</td><td>9.2</td><td>3.8</td></tr>
+  </tbody>
+</table>
+
+<h2>Diskussion</h2>
+<p>Verktyg som Scrutinizer och Phpmetrics ger konkreta sätt att jobba mot clean code. Fördelarna är många...</p>
+
+{% endblock %}
