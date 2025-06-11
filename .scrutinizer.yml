@@ -5,18 +5,20 @@ filter:
     excluded_paths: [vendor/*, test/*]
 
 build:
-    image: default-jammy
-
-    environment:
-        node:
-            version: "18"
+    image: default-bionic
 
     nodes:
-     analysis:
-    tests:
-      commands:
-        - composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader
-        - vendor/bin/phpunit --coverage-clover=docs/coverage.clover
-      coverage:
-        file: "docs/coverage.clover"
-        format: "php-clover"
+        my-tests:
+            environment:
+                php:
+                    version: 8.3.3
+            tests:
+                override:
+                    - command: "composer phpunit"
+
+tools:
+    external_code_coverage:
+        runs:
+            - command: "composer phpunit"
+              coverage_file: "docs/coverage.clover"
+              format: "php-clover"
