@@ -5,7 +5,7 @@ filter:
     excluded_paths: [vendor/*, test/*]
 
 build:
-    image: php:8.1
+    image: default-jammy
 
     environment:
         node:
