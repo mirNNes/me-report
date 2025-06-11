@@ -12,7 +12,6 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@symfony/stimulus-bundle": "^2.24.0",
         "acorn": "^8.14.1",
         "adjust-sourcemap-loader": "^4.0.0",
         "ajv": "^8.17.1",
