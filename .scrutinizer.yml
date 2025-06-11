@@ -5,16 +5,14 @@ filter:
     excluded_paths: [vendor/*, test/*]
 
 build:
-    image: default
+    image: default-bionic
 
     nodes:
         analysis:
-            project_setup:
-                override:
-                    - 'composer install'
             tests:
                 override:
-                    - command: 'vendor/bin/phpunit --coverage-clover=docs/coverage.clover'
+                    - command: "composer install --no-interaction"
+                    - command: "composer phpunit"
                       coverage:
-                          file: 'docs/coverage.clover'
-                          format: 'php-clover'
+                          file: "docs/coverage.clover"
+                          format: "php-clover"
