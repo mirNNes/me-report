@@ -7,6 +7,10 @@ filter:
 build:
     image: default-jammy  
 
+    environment:
+        node:
+            version: "18"
+
     nodes:
         analysis:
             tests:
