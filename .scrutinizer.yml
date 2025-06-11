@@ -12,11 +12,11 @@ build:
             version: "18"
 
     nodes:
-        analysis:
-        tests:
-         override:
-            - command: "composer install --no-interaction"
-            - command: "vendor/bin/phpunit --coverage-clover=docs/coverage.clover"
-        coverage:
-            file: "docs/coverage.clover"
-            format: "php-clover"
+     analysis:
+    tests:
+      commands:
+        - composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader
+        - vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+      coverage:
+        file: "docs/coverage.clover"
+        format: "php-clover"
