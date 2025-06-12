@@ -15,7 +15,7 @@ build:
       tests:
         override:
           - command: "mkdir -p docs && XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover"
-
+          
 tools:
   external_code_coverage:
     enabled: true
