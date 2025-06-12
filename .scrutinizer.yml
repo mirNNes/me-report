@@ -26,3 +26,7 @@ build:
               mkdir -p docs &&
               npm install &&
               ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+
+tools:
+  external_code_coverage:
+    enabled: true
