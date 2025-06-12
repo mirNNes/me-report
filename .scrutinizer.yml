@@ -1,32 +1,35 @@
 imports:
-  - php
+    - php
 
 filter:
-  excluded_paths:
-    - vendor/*
-    - tests/*
+    excluded_paths: [vendor/*, test/*]
 
 build:
-  image: default-bionic
+    image: default-bionic
 
-  nodes:
+    nodes:
+        my-tests:
+            environment:
+                php:
+                    version: 8.3.3
+                node:
+                    version: 20
+
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+
     tests:
-      environment:
-        php:
-          version: 8.3.3
-          ini:
-            xdebug.mode: coverage
-        global:
-          - curl -sL https://deb.nodesource.com/setup_20.x | bash -
-          - apt-get install -y nodejs
-          - npm install
-
-      tests:
         override:
-          - command: >
-              mkdir -p docs &&
-              ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+            - command: >
+                npm install &&
+                mkdir -p docs &&
+                ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+        coverage:
+                file: "docs/coverage.clover"
+                format: "php-clover"
 
 tools:
-  external_code_coverage:
-    enabled: true
+    external_code_coverage:
+        enabled: true
