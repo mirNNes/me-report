@@ -9,11 +9,6 @@ filter:
 build:
   image: default-bionic
 
-  commands:
-    - curl -sL https://deb.nodesource.com/setup_20.x | bash -
-    - apt-get install -y nodejs
-    - npm install
-
   nodes:
     tests:
       environment:
@@ -21,6 +16,10 @@ build:
           version: 8.3.3
           ini:
             xdebug.mode: coverage
+        global:
+          - curl -sL https://deb.nodesource.com/setup_20.x | bash -
+          - apt-get install -y nodejs
+          - npm install
 
       tests:
         override:
