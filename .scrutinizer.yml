@@ -4,13 +4,13 @@ imports:
 filter:
     excluded_paths: [vendor/*, test/*]
 
-cache:
-    paths:
-        - vendor/
-        - node_modules/
-
 build:
     image: default-bionic
+
+    artifacts:
+        paths:
+            - vendor/
+            - node_modules/
 
     nodes:
         analysis:
