@@ -9,6 +9,7 @@ filter:
 build:
   image: default-bionic
 
+  # ✅ Dessa körs innan några noder (t.ex. tests)
   before_commands:
     - curl -sL https://deb.nodesource.com/setup_20.x | bash -
     - apt-get install -y nodejs
