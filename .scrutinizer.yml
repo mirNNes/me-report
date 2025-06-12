@@ -19,6 +19,10 @@ build:
                     version: 8.3.3
                 node:
                     version: 16
+            cache:
+                paths:
+                    - vendor/
+                    - node_modules/
             commands:
                 - npm cache clean --force
                 - npm install --verbose --no-progress
