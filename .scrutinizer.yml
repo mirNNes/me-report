@@ -9,10 +9,11 @@ filter:
 build:
   image: default-bionic
 
-  # ✅ Dessa körs innan några noder (t.ex. tests)
+  # ✅ Dessa kommandon körs före noder
   before_commands:
     - curl -sL https://deb.nodesource.com/setup_20.x | bash -
     - apt-get install -y nodejs
+    - npm install
 
   nodes:
     tests:
@@ -21,11 +22,11 @@ build:
           version: 8.3.3
           ini:
             xdebug.mode: coverage
+
       tests:
         override:
           - command: >
               mkdir -p docs &&
-              npm install &&
               ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
 tools:
