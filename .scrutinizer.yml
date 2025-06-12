@@ -9,8 +9,7 @@ build:
 
     artifacts:
         paths:
-            - vendor/
-            - node_modules/
+            - docs/coverage.clover
 
     nodes:
         analysis:
