@@ -26,9 +26,8 @@ build:
                 npm install &&
                 mkdir -p docs &&
                 ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
-        coverage:
-                file: "docs/coverage.clover"
-                format: "php-clover"
+        after:
+            - php-scrutinizer-run --coverage docs/coverage.clover
 
 tools:
     external_code_coverage:
