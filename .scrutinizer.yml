@@ -15,7 +15,7 @@ build:
                 node:
                     version: 16
             cache:
-                paths:
+                directories:
                     - vendor/
                     - node_modules/
             commands:
