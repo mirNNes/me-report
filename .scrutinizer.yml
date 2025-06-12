@@ -7,10 +7,6 @@ filter:
 build:
     image: default-bionic
 
-    artifacts:
-        paths:
-            - docs/coverage.clover
-
     nodes:
         analysis:
             environment:
@@ -28,3 +24,8 @@ build:
                 - mkdir -p docs
                 - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
                 - php-scrutinizer-run
+
+tools:
+    external_code_coverage:
+        timeout: 600
+        runs: true
