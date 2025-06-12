@@ -4,12 +4,12 @@ imports:
 filter:
     excluded_paths: [vendor/*, test/*]
 
-artifacts:
-    paths:
-        - docs/coverage.clover
-
 build:
     image: default-bionic
+
+    artifacts:
+        paths:
+            - docs/coverage.clover
 
     nodes:
         analysis:
@@ -23,6 +23,7 @@ build:
                     - vendor/
                     - node_modules/
             commands:
+                - cd $SCRUTINIZER_BUILD_DIR
                 - npm --version
                 - ls -la
                 - ls -la package.json || echo "⚠️ Ingen package.json hittades!"
