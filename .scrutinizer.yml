@@ -1,3 +1,4 @@
+# config for Scrutinizer CI
 imports:
     - php
 
@@ -8,21 +9,15 @@ build:
     image: default-bionic
 
     nodes:
-        my-tests:
+        analysis:
             environment:
                 php:
                     version: 8.3.3
                 node:
-                    version: 20
-
-        analysis:
+                    version: 18
             commands:
+                - npm cache clean --force
+                - npm install --verbose --no-progress
+                - mkdir -p docs
+                - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
                 - php-scrutinizer-run
-
-    tests:
-        override:
-            - command: >
-                npm cache clean --force &&
-                npm install --verbose --no-progress &&
-                mkdir -p docs &&
-                ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
