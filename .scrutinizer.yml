@@ -9,6 +9,10 @@ filter:
 build:
   image: default-bionic
 
+  before_commands:
+    - curl -sL https://deb.nodesource.com/setup_20.x | bash -
+    - apt-get install -y nodejs
+
   nodes:
     tests:
       environment:
@@ -20,4 +24,5 @@ build:
         override:
           - command: >
               mkdir -p docs &&
+              npm install &&
               ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
