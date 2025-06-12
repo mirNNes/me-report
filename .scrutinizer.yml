@@ -7,10 +7,6 @@ filter:
 build:
     image: default-bionic
 
-    artifacts:
-        paths:
-            - docs/coverage.clover
-
     nodes:
         analysis:
             environment:
