@@ -7,6 +7,10 @@ filter:
 build:
     image: default-bionic
 
+    artifacts:
+        paths:
+            - docs/coverage.clover
+
     nodes:
         analysis:
             environment:
@@ -19,13 +23,11 @@ build:
                     - vendor/
                     - node_modules/
             commands:
+                - npm --version
+                - ls -la
+                - ls -la package.json || echo "⚠️ Ingen package.json hittades!"
                 - npm cache clean --force
-                - npm install --verbose --no-progress
+                - npm ci || npm install
                 - mkdir -p docs
                 - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
                 - php-scrutinizer-run
-
-tools:
-    external_code_coverage:
-        timeout: 600
-        runs: true
