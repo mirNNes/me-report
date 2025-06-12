@@ -1,11 +1,8 @@
 imports:
   - php
 
-project_setup:
-  override: true
-
 filter:
-  excluded_paths: 
+  excluded_paths:
     - vendor/*
     - tests/*
 
@@ -21,6 +18,6 @@ build:
             xdebug.mode: coverage
       tests:
         override:
-          - command: |
-              mkdir -p docs
+          - command: >
+              mkdir -p docs &&
               ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
