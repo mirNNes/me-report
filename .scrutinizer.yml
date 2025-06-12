@@ -16,9 +16,8 @@ build:
                     version: 20
 
         analysis:
-            tests:
-                override:
-                    - php-scrutinizer-run
+            commands:
+                - php-scrutinizer-run
 
     tests:
         override:
@@ -27,9 +26,3 @@ build:
                 npm install --verbose --no-progress &&
                 mkdir -p docs &&
                 ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
-    after:
-        - php-scrutinizer-run --coverage docs/coverage.clover
-
-tools:
-    external_code_coverage:
-        enabled: true
