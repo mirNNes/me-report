@@ -24,10 +24,11 @@ build:
         override:
             - command: >
                 npm cache clean --force &&
-                npm install --verbose &&
+                npm install --verbose --no-progress &&
                 mkdir -p docs &&
                 ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
-        idle_timeout: 300
+    after:
+        - php-scrutinizer-run --coverage docs/coverage.clover
 
 tools:
     external_code_coverage:
