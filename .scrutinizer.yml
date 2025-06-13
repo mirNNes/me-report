@@ -6,10 +6,12 @@ build:
       version: 16
 
   commands:
-    - cd $SCRUTINIZER_PROJECT_ROOT && composer install --no-interaction --prefer-dist --no-progress
-    - cd $SCRUTINIZER_PROJECT_ROOT && npm ci || npm install
-    - cd $SCRUTINIZER_PROJECT_ROOT && ./vendor/bin/phpstan analyse --level=max src
-    - cd $SCRUTINIZER_PROJECT_ROOT && ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+    - ls -la
+    - ls -la me-report
+    - cd me-report && composer install --no-interaction --prefer-dist --no-progress
+    - cd me-report && npm ci || npm install
+    - cd me-report && ./vendor/bin/phpstan analyse --level=max src
+    - cd me-report && ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
 tools:
   php_code_sniffer: true
