@@ -1,9 +1,6 @@
 imports:
   - php
 
-project_setup:
-  override: true
-
 filter:
   excluded_paths: [vendor/*, tests/*]
 
@@ -14,10 +11,13 @@ build:
     tests:
       environment:
         php:
-          version: 8.3.3
+          version: 8.2  # Byt till 8.2 för kompatibilitet
       tests:
         override:
-          - command: "mkdir -p docs && XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover"
+          - mkdir -p docs && XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+
+before_commands:
+  - echo "Setup commands can go here if needed"
 
 artifacts:
   paths:
