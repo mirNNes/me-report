@@ -18,6 +18,9 @@ build:
           file: docs/coverage.clover
           format: clover
 
+  commands:
+    - ./vendor/bin/phpstan analyse --level=max src
+
 tools:
   php_code_sniffer: true
   php_cpd: true
@@ -27,6 +30,3 @@ tools:
   php_mess_detector: true
   php_pdepend: true
   php_analyzer: true
-  phpstan:
-    config: phpstan.dist.neon
-    level: 5
