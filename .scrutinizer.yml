@@ -15,8 +15,6 @@ build:
       commands:
         - pwd
         - ls -la
-        - cd report || true
-        - ls -la
         - npm ci || npm install
         - mkdir -p docs
         - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
