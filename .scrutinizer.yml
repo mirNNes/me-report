@@ -1,20 +1,28 @@
+# skapa mappar som behövs innan testkörning
+before_commands:
+  - mkdir -p build/logs
+
+# bygg steg, installera beroenden
 build:
   nodes:
     scrutinizer:
+      # jobba i roten av projektet
       root_path: .
-      environment:
-        php:
-          version: '8.1'
-      dependencies:
-        before:
-          - composer install --no-interaction --prefer-dist
-      tests:
-        override:
-          - command: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
-            coverage:
-              file: build/logs/clover.xml
-              format: clover
+      # kommandon som körs i byggfasen
+      commands:
+        - composer install --no-interaction --prefer-dist
 
-tools:
-  php_analyzer: true
-  php_code_coverage: true
+# test steg, kör phpunit
+tests:
+  override:
+    - vendor/bin/phpunit --configuration phpunit.xml --coverage-clover=build/logs/clover.xml
+
+# rapportering av kodtäckning till Scrutinizer
+artifacts:
+  - build/logs/clover.xml
+
+checks:
+  php:
+    # aktivera kodtäckning
+    code_coverage:
+      enabled: true
