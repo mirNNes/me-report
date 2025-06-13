@@ -10,16 +10,9 @@ build:
       - composer install --no-interaction --prefer-dist --no-progress
       - npm ci || npm install
 
-  tests:
-    override:
-      -
-        command: ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
-        coverage:
-          file: docs/coverage.clover
-          format: clover
-
   commands:
     - ./vendor/bin/phpstan analyse --level=max src
+    - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
 tools:
   php_code_sniffer: true
