@@ -23,8 +23,7 @@ build:
             project_setup:
                 override:
                     - npm ci || npm install
-            tests:
-                override:
-                    - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
             commands:
+                - mkdir -p docs
+                - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
                 - php-scrutinizer-run
