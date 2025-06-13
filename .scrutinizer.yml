@@ -1,13 +1,18 @@
 build:
-  environment:
-    php:
-      version: '8.1'
-
-  custom_commands:
-    run_phpunit:
-      run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+  nodes:
+    scrutinizer__default:
+      environment:
+        php:
+          version: '8.1'
+      commands:
+        - composer install --no-interaction --prefer-dist
+        - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
 
 tools:
-  php_analyzer:
-    config:
-      - vendor/bin/phpstan analyse src --level=max
+  php_code_coverage:
+    formats:
+      - clover: build/logs/clover.xml
+
+checks:
+  php_code_coverage:
+    enabled: true
