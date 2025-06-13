@@ -12,12 +12,10 @@ build:
       environment:
         php:
           version: 8.2
-      before_commands:
+      commands:
         - composer install --no-interaction --prefer-dist --optimize-autoloader
-      tests:
-        override:
-          - mkdir -p docs
-          - XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+        - mkdir -p docs
+        - XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
 artifacts:
   paths:
