@@ -1,29 +1,35 @@
-imports:
-    - php
-
-filter:
-    excluded_paths: [vendor/*, test/*]
-
 build:
-    image: default-bionic
-
-    nodes:
-        my-tests:
-            environment:
-                php:
-                    version: 8.3.3
-                    # version: 8.1.13
-                    # version: 8.1.17
-                    # version: 8.2.4
-        analysis:
-            tests:
-                override:
-                    - php-scrutinizer-run
-                    #- phpcs-run # Not used, missing config file
+    environment:
+        php:
+            version: 8.3
+        node: true
+        dependencies:
+            before:
+                - composer install --no-interaction
+            override:
+                - npm install
     tests:
         override:
-            -   command: "composer phpunit"
-                # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-                coverage:
-                    file: "docs/coverage.clover"
-                    format: "php-clover"
+            - command: vendor/bin/phpunit --coverage-clover=var/coverage.clover
+              coverage:
+                  file: var/coverage.clover
+                  format: php-clover
+
+filter:
+    excluded_paths:
+        - tests/*
+        - var/*
+        - config/*
+        - public/*
+        - tools/*
+        - vendor/*
+
+tools:
+    php_code_sniffer: true
+    php_cpd: true
+    php_loc: true
+    php_mess_detector: true
+    php_pdepend: true
+    php_analyzer: true
+    sensiolabs_security_checker: false
+    external_code_coverage: true
