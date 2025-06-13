@@ -6,12 +6,10 @@ build:
       version: 16
 
   commands:
-    - ls -la
-    - ls -la me-report
-    - cd me-report && composer install --no-interaction --prefer-dist --no-progress
-    - cd me-report && npm ci || npm install
-    - cd me-report && ./vendor/bin/phpstan analyse --level=max src
-    - cd me-report && ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+    - composer install --no-interaction --prefer-dist --no-progress
+    - npm ci || npm install
+    - ./vendor/bin/phpstan analyse --level=max src
+    - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
 tools:
   php_code_sniffer: true
