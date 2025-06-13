@@ -1,4 +1,7 @@
 build:
+  project_setup:
+    project_root: .
+
   environment:
     php:
       version: '8.1'
@@ -12,6 +15,8 @@ build:
 
 tools:
   php_analyzer:
+    enabled: true
+  php_code_coverage:
     enabled: true
 
 filter:
