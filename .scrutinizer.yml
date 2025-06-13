@@ -15,7 +15,7 @@ build:
       commands:
         - pwd
         - ls -la
-        - cd me/report
+        - cd me/report || exit
         - ls -la
         - npm install
         - mkdir -p docs
