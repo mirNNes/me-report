@@ -13,7 +13,9 @@ build:
           - vendor/
           - node_modules/
       commands:
-        - git clone https://github.com/mirNNes/me-report.git .
+        - pwd
+        - ls -la
+        - cd report || true
         - ls -la
         - npm ci || npm install
         - mkdir -p docs
