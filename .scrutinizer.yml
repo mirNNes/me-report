@@ -1,22 +1,20 @@
-project_setup:
-  project_root: .
-
 build:
-  environment:
-    php:
-      version: '8.1'
-
-  dependencies:
-    before:
-      - composer install --no-interaction --prefer-dist
-
-  tests:
-    override:
-      - command: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
-        coverage:
-          file: build/logs/clover.xml
-          format: clover
+  nodes:
+    scrutinizer:
+      project_root: .
+      environment:
+        php:
+          version: '8.1'
+      dependencies:
+        before:
+          - composer install --no-interaction --prefer-dist
+      tests:
+        override:
+          - command: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+            coverage:
+              file: build/logs/clover.xml
+              format: clover
 
 tools:
-  php_code_coverage: true
   php_analyzer: true
+  php_code_coverage: true
