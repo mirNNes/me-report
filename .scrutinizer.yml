@@ -10,9 +10,10 @@ build:
       environment:
         php:
           version: '8.1'
-      # eventuella byggsteg och kommandon
+      # Lägg till byggsteg här vid behov
 
 tools:
-  phpunit:
-    config: phpunit.xml
-    run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+  php_code_coverage:
+    config_file: phpunit.xml
+    executable: vendor/bin/phpunit
+    options: "--coverage-clover=build/logs/clover.xml"
