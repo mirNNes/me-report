@@ -7,7 +7,7 @@ filter:
         - test/*
 
 build:
-    image: default
+    image: default-bionic
 
     nodes:
         analysis:
