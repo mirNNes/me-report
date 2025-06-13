@@ -9,6 +9,7 @@ build:
 
   nodes:
     tests:
+      root_path: me-report
       environment:
         php:
           version: 8.2
