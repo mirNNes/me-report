@@ -1,19 +1,9 @@
-environment:
-  php:
-    version: '8.1'
-  node:
-    version: '16'
-
 build:
-  nodes:
-    analysis:
-      environment:
-        php:
-          version: '8.1'
-      # Lägg till byggsteg här vid behov
+  environment:
+    php:
+      version: '8.1'
 
 tools:
-  php_code_coverage:
-    config_file: phpunit.xml
+  phpunit:
     executable: vendor/bin/phpunit
     options: "--coverage-clover=build/logs/clover.xml"
