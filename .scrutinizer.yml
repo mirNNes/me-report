@@ -2,29 +2,31 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*]
+    excluded_paths:
+        - vendor/*
+        - test/*
 
 build:
-    image: default-bionic
+    image: default
 
     nodes:
         analysis:
             environment:
                 php:
-                    version: 8.3.3
+                    version: 8.3
                 node:
                     version: 16
             cache:
                 directories:
                     - vendor/
                     - node_modules/
+            project_setup:
+                override: true
+                commands:
+                    - npm ci || npm install
+            tests:
+                override: true
+                commands:
+                    - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
             commands:
-                - cd $SCRUTINIZER_BUILD_DIR
-                - npm --version
-                - ls -la
-                - ls -la package.json || echo "⚠️ Ingen package.json hittades!"
-                - npm cache clean --force
-                - npm ci || npm install
-                - mkdir -p docs
-                - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
                 - php-scrutinizer-run
