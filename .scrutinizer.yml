@@ -1,3 +1,9 @@
+imports:
+  - php
+
+filter:
+  excluded_paths: [vendor/*, tests/*]
+
 build:
   image: default-bionic
 
@@ -6,15 +12,17 @@ build:
       environment:
         php:
           version: 8.2
-      project_setup:
-        override:
-          - composer install --no-interaction --prefer-dist --optimize-autoloader
+      before_commands:
+        - composer install --no-interaction --prefer-dist --optimize-autoloader
       tests:
         override:
           - mkdir -p docs
-          - cd $SCRUTINIZER_BUILD_DIR
           - XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
 artifacts:
   paths:
     - docs/coverage.clover
+
+tools:
+  external_code_coverage:
+    enabled: true
