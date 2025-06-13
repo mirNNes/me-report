@@ -1,7 +1,7 @@
 build:
   nodes:
     scrutinizer:
-      project_root: .
+      root_path: .
       environment:
         php:
           version: '8.1'
