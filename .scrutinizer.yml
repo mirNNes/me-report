@@ -13,11 +13,12 @@ build:
           - vendor/
           - node_modules/
       commands:
-        - pwd                  # Visa nuvarande arbetskatalog
-        - ls -la              # Lista alla filer och mappar
-        - cd /home/scrutinizer/me-report  # Navigera till rätt katalog
-        - ls -la              # Lista filer i me-report för att bekräfta
-        - npm install          # Installera npm-paket
+        - pwd
+        - echo "Checking directory contents"
+        - ls -la
+        - echo "Checking if package.json exists"
+        - test -f package.json && echo "Found package.json" || echo "package.json missing!"
+        - npm ci || npm install
         - mkdir -p docs
         - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
         - php-scrutinizer-run
