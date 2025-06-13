@@ -5,12 +5,9 @@ build:
     node:
       version: 16
 
-  dependencies:
-    override:
-      - composer install --no-interaction --prefer-dist --no-progress
-      - npm ci || npm install
-
   commands:
+    - composer install --no-interaction --prefer-dist --no-progress
+    - npm ci || npm install
     - ./vendor/bin/phpstan analyse --level=max src
     - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
 
