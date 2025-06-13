@@ -1,9 +1,3 @@
-imports:
-  - php
-
-filter:
-  excluded_paths: [vendor/*, tests/*]
-
 build:
   image: default-bionic
 
@@ -12,6 +6,9 @@ build:
       environment:
         php:
           version: 8.2
+      project_setup:
+        override:
+          - composer install --no-interaction --prefer-dist --optimize-autoloader
       tests:
         override:
           - mkdir -p docs
@@ -21,7 +18,3 @@ build:
 artifacts:
   paths:
     - docs/coverage.clover
-
-tools:
-  external_code_coverage:
-    enabled: true
