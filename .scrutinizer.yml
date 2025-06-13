@@ -13,8 +13,8 @@ build:
                     - vendor/
                     - node_modules/
             commands:
+                - cd me-report
                 - ls -la
                 - npm ci || npm install
                 - mkdir -p docs
                 - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover || true
-                - php-scrutinizer-run || true
