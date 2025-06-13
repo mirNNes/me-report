@@ -20,10 +20,8 @@ build:
                 directories:
                     - vendor/
                     - node_modules/
-            project_setup:
-                override:
-                    - npm ci || npm install
             commands:
+                - npm ci || npm install
                 - mkdir -p docs
                 - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
                 - php-scrutinizer-run
