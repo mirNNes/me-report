@@ -1,20 +1,21 @@
 build:
-    image: default-bionic
+  image: default-bionic
 
-    nodes:
-        analysis:
-            environment:
-                php:
-                    version: 8.2
-                node:
-                    version: 16
-            cache:
-                directories:
-                    - vendor/
-                    - node_modules/
-            commands:
-                - ls -la
-                - npm ci || npm install
-                - mkdir -p docs
-                - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
-                - php-scrutinizer-run
+  nodes:
+    analysis:
+      environment:
+        php:
+          version: 8.2
+        node:
+          version: 16
+      cache:
+        directories:
+          - vendor/
+          - node_modules/
+      commands:
+        - git clone https://github.com/mirNNes/me-report.git .
+        - ls -la
+        - npm ci || npm install
+        - mkdir -p docs
+        - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+        - php-scrutinizer-run
