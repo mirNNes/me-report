@@ -21,12 +21,10 @@ build:
                     - vendor/
                     - node_modules/
             project_setup:
-                override: true
-                commands:
+                override:
                     - npm ci || npm install
             tests:
-                override: true
-                commands:
+                override:
                     - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
             commands:
                 - php-scrutinizer-run
