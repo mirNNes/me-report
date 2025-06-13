@@ -1,20 +1,32 @@
 build:
-    image: default-bionic
+  environment:
+    php:
+      version: 8.2
+    node:
+      version: 16
 
-    nodes:
-        analysis:
-            environment:
-                php:
-                    version: 8.2
-                node:
-                    version: 16
-            cache:
-                directories:
-                    - vendor/
-                    - node_modules/
-            commands:
-                - cd me-report
-                - ls -la
-                - npm ci || npm install
-                - mkdir -p docs
-                - ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover || true
+  dependencies:
+    override:
+      - composer install --no-interaction --prefer-dist --no-progress
+      - npm ci || npm install
+
+  tests:
+    override:
+      -
+        command: ./vendor/bin/phpunit --coverage-clover=docs/coverage.clover
+        coverage:
+          file: docs/coverage.clover
+          format: clover
+
+tools:
+  php_code_sniffer: true
+  php_cpd: true
+  php_cs_fixer:
+    config: .php-cs-fixer.dist.php
+  php_loc: true
+  php_mess_detector: true
+  php_pdepend: true
+  php_analyzer: true
+  phpstan:
+    config: phpstan.dist.neon
+    level: 5
