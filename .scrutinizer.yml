@@ -13,7 +13,7 @@ build:
 checks:
   php:
     coding_standard:
-      name: Symfony
+      name: WordPress  # Byt till Drupal, Magento eller Magento2 om du vill
 
 tools:
   php_code_sniffer: true
