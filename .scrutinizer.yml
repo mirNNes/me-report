@@ -5,10 +5,8 @@ build:
       environment:
         php:
           version: 8.1
-      dependencies:
-        before:
-          - composer install --no-interaction --prefer-dist
       commands:
+        - composer install --no-interaction --prefer-dist
         - mkdir -p var/logs
         - vendor/bin/phpunit --coverage-clover=var/coverage.clover
 
