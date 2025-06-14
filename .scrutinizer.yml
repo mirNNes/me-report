@@ -14,4 +14,3 @@ checks:
   php:
     coding_standard:
       name: Magento2
-      enabled: true
