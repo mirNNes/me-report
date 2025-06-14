@@ -12,4 +12,4 @@ artifacts:
 
 checks:
   php:
-    coding_standard: PSR2
+    coding_standard: true
