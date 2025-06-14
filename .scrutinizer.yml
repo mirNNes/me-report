@@ -2,15 +2,28 @@ build:
   nodes:
     scrutinizer:
       root_path: .
+      environment:
+        php:
+          version: 8.1
+      dependencies:
+        before:
+          - composer install --no-interaction --prefer-dist
       commands:
-        - mkdir -p build/logs
-        - composer install --no-interaction --prefer-dist
-        - vendor/bin/phpunit --configuration=phpunit.xml --coverage-clover=build/logs/clover.xml
-
-artifacts:
-  - build/logs/clover.xml
+        - mkdir -p var/logs
+        - vendor/bin/phpunit --coverage-clover=var/coverage.clover
 
 checks:
   php:
     coding_standard:
-      name: Magento2
+      name: Symfony
+
+tools:
+  php_code_sniffer: true
+  php_cpd: true
+  php_loc: true
+  php_mess_detector: true
+  php_pdepend: true
+  php_analyzer: true
+  php_coding_standard:
+    config:
+      standard: Symfony
