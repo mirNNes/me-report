@@ -1,25 +1,28 @@
+imports:
+  - php
+
+filter:
+  excluded_paths:
+    - vendor/*
+    - tests/*
+
 build:
+  image: default-bionic
+
   nodes:
-    scrutinizer:
-      root_path: .
+    tests:
       environment:
         php:
           version: 8.1
-      commands:
-        - composer install --no-interaction --prefer-dist
-        - mkdir -p var/logs
-        - vendor/bin/phpunit --coverage-clover=var/coverage.clover
+
+      tests:
+        override:
+          - command: "composer phpunit:coverage"
+            coverage:
+              file: "var/coverage.clover"
+              format: "php-clover"
 
 checks:
   php:
     coding_standard:
-      name: WordPress  # Byt till Drupal, Magento eller Magento2 om du vill
-
-tools:
-  php_code_sniffer: true
-  php_cpd: true
-  php_loc: true
-  php_mess_detector: true
-  php_pdepend: true
-  php_analyzer: true
-  php_cs_fixer: true
+      name: "Drupal"  # Byt till något av: Drupal, WordPress, Magento, Magento2 (Scrutinizer stödjer inte Symfony)
