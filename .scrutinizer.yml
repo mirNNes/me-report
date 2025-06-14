@@ -12,4 +12,5 @@ artifacts:
 
 checks:
   php:
-    coding_standard: true
+    coding_standard:
+      enabled: true
