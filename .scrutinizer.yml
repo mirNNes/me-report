@@ -1,4 +1,4 @@
-before_commands:
+.scrutinizer.yml:before_commands:
   - mkdir -p build/logs
 
 build:
@@ -17,5 +17,6 @@ artifacts:
 
 checks:
   php:
-    code_coverage:
-      enabled: true
+    # code_coverage:
+    #   enabled: true
+    coding_standard: PSR2
