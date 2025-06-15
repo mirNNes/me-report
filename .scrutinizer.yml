@@ -43,7 +43,10 @@ build:
 
       tests:
         override:
-          - command: vendor/bin/phpunit --coverage-clover=var/coverage.clover
+          - command: |
+              php bin/console doctrine:database:create --if-not-exists
+              php bin/console doctrine:migrations:migrate --no-interaction
+              vendor/bin/phpunit --coverage-clover=var/coverage.clover
             coverage:
               file: var/coverage.clover
               format: php-clover
