@@ -22,6 +22,9 @@ class ApiControllerTest extends WebTestCase
 
         $this->assertIsString($data['quote']);
         $this->assertMatchesRegularExpression('/\d{4}-\d{2}-\d{2}/', $data['date']);
+        $this->assertIsString($data['timestamp']);
+        $this->assertMatchesRegularExpression('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $data['timestamp']);
+
     }
 
     public function testGetAllBooks()
@@ -50,9 +53,17 @@ class ApiControllerTest extends WebTestCase
         $client->request('GET', '/api/library/book/nonexistent-isbn');
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseIsSuccessful();
-        $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertTrue($data === null || $data === []);
 
+        $data = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertTrue(is_null($data) || (is_array($data) && empty($data)));
+    }
+
+    public function testInvalidEndpoint()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/invalid-endpoint');
+
+        $this->assertResponseStatusCodeSame(404);
     }
 }
