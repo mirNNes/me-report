@@ -7,7 +7,6 @@ tools:
   php_loc: true
   php_pdepend: true
   php_sim: true
-  php_cs_fixer: true
 
 imports:
   - php
@@ -15,12 +14,12 @@ imports:
 filter:
   excluded_paths: [vendor/*, tests/*]
 
-# coding_style:
-#   php:
-#     braces: true
-#     indentation: 4
-#     spaces: true
-#     upper_lower_casing: true
+coding_style:
+  php:
+    braces: true
+    indentation: 4
+    spaces: true
+    upper_lower_casing: true
 
 build:
   image: default-bionic
@@ -39,7 +38,7 @@ build:
 
       tests:
         override:
-          - command: composer phpunit:coverage
+          - command: vendor/bin/phpunit --coverage-clover=var/coverage.clover
             coverage:
               file: var/coverage.clover
               format: php-clover
