@@ -7,8 +7,6 @@ tools:
   php_loc: true
   php_pdepend: true
   php_sim: true
-  php_code_rating:
-    enabled: true
 
 imports:
   - php
