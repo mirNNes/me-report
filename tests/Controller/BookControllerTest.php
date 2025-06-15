@@ -15,7 +15,7 @@ class BookControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testListPage():void
+    public function testListPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/library/books');

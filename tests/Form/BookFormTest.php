@@ -8,7 +8,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class BookFormTest extends TypeTestCase
 {
-    public function testBuildForm() : void
+    public function testBuildForm(): void
     {
         $formData = [
             'title' => 'Test Title',
