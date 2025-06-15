@@ -1,10 +1,11 @@
+tools:
+  php_code_coverage: true
+
 imports:
   - php
 
 filter:
-  excluded_paths:
-    - vendor/*
-    - tests/*
+  excluded_paths: [vendor/*, tests/*]
 
 build:
   image: default-bionic
@@ -17,9 +18,9 @@ build:
           ini:
             xdebug.mode: coverage
 
-      tests:
-        override:
-          - command: "composer phpunit:coverage && ls -la var"
-            coverage:
-              file: "var/coverage.clover"
-              format: "php-clover"
+  tests:
+    override:
+      - command: "composer phpunit:coverage"
+        coverage:
+          file: "var/coverage.clover"
+          format: "php-clover"
