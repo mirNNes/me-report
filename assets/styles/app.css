@@ -585,4 +585,98 @@ form {
 .btn:hover {
     opacity: 0.9;
 }
+/* === Rapportstil för Kodkvalitet – Metricsanalys === */
 
+body {
+  line-height: 1.6;
+  color: #222;
+}
+
+h1, h2, h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #111;
+}
+
+h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #61dafb;
+  padding-bottom: 0.3rem;
+  color: #1a1a1a;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+}
+
+code {
+  background-color: #f3f3f3;
+  padding: 0.2em 0.4em;
+  font-family: Consolas, monospace;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Bildcontainer (Phpmetrics, Scrutinizer) */
+div[style*="text-align:center"] {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin: 2rem 0;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Tabeller i rapport */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Emoji-symboler i listor */
+ul li::marker {
+  color: #444;
+}

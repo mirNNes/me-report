@@ -143,7 +143,29 @@ Den här veckan lärde jag mig hur Symfony automatiskt kan hämta data från dat
     </section>
     <section>
      <h2>kmom06</h2>
-    <p></p>
+    <p>
+PhpMetrics var ganska smidigt att använda. Det var lätt att komma igång, och det gav en bra översikt över min kod. Jag gillade särskilt bilderna och graferna – till exempel de som visar komplexitet i varje klass. Det hjälpte mig att snabbt se var problemen fanns, utan att jag behövde läsa igenom all kod. Siffror som "Cyclomatic Complexity" och "antal buggar per klass" var extra användbara.<br>
+
+Scrutinizer var däremot en riktig huvudvärk. Det tog flera dagar och nästan 100 commits innan jag fick rätt på det. Problemet var att jag inte hade rätt konfiguration i scrutinizer.yml. Dokumentationen på Scrutinizer är ganska rörig, och strukturen är inte så logisk som man först tror. Jag trodde jag gjorde rätt – men Scrutinizer genererade inte de analyser jag ville ha. Det var först när jag verkligen satte mig och testade rad för rad, som jag fick det att funka.
+
+Men till slut lyckades jag. Nu funkar det, och jag får ut alla värden, badges och analyser som jag vill.<br>
+
+Efter första bygget såg det ut så här:
+
+Kodtäckning: 25%
+
+Kodkvalitet: OK, men med flera fel och varningar (issues)<br>
+
+Badges är ett smart sätt att visa hur koden mår – särskilt när man jobbar i team eller vill visa upp sitt projekt.
+
+För mig handlar kodkvalitet om att skriva ren, tydlig och enkel kod. Det ska vara lätt att läsa, förstå och testa koden. Det är också viktigt att följa samma stil hela tiden – det gör koden mer professionell och lättare att jobba med.
+
+Jag tror att man kan visa viss kodkvalitet med badges och mätvärden – till exempel testtäckning eller komplexitet – men inte allt. Man måste fortfarande läsa koden för att förstå om den är bra.<br>
+
+TIL (Today I Learned)
+Min TIL från det här momentet är:
+Det lönar sig inte att slarva.
+Allt jag hoppade över eller inte tänkte på i början fick jag göra om sen, för att få en bra rapport i Scrutinizer. Det hade sparat tid om jag varit noggrann från början.</p>
     </section>
     <section>
      <h2>kmom10</h2>

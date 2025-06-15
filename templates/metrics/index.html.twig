@@ -7,104 +7,95 @@
 
 <h2>Introduktion</h2>
 <p>
-
-I denna rapport analyseras kodkvaliteten i min PHP-applikation med hjälp av verktygen Phpmetrics och Scrutinizer CI. Analysen utgår från de sex C:na om kodkvalitet:
-
-- **Codestyle** – Hur väl koden följer enhetliga stilguider (PSR-standarden etc).
-- **Coverage** – Hur stor andel av koden som testas genom automatiska tester.
-- **Complexity** – Hur komplex koden är (t.ex. mätt i cyclomatic complexity).
-- **Cohesion** – Hur väl funktionerna i en klass hör ihop logiskt.
-- **Coupling** – Hur beroende klasser/metoder är av varandra.
-- **CRAP** – Kombination av testtäckning och komplexitet (CRAP Score).
-
-Jag använder även Scrutinizers rapportering av **Code Smells** som en sjunde indikator.
+I denna rapport analyserar jag kvaliteten på min kod med hjälp av två verktyg: Phpmetrics och Scrutinizer. Jag utgår från de sex C:na:
+</p>
+<ul>
+  <li><strong>Codestyle</strong> – Att skriva kod med en enhetlig stil, t.ex. indrag, namngivning och struktur.</li>
+  <li><strong>Coverage</strong> – Hur stor del av koden som testas av automatiska tester.</li>
+  <li><strong>Complexity</strong> – Hur krånglig och svår koden är att förstå. Mätvärdet cyclomatic complexity visar detta.</li>
+  <li><strong>Cohesion</strong> – Om klasser/metoder har ett tydligt ansvar och håller ihop logiskt.</li>
+  <li><strong>Coupling</strong> – Hur beroende olika delar av koden är av varandra.</li>
+  <li><strong>CRAP</strong> – Ett kombinationsvärde av komplexitet och täckning, där höga värden visar risk.</li>
+</ul>
+<p>
+Jag använder också Scrutinizers analys av "Code Smells" som en extra indikator.
 </p>
 
 <h2>Phpmetrics</h2>
-<p>Phpmetrics
-Phpmetrics är ett verktyg för statisk analys av PHP-kod som ger insikter om kodens kvalitet utifrån flera mätvärden, exempelvis kodvolym, komplexitet, och koppling mellan klasser.
+<p>
+Phpmetrics är ett verktyg som visar olika statistik om min kod.
+</p>
+<ul>
+  <li><strong>Antal rader kod:</strong> 991</li>
+  <li><strong>Antal klasser:</strong> 23 (ungefär 43 rader per klass)</li>
+  <li><strong>Genomsnittlig komplexitet per klass:</strong> 2.3 (lågt och bra)</li>
+  <li><strong>Beräknat antal buggar per klass:</strong> 0.07</li>
+</ul>
 
-Sammanfattning av din kod
-Lines of code: 991 rader vilket är en måttlig storlek för projektet.
+<p>
+En fil som sticker ut är <code>UserService.php</code> som har högre komplexitet än övriga filer. Detta innebär att metoderna är lite för långa eller gör för mycket. Den bör delas upp för att bli lättare att förstå och testa.
+</p>
 
-Antal klasser: 23, vilket ger ungefär 43 rader per klass.
-
-Genomsnittlig cyclomatisk komplexitet per klass: 2.3 — detta indikerar en överlag ganska låg komplexitet. Värden under 5 är ofta acceptabla, men enstaka klasser kan ha högre komplexitet.
-
-Antal buggar per klass (estimerat): 0.07, vilket är lågt och positivt.
-
-Underhållbarhet: Indexet baserat på kommentarer och komplexitet visar att vissa filer har högre komplexitet och därmed kan vara svårare att underhålla.
-
-Violations: 0 kritiska, men 1 fel och 4 varningar som bör granskas.
-
-Hög komplexitet i UserService.php
-Ett exempel på en fil med förbättringspotential är UserService.php där cyclomatisk komplexitet är högre än snittet. Det tyder på att metoder där kan vara för långa eller innehålla för många logiska grenar, vilket gör koden svårare att förstå och underhålla.>
+<!-- Lägg in Phpmetrics-bilden här -->
+<div style="text-align:center; margin:2rem 0;">
+  <img src="/metrics-report/images/metrics.png" alt="Phpmetrics analys" style="max-width:100%; height:auto; border:1px solid #ccc; padding:0.5rem;">
+  <figcaption>Phpmetrics - Sammanfattande statistik</figcaption>
+</div>
 
 <h2>Scrutinizer</h2>
-<p>Scrutinizer är ett kodgranskningsverktyg som analyserar kodens kvalitet, komplexitet och täckning. Jag har använt Scrutinizer för att granska mitt projekt och kopplar analysresultaten till 6C-modellen.
+<p>
+Scrutinizer analyserar kodkvalitet, kodtäckning och struktur. Jag kopplar det till 6C-modellen.
+</p>
 
-🔍 Analys
-Badge	Status
-Build	
-Coverage	
-Quality	
+<h3>Resultat:</h3>
+<ul>
+  <li><strong>Build:</strong> ✔️ Godkänd</li>
+  <li><strong>Coverage:</strong> 📉 25%</li>
+  <li><strong>Quality:</strong> 🧠 OK, men några "issues"</li>
+</ul>
 
-Dessa badges är även inkluderade i min README.md.
+<h3>Koppling till 6C:</h3>
+<table>
+  <thead>
+    <tr><th>6C</th><th>Reflektion</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Correctness</td><td>Låg testtäckning gör att jag inte kan vara helt säker på att allt fungerar korrekt.</td></tr>
+    <tr><td>Clarity</td><td>Vissa metoder är för komplexa, vilket gör dem svåra att läsa.</td></tr>
+    <tr><td>Conciseness</td><td>Det finns kod som kan göras kortare och tydligare.</td></tr>
+    <tr><td>Coherence</td><td>Strukturen på vissa delar av projektet är bra, men kan förbättras.</td></tr>
+    <tr><td>Cohesion</td><td>Några klasser har för mycket ansvar. Bör delas upp.</td></tr>
+    <tr><td>Completeness</td><td>Testtäckningen är låg, så jag vet inte om allt fungerar som det ska.</td></tr>
+  </tbody>
+</table>
 
-Resultat:
-✅ Build: Godkänd (ingen kompileringsfel eller blockerande problem).
+<p>
+Jag hade kunnat öka kodtäckningen till 70–75% genom att lägga till tester till exempelvis <code>HomeController</code> och <code>ReportController</code>. Men eftersom de är så enkla valde jag att inte lägga tid på det – det hade inte förbättrat kodkvaliteten på riktigt.
+</p>
 
-📉 Code Coverage: 25%, vilket är väldigt lågt. Detta innebär att endast en fjärdedel av min kod testas via enhetstester.
-
-🧠 Code Quality: Acceptabel, men Scrutinizer rapporterar vissa förbättringspunkter som påverkar kodens underhållbarhet.
-
-Koppling till 6C:
-6C-princip	Reflektion utifrån Scrutinizer
-Correctness	Låg testtäckning påverkar säkerheten att koden gör det den ska. Endast 25 % är verifierad med tester.
-Clarity	Vissa metoder har hög komplexitet, vilket gör dem svårare att förstå. Scrutinizer påpekar behov av refaktorering.
-Conciseness	Vissa kodavsnitt kan förenklas. Det finns duplicerad kod och onödiga beroenden.
-Coherence	Projektet är delvis konsekvent men det finns utrymme för förbättring i struktur och namnkonventioner.
-Cohesion	Vissa klasser innehåller ansvar som bör delas upp. Detta påverkar kodens sammansvetsning.
-Completeness	Låg kodtäckning gör det svårt att avgöra om systemet är fullständigt testat.
-
-🛠 Förbättringar
-Utifrån Scrutinizer-analysen har jag valt följande förbättringar för att stärka kodens kvalitet och hållbarhet:
-
-✅ Öka testtäckning från 25 % till minst 60 %
-
-Jag kommer att skriva enhetstester för de viktigaste klasserna och metoderna.
-
-Fokus ligger på affärslogik samt edge cases.
-
-🔁 Minska komplexiteten i vissa metoder
-
-Identifierade metoder med hög cyclomatic complexity delas upp i mindre, tydligare funktioner.
-
-Jag kommer använda refaktoreringstekniker som "Extract Method".
-
-🧹 Fixa kodkvalitetsproblem markerade av Scrutinizer
-
-Exempel: oanvända variabler, långa funktioner, kodduplicering.
-
-Dessa påverkar både läsbarheten och underhållbarheten.
-
-📏 Införa PSR-standarder
-
-Säkerställa enhetlig kodformattering och stil.
-
-Ökar tydligheten och teamarbete.
-
-
+<!-- Lägg in Scrutinizer-bilden här -->
+<div style="text-align:center; margin:2rem 0;">
+  <img src="/metrics-report/images/scrutinizer.png" alt="Scrutinizer analys" style="max-width:100%; height:auto; border:1px solid #ccc; padding:0.5rem;">
+  <figcaption>Scrutinizer - Kodkvalitet och struktur</figcaption>
+</div>
 
 <h3>Badges</h3>
 <p>
-  <img src="https://scrutinizer-ci.com/g/user/repo/badges/quality-score.png?b=main" alt="Quality">
-  <img src="https://scrutinizer-ci.com/g/user/repo/badges/coverage.png?b=main" alt="Coverage">
-  <img src="https://scrutinizer-ci.com/g/user/repo/badges/build.png?b=main" alt="Build">
+  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/quality-score.png?b=main" alt="Quality">
+  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/coverage.png?b=main" alt="Coverage">
+  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/build.png?b=main" alt="Build">
 </p>
 
 <h2>Förbättringar</h2>
-<p>Jag förbättrade följande delar av koden...</p>
+<p>
+Jag valde att göra följande förbättringar:
+</p>
+<ul>
+  <li>🧪 Öka testtäckning till minst 60% genom att fokusera på viktiga klasser och edge cases.</li>
+  <li>🧹 Refaktorera metoder med hög komplexitet till mindre och tydligare funktioner.</li>
+  <li>🐛 Fixa Scrutinizer-fel som oanvända variabler, lång kod, osv.</li>
+  <li>📐 Följa PSR-standarder för snygg och enhetlig kod.</li>
+</ul>
 
 <h2>Resultat</h2>
 <table>
@@ -112,13 +103,21 @@ Säkerställa enhetlig kodformattering och stil.
     <tr><th>Mätvärde</th><th>Före</th><th>Efter</th></tr>
   </thead>
   <tbody>
-    <tr><td>Coverage</td><td>48%</td><td>85%</td></tr>
-    <tr><td>CRAP score</td><td>34</td><td>10</td></tr>
-    <tr><td>Complexity (medel)</td><td>9.2</td><td>3.8</td></tr>
+    <tr><td>Coverage</td><td>25%</td><td>62%</td></tr>
+    <tr><td>CRAP score</td><td>31</td><td>12</td></tr>
+    <tr><td>Complexity (medel)</td><td>6.5</td><td>3.4</td></tr>
   </tbody>
 </table>
 
 <h2>Diskussion</h2>
-<p>Verktyg som Scrutinizer och Phpmetrics ger konkreta sätt att jobba mot clean code. Fördelarna är många...</p>
+<p>
+Att jobba med verktyg som Scrutinizer och Phpmetrics gör det lättare att förstå vad som behöver förbättras i koden. Det är ett effektivt sätt att jobba mot clean code.
+
+Fördelarna är att man får tydliga mätvärden att jobba mot, och att problemen blir synliga tidigt. Nackdelen är att det ibland blir för mycket fokus på siffror istället för faktisk funktion.
+
+Jag har lärt mig att testbar kod oftast är bättre kod. Täckning på 100% betyder inte alltid kvalitet, men låg täckning visar nästan alltid på problem. Nästa gång vill jag använda dessa verktyg redan från början – det hade sparat mycket tid.
+
+En annan insikt är att strukturfel i början kan leda till problem senare, som är svåra att fixa. Det påminner mig om poker: om du gör ett stort misstag i början av spelet, kan du inte rädda det i slutet hur bra du än spelar. Detsamma gäller kodkvalitet.
+</p>
 
 {% endblock %}
