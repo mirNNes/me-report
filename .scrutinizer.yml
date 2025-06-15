@@ -1,11 +1,25 @@
 tools:
   php_code_coverage: true
+  php_analyzer: true
+  php_mess_detector: true
+  php_code_sniffer: true
+  php_cpd: true
+  php_loc: true
+  php_pdepend: true
+  php_sim: true
+  php_cs_fixer: true
 
 imports:
   - php
 
 filter:
   excluded_paths: [vendor/*, tests/*]
+
+coding_style:
+  php:
+    code_sniffer:
+      config:
+        standard: PSR2
 
 build:
   image: default-bionic
