@@ -1,5 +1,8 @@
 tools:
   php_code_coverage: true
+  external_code_coverage:
+    format: php-clover
+    file: var/coverage.clover
 
 imports:
   - php
@@ -25,7 +28,3 @@ build:
       tests:
         override:
           - command: composer phpunit:coverage
-
-external_code_coverage:
-  format: php-clover
-  file: var/coverage.clover
