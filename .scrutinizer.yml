@@ -15,11 +15,12 @@ imports:
 filter:
   excluded_paths: [vendor/*, tests/*]
 
-coding_style:
-  php:
-    code_sniffer:
-      config:
-        standard: PSR2
+# coding_style:
+#   php:
+#     braces: true
+#     indentation: 4
+#     spaces: true
+#     upper_lower_casing: true
 
 build:
   image: default-bionic
