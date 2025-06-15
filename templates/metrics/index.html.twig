@@ -7,44 +7,44 @@
 
 <h2>Introduktion</h2>
 <p>
-I denna rapport analyserar jag kvaliteten på min kod med hjälp av två verktyg: Phpmetrics och Scrutinizer. Jag utgår från de sex C:na:
+  I denna rapport analyserar jag kvaliteten på min kod med hjälp av två verktyg: Phpmetrics och Scrutinizer. Jag utgår från de sex C:na:
 </p>
 <ul>
-  <li><strong>Codestyle</strong> – Att skriva kod med en enhetlig stil, t.ex. indrag, namngivning och struktur.</li>
+  <li><strong>Codestyle</strong> – Enhetlig stil, t.ex. indrag, namngivning och struktur.</li>
   <li><strong>Coverage</strong> – Hur stor del av koden som testas av automatiska tester.</li>
-  <li><strong>Complexity</strong> – Hur krånglig och svår koden är att förstå. Mätvärdet cyclomatic complexity visar detta.</li>
-  <li><strong>Cohesion</strong> – Om klasser/metoder har ett tydligt ansvar och håller ihop logiskt.</li>
+  <li><strong>Complexity</strong> – Hur svår koden är att förstå. Cyclomatic complexity används som mått.</li>
+  <li><strong>Cohesion</strong> – Om klasser/metoder har tydligt ansvar och logisk sammanhållning.</li>
   <li><strong>Coupling</strong> – Hur beroende olika delar av koden är av varandra.</li>
-  <li><strong>CRAP</strong> – Ett kombinationsvärde av komplexitet och täckning, där höga värden visar risk.</li>
+  <li><strong>CRAP</strong> – Ett kombinationsmått av komplexitet och testtäckning. Höga värden tyder på risk.</li>
 </ul>
 <p>
-Jag använder också Scrutinizers analys av "Code Smells" som en extra indikator.
+  Jag använder även Scrutinizers analys av "Code Smells" som en extra indikator.
 </p>
 
 <h2>Phpmetrics</h2>
 <p>
-Phpmetrics är ett verktyg som visar olika statistik om min kod.
+  Phpmetrics är ett verktyg som visualiserar kodstatistik.
 </p>
 <ul>
-  <li><strong>Antal rader kod:</strong> 991</li>
-  <li><strong>Antal klasser:</strong> 23 (ungefär 43 rader per klass)</li>
-  <li><strong>Genomsnittlig komplexitet per klass:</strong> 2.3 (lågt och bra)</li>
+  <li><strong>Rader kod:</strong> 991</li>
+  <li><strong>Klasser:</strong> 23 (ca 43 rader per klass)</li>
+  <li><strong>Genomsnittlig komplexitet per klass:</strong> 2.3 (lågt = bra)</li>
   <li><strong>Beräknat antal buggar per klass:</strong> 0.07</li>
 </ul>
-
 <p>
-En fil som sticker ut är <code>UserService.php</code> som har högre komplexitet än övriga filer. Detta innebär att metoderna är lite för långa eller gör för mycket. Den bör delas upp för att bli lättare att förstå och testa.
+  <code>UserService.php</code> sticker ut med hög komplexitet. Den bör refaktoreras till mindre metoder för att öka testbarhet och läsbarhet.
 </p>
 
-<!-- Lägg in Phpmetrics-bilden här -->
-<div style="text-align:center; margin:2rem 0;">
-  <img src="/assets/img/metrics.png" alt="Phpmetrics analys" style="max-width:100%; height:auto; border:1px solid #ccc; padding:0.5rem;">
-  <figcaption>Phpmetrics - Sammanfattande statistik</figcaption>
-</div>
+<figure style="text-align:center; margin:2rem 0;">
+  <a href="{{ asset('img/metrics.png') }}">
+    <img src="{{ asset('img/metrics.png') }}" alt="Phpmetrics bild">
+  </a>
+  <figcaption>Phpmetrics – Sammanfattande statistik</figcaption>
+</figure>
 
 <h2>Scrutinizer</h2>
 <p>
-Scrutinizer analyserar kodkvalitet, kodtäckning och struktur. Jag kopplar det till 6C-modellen.
+  Scrutinizer analyserar kodkvalitet, struktur och täckning. Här kopplas resultaten till 6C-modellen.
 </p>
 
 <h3>Resultat:</h3>
@@ -60,41 +60,40 @@ Scrutinizer analyserar kodkvalitet, kodtäckning och struktur. Jag kopplar det t
     <tr><th>6C</th><th>Reflektion</th></tr>
   </thead>
   <tbody>
-    <tr><td>Correctness</td><td>Låg testtäckning gör att jag inte kan vara helt säker på att allt fungerar korrekt.</td></tr>
-    <tr><td>Clarity</td><td>Vissa metoder är för komplexa, vilket gör dem svåra att läsa.</td></tr>
-    <tr><td>Conciseness</td><td>Det finns kod som kan göras kortare och tydligare.</td></tr>
-    <tr><td>Coherence</td><td>Strukturen på vissa delar av projektet är bra, men kan förbättras.</td></tr>
-    <tr><td>Cohesion</td><td>Några klasser har för mycket ansvar. Bör delas upp.</td></tr>
-    <tr><td>Completeness</td><td>Testtäckningen är låg, så jag vet inte om allt fungerar som det ska.</td></tr>
+    <tr><td>Correctness</td><td>Låg testtäckning gör att jag inte kan lita fullt på funktionaliteten.</td></tr>
+    <tr><td>Clarity</td><td>Vissa metoder är komplexa och svåra att läsa.</td></tr>
+    <tr><td>Conciseness</td><td>Det finns redundant kod som kan förenklas.</td></tr>
+    <tr><td>Coherence</td><td>Strukturen är god men vissa förbättringar kan göras.</td></tr>
+    <tr><td>Cohesion</td><td>Vissa klasser gör för mycket. Behöver delas upp.</td></tr>
+    <tr><td>Completeness</td><td>Låg testtäckning gör analysen ofullständig.</td></tr>
   </tbody>
 </table>
 
 <p>
-Jag hade kunnat öka kodtäckningen till 70–75% genom att lägga till tester till exempelvis <code>HomeController</code> och <code>ReportController</code>. Men eftersom de är så enkla valde jag att inte lägga tid på det – det hade inte förbättrat kodkvaliteten på riktigt.
+  Kodtäckningen hade kunnat ökas till 70–75% med tester för t.ex. <code>HomeController</code> och <code>ReportController</code>. Jag prioriterade andra förbättringar eftersom dessa klasser är enkla.
 </p>
 
-<!-- Lägg in Scrutinizer-bilden här -->
-<div style="text-align:center; margin:2rem 0;">
-  <img src="/assets/img/scrutinizer.png" alt="Scrutinizer analys" style="max-width:100%; height:auto; border:1px solid #ccc; padding:0.5rem;">
-  <figcaption>Scrutinizer - Kodkvalitet och struktur</figcaption>
-</div>
+<figure style="text-align:center; margin:2rem 0;">
+  <a href="{{ asset('img/scrutinizer.png') }}">
+    <img src="{{ asset('img/scrutinizer.png') }}" alt="Scrutinizer bild">
+  </a>
+  <figcaption>Scrutinizer – Kodkvalitet och struktur</figcaption>
+</figure>
 
 <h3>Badges</h3>
 <p>
-  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/quality-score.png?b=main" alt="Quality">
-  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/coverage.png?b=main" alt="Coverage">
-  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/build.png?b=main" alt="Build">
+  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/quality-score.png?b=main" alt="Quality badge">
+  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/coverage.png?b=main" alt="Coverage badge">
+  <img src="https://scrutinizer-ci.com/g/mirNNes/me-report/badges/build.png?b=main" alt="Build badge">
 </p>
 
 <h2>Förbättringar</h2>
-<p>
-Jag valde att göra följande förbättringar:
-</p>
+<p>Jag har gjort följande förbättringar:</p>
 <ul>
-  <li>🧪 Öka testtäckning till minst 60% genom att fokusera på viktiga klasser och edge cases.</li>
-  <li>🧹 Refaktorera metoder med hög komplexitet till mindre och tydligare funktioner.</li>
-  <li>🐛 Fixa Scrutinizer-fel som oanvända variabler, lång kod, osv.</li>
-  <li>📐 Följa PSR-standarder för snygg och enhetlig kod.</li>
+  <li>🧪 Ökat testtäckning till över 60% med fokus på kritiska klasser och edge cases.</li>
+  <li>🧹 Refaktorerat komplexa metoder till mindre och mer läsbara.</li>
+  <li>🐛 Rensat kod enligt Scrutinizer: oanvända variabler, duplicering osv.</li>
+  <li>📐 Följt PSR-standarder för stil och struktur.</li>
 </ul>
 
 <h2>Resultat</h2>
@@ -111,13 +110,16 @@ Jag valde att göra följande förbättringar:
 
 <h2>Diskussion</h2>
 <p>
-Att jobba med verktyg som Scrutinizer och Phpmetrics gör det lättare att förstå vad som behöver förbättras i koden. Det är ett effektivt sätt att jobba mot clean code.
-
-Fördelarna är att man får tydliga mätvärden att jobba mot, och att problemen blir synliga tidigt. Nackdelen är att det ibland blir för mycket fokus på siffror istället för faktisk funktion.
-
-Jag har lärt mig att testbar kod oftast är bättre kod. Täckning på 100% betyder inte alltid kvalitet, men låg täckning visar nästan alltid på problem. Nästa gång vill jag använda dessa verktyg redan från början – det hade sparat mycket tid.
-
-En annan insikt är att strukturfel i början kan leda till problem senare, som är svåra att fixa. Det påminner mig om poker: om du gör ett stort misstag i början av spelet, kan du inte rädda det i slutet hur bra du än spelar. Detsamma gäller kodkvalitet.
+  Att arbeta med verktyg som Scrutinizer och Phpmetrics ger insikt i kodens styrkor och svagheter. 
+  Det är ett effektivt sätt att jobba mot clean code.
 </p>
-
+<p>
+  Fördelarna är tydliga mätvärden och tidig identifiering av problem. Nackdelen är att man lätt stirrar sig blind på siffror istället för funktionalitet.
+</p>
+<p>
+  Jag har lärt mig att testbar kod ofta är bättre kod. 100% täckning garanterar inte kvalitet, men låg täckning signalerar nästan alltid problem.
+</p>
+<p>
+  Nästa gång vill jag använda dessa verktyg från början – det sparar tid och leder till bättre arkitektur. Ett dåligt beslut i början är svårt att rätta till senare, ungefär som i poker: gör du ett misstag tidigt, är det svårt att vinna spelet oavsett hur bra du spelar resten.
+</p>
 {% endblock %}
