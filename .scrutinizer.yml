@@ -22,8 +22,7 @@ coding_style:
         size: 4
         use_tabs: false
       switch:
-        size: 4
-        use_tabs: false
+        indent_case: true
     spaces: true
     upper_lower_casing: true
 
