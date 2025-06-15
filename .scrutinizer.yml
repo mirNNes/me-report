@@ -36,6 +36,8 @@ build:
           version: 8.1
           ini:
             xdebug.mode: coverage
+        node:
+          version: 16
 
       dependencies:
         before:
