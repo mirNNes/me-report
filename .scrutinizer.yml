@@ -17,7 +17,9 @@ filter:
 coding_style:
   php:
     braces: true
-    indentation: [4]
+    indentation:
+      general: 4
+      switch: 4
     spaces: true
     upper_lower_casing: true
 
