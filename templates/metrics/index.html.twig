@@ -41,12 +41,60 @@ Hög komplexitet i UserService.php
 Ett exempel på en fil med förbättringspotential är UserService.php där cyclomatisk komplexitet är högre än snittet. Det tyder på att metoder där kan vara för långa eller innehålla för många logiska grenar, vilket gör koden svårare att förstå och underhålla.>
 
 <h2>Scrutinizer</h2>
-<p>Scrutinizer CI rapporterade följande:</p>
-<ul>
-  <li>Kvalitet: 6.7/10</li>
-  <li>Coverage: 48%</li>
-  <li>Code smells: 12</li>
-</ul>
+<p>Scrutinizer är ett kodgranskningsverktyg som analyserar kodens kvalitet, komplexitet och täckning. Jag har använt Scrutinizer för att granska mitt projekt och kopplar analysresultaten till 6C-modellen.
+
+🔍 Analys
+Badge	Status
+Build	
+Coverage	
+Quality	
+
+Dessa badges är även inkluderade i min README.md.
+
+Resultat:
+✅ Build: Godkänd (ingen kompileringsfel eller blockerande problem).
+
+📉 Code Coverage: 25%, vilket är väldigt lågt. Detta innebär att endast en fjärdedel av min kod testas via enhetstester.
+
+🧠 Code Quality: Acceptabel, men Scrutinizer rapporterar vissa förbättringspunkter som påverkar kodens underhållbarhet.
+
+Koppling till 6C:
+6C-princip	Reflektion utifrån Scrutinizer
+Correctness	Låg testtäckning påverkar säkerheten att koden gör det den ska. Endast 25 % är verifierad med tester.
+Clarity	Vissa metoder har hög komplexitet, vilket gör dem svårare att förstå. Scrutinizer påpekar behov av refaktorering.
+Conciseness	Vissa kodavsnitt kan förenklas. Det finns duplicerad kod och onödiga beroenden.
+Coherence	Projektet är delvis konsekvent men det finns utrymme för förbättring i struktur och namnkonventioner.
+Cohesion	Vissa klasser innehåller ansvar som bör delas upp. Detta påverkar kodens sammansvetsning.
+Completeness	Låg kodtäckning gör det svårt att avgöra om systemet är fullständigt testat.
+
+🛠 Förbättringar
+Utifrån Scrutinizer-analysen har jag valt följande förbättringar för att stärka kodens kvalitet och hållbarhet:
+
+✅ Öka testtäckning från 25 % till minst 60 %
+
+Jag kommer att skriva enhetstester för de viktigaste klasserna och metoderna.
+
+Fokus ligger på affärslogik samt edge cases.
+
+🔁 Minska komplexiteten i vissa metoder
+
+Identifierade metoder med hög cyclomatic complexity delas upp i mindre, tydligare funktioner.
+
+Jag kommer använda refaktoreringstekniker som "Extract Method".
+
+🧹 Fixa kodkvalitetsproblem markerade av Scrutinizer
+
+Exempel: oanvända variabler, långa funktioner, kodduplicering.
+
+Dessa påverkar både läsbarheten och underhållbarheten.
+
+📏 Införa PSR-standarder
+
+Säkerställa enhetlig kodformattering och stil.
+
+Ökar tydligheten och teamarbete.
+
+
 
 <h3>Badges</h3>
 <p>
