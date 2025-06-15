@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookControllerTest extends WebTestCase
 {
-    public function testIndexPage()
+    public function testIndexPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/library');
@@ -15,7 +15,7 @@ class BookControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testListPage()
+    public function testListPage():void
     {
         $client = static::createClient();
         $client->request('GET', '/library/books');
@@ -24,7 +24,7 @@ class BookControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testNewPage()
+    public function testNewPage(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/library/new');
@@ -33,7 +33,7 @@ class BookControllerTest extends WebTestCase
         $this->assertSelectorExists('form');
     }
 
-    public function testShowPageNotFound()
+    public function testShowPageNotFound(): void
     {
         $client = static::createClient();
         $client->request('GET', '/library/999999');

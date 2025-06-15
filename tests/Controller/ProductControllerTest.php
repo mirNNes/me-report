@@ -3,13 +3,10 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use App\Entity\Product;
-use Doctrine\Persistence\ManagerRegistry;
-use App\Repository\ProductRepository;
 
 class ProductControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIndex(): void
     {
         $client = static::createClient();
         $client->request('GET', '/product');
@@ -17,7 +14,7 @@ class ProductControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'ProductController');
     }
 
-    public function testShowAllProduct()
+    public function testShowAllProduct(): void
     {
         $client = static::createClient();
         $client->request('GET', '/product/show');
@@ -25,12 +22,16 @@ class ProductControllerTest extends WebTestCase
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
     }
 
-    public function testShowProductByIdNotFound()
+    public function testShowProductByIdNotFound(): void
     {
         $client = static::createClient();
         $client->request('GET', '/product/show/999999');
+
         $this->assertResponseIsSuccessful();
-        $this->assertJson($client->getResponse()->getContent());
-        $this->assertEquals('{}', $client->getResponse()->getContent());
+
+        $content = $client->getResponse()->getContent();
+        $this->assertIsString($content);
+        $this->assertJson($content);
+        $this->assertEquals('{}', $content);
     }
 }

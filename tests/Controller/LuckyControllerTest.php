@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LuckyControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIndex(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/lucky');
@@ -21,6 +21,7 @@ class LuckyControllerTest extends WebTestCase
 
         // Kontrollera att rätt bildfil inkluderas
         $content = $client->getResponse()->getContent();
+        $this->assertIsString($content);
         $this->assertMatchesRegularExpression(
             '/\/assets\/img\/(unicorn|rainbow|confeti|clover)-[a-z0-9]+\.(png|jpg|jpeg|gif)/i',
             $content,
@@ -28,7 +29,7 @@ class LuckyControllerTest extends WebTestCase
         );
     }
 
-    public function testMultipleRequestsReturnDifferentNumbers()
+    public function testMultipleRequestsReturnDifferentNumbers(): void
     {
         $client = static::createClient();
         $numbers = [];
@@ -48,14 +49,13 @@ class LuckyControllerTest extends WebTestCase
         $this->assertGreaterThan(1, count($uniqueNumbers), 'Expected variation in lucky numbers across requests');
     }
 
-    public function testImageFileExtensions()
+    public function testImageFileExtensions(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/lucky');
 
         $content = $client->getResponse()->getContent();
-
-        // Kontrollera att minst en bild med förväntade filändelser finns med
+        $this->assertIsString($content);
         $this->assertMatchesRegularExpression('/\.(png|jpg|jpeg|gif)/i', $content);
     }
 }

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class NameStringTest extends TestCase
 {
-    public function testGetSetValue()
+    public function testGetSetValue(): void
     {
         $nameString = new NameString();
 
@@ -19,7 +19,7 @@ class NameStringTest extends TestCase
         $this->assertInstanceOf(NameString::class, $nameString->setValue(100));
     }
 
-    public function testGetIdInitiallyNull()
+    public function testGetIdInitiallyNull(): void
     {
         $nameString = new NameString();
 

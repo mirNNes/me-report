@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CardControllerTest extends WebTestCase
 {
-    public function testCardPage()
+    public function testCardPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/card');
@@ -15,7 +15,7 @@ class CardControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testDeckPage()
+    public function testDeckPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/card/deck');
@@ -24,7 +24,7 @@ class CardControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testShuffleDeck()
+    public function testShuffleDeck(): void
     {
         $client = static::createClient();
         $client->request('GET', '/card/deck/shuffle');
@@ -33,7 +33,7 @@ class CardControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testDrawCards()
+    public function testDrawCards(): void
     {
         $client = static::createClient();
         $client->request('GET', '/card/deck/draw/2');
@@ -42,7 +42,7 @@ class CardControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testSessionPage()
+    public function testSessionPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/session');
@@ -51,7 +51,7 @@ class CardControllerTest extends WebTestCase
         $this->assertSelectorExists('html');
     }
 
-    public function testDeleteSession()
+    public function testDeleteSession(): void
     {
         $client = static::createClient();
         $client->request('GET', '/session/delete');
