@@ -18,8 +18,8 @@ coding_style:
   php:
     braces: true
     indentation:
-      general: 4
-      switch: 4
+      general: [4]
+      switch: [4]
     spaces: true
     upper_lower_casing: true
 
