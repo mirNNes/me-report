@@ -7,7 +7,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     .setOutputPath('public/build/')
-    .setPublicPath('/build')
+    .setPublicPath('/~mimr24/build')
     .addEntry('app', './assets/app.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
