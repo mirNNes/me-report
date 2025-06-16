@@ -7,8 +7,8 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     .setOutputPath('public/build/')
-    .setPublicPath('/~mimr24/build/')
-    .setManifestKeyPrefix('~mimr24/build/')
+    .setPublicPath('/~mimr24/dbwebb-kurser/mvc/me/report/build')
+    .setManifestKeyPrefix('~mimr24/dbwebb-kurser/mvc/me/report/build')
     .addEntry('app', './assets/app.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
