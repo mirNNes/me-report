@@ -1,0 +1,82 @@
+{% extends 'base_project.html.twig' %}
+
+{% block body %}
+<main class="game-container">
+    <h1 class="wacky-heading">Blackjack</h1>
+
+    <section class="player-hands">
+        {% for handIndex, hand in gameState.playerHands %}
+            <div class="hand">
+                <h4>Spelare {{ handIndex + 1 }} 🃏 Poäng: {{ hand.score }}</h4>
+
+                <div class="card-container">
+                    {% for card in hand.cards %}
+                        {% include 'card/_card.html.twig' with { card: card } %}
+                    {% endfor %}
+                </div>
+
+                {% if hand.bust %}
+                    <p class="status bust">Bust!</p>
+                {% elseif not hand.standing and gameState.roundActive %}
+                    <form method="post" action="{{ path('proj_blackjack_hit', { hand: handIndex }) }}" style="display:inline;">
+                        <button type="submit">Dra kort</button>
+                    </form>
+                    <form method="post" action="{{ path('proj_blackjack_stand', { hand: handIndex }) }}" style="display:inline;">
+                        <button type="submit">Stanna</button>
+                    </form>
+                {% elseif hand.standing %}
+                    <p class="status stand">Stannar</p>
+                {% endif %}
+
+                {# Visa resultat när rundan är avslutad #}
+                {% if gameState.roundResolved and roundResult is defined and roundResult[handIndex] is defined %}
+                    <p class="result 
+                        {% if roundResult[handIndex] == 'Vinst' %}win
+                        {% elseif roundResult[handIndex] == 'Förlust' %}loss
+                        {% else %}draw
+                        {% endif %}
+                    ">
+                        {% if roundResult[handIndex] == 'Vinst' %}
+                            🟢 Du vann! Slump eller skills? Vi låtsas på skills. 😏
+                        {% elseif roundResult[handIndex] == 'Förlust' %}
+                          🔴 Womp womp wooomp... Förlust! 😅
+                        {% else %}
+                           ⚪ Det här var typ... ett vänskapsresultat? 🤷‍♂️
+
+
+                        {% endif %}
+                    </p>
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+    </section>
+
+<section class="dealer-hand">
+    <h2>Dealer:</h2>
+
+    {% if gameState.roundActive %}
+        <div class="card-container">
+            {% include 'card/_card.html.twig' with { card: gameState.dealerHand[0] } %}
+            <div class="card back">
+    <img src="{{ asset('img/card-back.png') }}" alt="Dolt kort" />
+</div>
+
+    {% else %}
+        <p>Poäng: {{ gameState.dealerScore }}</p>
+        <div class="card-container">
+            {% for card in gameState.dealerHand %}
+                {% include 'card/_card.html.twig' with { card: card } %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+    {% if not gameState.roundActive and gameState.roundResolved %}
+        <form method="post" action="{{ path('proj_blackjack_start') }}">
+    <button type="submit" class="btn btn-secondary">Starta ny runda</button>
+</form>
+
+    {% endif %}
+</main>
+{% endblock %}

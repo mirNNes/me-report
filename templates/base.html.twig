@@ -52,6 +52,10 @@
                     <a href="{{ path('app_book_index') }}" class="{{ app.request.attributes.get('_route') starts with 'app_book' ? 'active' : '' }}">Library</a>
 
                 </li>
+                <li>
+                    <a href="{{ path('proj_landing') }}" class="{{ app.request.attributes.get('_route') starts with 'proj_landing' ? 'active' : '' }}">Projekt</a>
+
+                </li>
             </ul>
         </nav>
 

@@ -1,0 +1,12 @@
+{% extends 'base_project.html.twig' %}
+
+{% block title %}Om Projektet{% endblock %}
+
+{% block body %}
+<main>
+    <h1>Om Projektet</h1>
+    <p>Detta är mitt projekt för kursmoment 10. Jag har valt att bygga ett Blackjack-liknande spel (21).</p>
+    <p>Spelet är byggt med Symfony, PHP och Twig. Spelmotorn hanteras via sessions.</p>
+    <p>Du kan spela spelet genom att gå till <a href="{{ path('game_intro') }}">spelsidan</a>.</p>
+</main>
+{% endblock %}

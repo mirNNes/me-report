@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}BlackJack{% endblock %}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('project') }}
+    {% endblock %}
+</head>
+<body>
+<header class="site-header">
+    <nav>
+        <a href="{{ path('proj_landing') }}">Start</a>
+        <a href="{{ path('proj_blackjack_start') }}">Spela</a>
+        <a href="{{ path('game_documentation') }}">Om Projektet</a>
+        <a href="{{ path('home') }}">Tillbaka till verkligheten</a>
+                
+    </nav>
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+    <p>© Kasta Tärningen AB</p>
+    <p><em>"Registrerad misstag sedan 2025"</em></p>
+</footer>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('project') }}
+{% endblock %}
+</body>
+</html>

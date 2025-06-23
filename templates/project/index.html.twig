@@ -1,0 +1,30 @@
+{% extends 'base_project.html.twig' %}
+
+{% block title %}BlackJack{% endblock %}
+
+{% block body %}
+<main class="game-container">
+    <h1 class="neon-blink">Kortslutning Casino</h1>
+    <p class="subtitle">Där turen tar slut innan kortleken gör det!</p>
+
+
+    <form method="post" action="{{ path('proj_blackjack_start') }}">
+        <label for="numHands">Välj antal spelare:</label>
+        <input type="number" id="numHands" name="num_hands" min="1" max="3" value="1" required>
+
+        <div class="preview-cards start-card-container" style="margin-top: 1em;">
+            <button type="submit" class="image-button">
+                <img src="{{ asset('img/card3.png') }}" alt="Starta spelet" class="start-card-img" />
+            </button>
+        </div>
+
+    <p>Klicka på kortet för att starta spelet – vad kan gå fel?</p>
+    </form>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+</main>
+{% endblock %}

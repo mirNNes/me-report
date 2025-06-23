@@ -2,22 +2,28 @@
 
 namespace App\Game;
 
-use App\Game\Card;
-
-/**
- * Represents a hand of playing cards.
- */
 class CardHand
 {
     /**
-     * @var Card[] The cards in the hand.
+     * @var Card[] Kort i handen
      */
     private array $cards = [];
 
     /**
-     * Add a card to the hand.
+     * @var int Satsningen för handen
+     */
+    private int $bet = 0;
+
+    /**
+     * @var bool Om spelaren står på denna hand
+     */
+    private bool $standing = false;
+
+    /**
+     * Lägg till ett kort till handen.
      *
      * @param Card $card
+     * @return void
      */
     public function addCard(Card $card): void
     {
@@ -25,7 +31,7 @@ class CardHand
     }
 
     /**
-     * Get all cards in the hand.
+     * Hämta alla kort i handen.
      *
      * @return Card[]
      */
@@ -35,8 +41,28 @@ class CardHand
     }
 
     /**
-     * Calculate the score of the hand.
-     * Aces count as 14, but adjusted to 1 if score exceeds 21.
+     * Sätt satsningen för handen.
+     *
+     * @param int $bet
+     * @return void
+     */
+    public function setBet(int $bet): void
+    {
+        $this->bet = $bet;
+    }
+
+    /**
+     * Hämta satsningen för handen.
+     *
+     * @return int
+     */
+    public function getBet(): int
+    {
+        return $this->bet;
+    }
+
+    /**
+     * Beräkna poäng för handen med korrekt ess-hantering.
      *
      * @return int
      */
@@ -48,25 +74,69 @@ class CardHand
         foreach ($this->cards as $card) {
             $value = $card->getNumericValue();
 
-            if ($value === 1) {
-                $score += 14;
-                $aces++;
-                continue;
-            }
-
-            if ($value >= 11) {
+            if ($value >= 10) {
+                // Klädda kort (J, Q, K) värderas som 10
                 $score += 10;
-                continue;
+            } elseif ($value === 1) {
+                // Ess räknas separat
+                $aces++;
+                $score += 11; // Räkna ess som 11 till en början
+            } else {
+                $score += $value;
             }
-
-            $score += $value;
         }
 
+        // Om poängen går över 21 och det finns ess, räkna om ess som 1 istället för 11
         while ($score > 21 && $aces > 0) {
-            $score -= 13;
+            $score -= 10; // dra bort 10 för ett ess (11->1)
             $aces--;
         }
 
         return $score;
+    }
+
+    /**
+     * Kolla om handen är "bust" (poäng över 21).
+     *
+     * @return bool
+     */
+    public function isBust(): bool
+    {
+        return $this->getScore() > 21;
+    }
+
+    /**
+     * Kolla om spelaren står på denna hand.
+     *
+     * @return bool
+     */
+    public function isStanding(): bool
+    {
+        return $this->standing;
+    }
+
+    /**
+     * Sätt om spelaren står på handen.
+     *
+     * @param bool $standing
+     * @return void
+     */
+    public function setStanding(bool $standing): void
+    {
+        $this->standing = $standing;
+    }
+
+    /**
+     * Kolla om handen kan splittas (två kort med samma värde).
+     *
+     * @return bool
+     */
+    public function canSplit(): bool
+    {
+        if (count($this->cards) !== 2) {
+            return false;
+        }
+
+        return $this->cards[0]->getNumericValue() === $this->cards[1]->getNumericValue();
     }
 }

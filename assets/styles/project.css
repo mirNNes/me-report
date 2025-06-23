@@ -1,0 +1,272 @@
+/* Bakgrund med neon-stil */
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Orbitron', sans-serif;
+    color: #f8f8f2;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Huvudinnehåll med soft glow */
+main {
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 2rem auto;
+    max-width: 1000px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+/* Navigeringslänkar */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    display: inline-block;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* Kort-knappar */
+a.btn, button {
+    background: linear-gradient(to right, #ff0080, #7928ca);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff0080;
+    transition: all 0.3s ease-in-out;
+}
+
+a.btn:hover, button:hover {
+    background: linear-gradient(to right, #00ffcc, #00b894);
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+/* Kortlayout */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    border-radius: 10px;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-size: cover;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #fffb00;
+}
+
+/* Header & Footer */
+.site-header, .site-footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #111;
+    color: #00ffcc;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+/* Titeln i header */
+.site-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* Centrera rubriker med neon-glow */
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Neon blink-animation */
+@keyframes neonBlink {
+    0%, 100% {
+        text-shadow:
+            0 0 5px #00ffcc,
+            0 0 10px #00ffcc,
+            0 0 20px #00ffcc,
+            0 0 40px #00ffcc,
+            0 0 80px #00ffcc;
+        color: #00ffcc;
+        opacity: 1;
+    }
+    50% {
+        text-shadow: none;
+        color: #004d4d;
+        opacity: 0.6;
+    }
+}
+
+/* Använd animation på h1 och h2 */
+h1 {
+    font-size: 2.5rem;
+    
+}
+.neon-blink {
+    animation: neonBlink 2.5s ease-in-out infinite;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #ff00cc;
+}
+
+/* Responsivt */
+@media (max-width: 768px) {
+    .card {
+        width: 80px;
+        height: 120px;
+    }
+
+    a.btn, button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+}
+.game-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+h1, h2, h4, p.score, p.bank {
+    margin: 1rem 0;
+}
+
+.hand {
+    margin-bottom: 1rem;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+form {
+    margin: 2rem 0;
+}
+
+button.start-new-round-btn {
+    margin: 2rem auto 0;
+    display: inline-block;
+}
+@keyframes bounceSpin {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+.wacky-heading {
+    animation: bounceSpin 2s ease-in-out infinite;
+    color: #fffb00;
+    text-shadow: 0 0 5px #fffb00, 0 0 10px #fffb00;
+}
+/* Extra spacing i index-sidan */
+.game-container h1.neon-blink {
+    margin-bottom: 5rem; /* mer space under h1 */
+}
+
+.game-container p {
+    margin-bottom: 4rem; /* mer space under alla p */
+}
+
+.game-container a.btn.start-new-round-btn {
+    margin-top: 5rem; /* mer space ovanför knappen */
+}
+.card-img-preview {
+    width: 360px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00ffcc, 0 0 30px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 1rem auto;
+    display: block;
+}
+
+.card-img-preview:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #ff00cc;
+}
+.action-buttons {
+    margin-top: 2rem;
+    text-align: center;
+}
+.status.bust {
+    color: red;
+    font-weight: bold;
+}
+
+.status.standing {
+    color: green;
+}
+
+.result {
+    font-weight: bold;
+    margin-top: 0.5em;
+}
+
+.result .win {
+    color: green;
+}
+
+.result .loss {
+    color: red;
+}
+
+.result .draw {
+    color: gray;
+}
+.card.back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
