@@ -2,28 +2,20 @@
 
 namespace App\Game;
 
+/**
+ * Representerar en hand med kort.
+ */
 class CardHand
 {
     /**
-     * @var Card[] Kort i handen
+     * @var Card[] Kort i handen.
      */
     private array $cards = [];
 
     /**
-     * @var int Satsningen för handen
-     */
-    private int $bet = 0;
-
-    /**
-     * @var bool Om spelaren står på denna hand
-     */
-    private bool $standing = false;
-
-    /**
-     * Lägg till ett kort till handen.
+     * Lägger till ett kort i handen.
      *
-     * @param Card $card
-     * @return void
+     * @param Card $card Kortet som ska läggas till.
      */
     public function addCard(Card $card): void
     {
@@ -31,7 +23,19 @@ class CardHand
     }
 
     /**
-     * Hämta alla kort i handen.
+     * Lägger till flera kort i handen.
+     *
+     * @param Card[] $cards Array med kort som ska läggas till.
+     */
+    public function addCards(array $cards): void
+    {
+        foreach ($cards as $card) {
+            $this->addCard($card);
+        }
+    }
+
+    /**
+     * Returnerar alla kort i handen.
      *
      * @return Card[]
      */
@@ -41,30 +45,11 @@ class CardHand
     }
 
     /**
-     * Sätt satsningen för handen.
+     * Räknar ihop poäng i handen.
+     * Ess räknas som 11, men kan räknas som 1 om totalpoängen blir över 21.
+     * Knekt, Dam, Kung räknas som 10 poäng.
      *
-     * @param int $bet
-     * @return void
-     */
-    public function setBet(int $bet): void
-    {
-        $this->bet = $bet;
-    }
-
-    /**
-     * Hämta satsningen för handen.
-     *
-     * @return int
-     */
-    public function getBet(): int
-    {
-        return $this->bet;
-    }
-
-    /**
-     * Beräkna poäng för handen med korrekt ess-hantering.
-     *
-     * @return int
+     * @return int Total poäng.
      */
     public function getScore(): int
     {
@@ -73,22 +58,19 @@ class CardHand
 
         foreach ($this->cards as $card) {
             $value = $card->getNumericValue();
-
-            if ($value >= 10) {
-                // Klädda kort (J, Q, K) värderas som 10
-                $score += 10;
-            } elseif ($value === 1) {
-                // Ess räknas separat
-                $aces++;
-                $score += 11; // Räkna ess som 11 till en början
-            } else {
-                $score += $value;
+            if ($value > 10) {
+                $value = 10;
             }
+            if ($value === 1) {
+                $aces++;
+                $value = 11;
+            }
+            $score += $value;
         }
 
-        // Om poängen går över 21 och det finns ess, räkna om ess som 1 istället för 11
+        // Justera Ess från 11 till 1 om poängen överstiger 21
         while ($score > 21 && $aces > 0) {
-            $score -= 10; // dra bort 10 för ett ess (11->1)
+            $score -= 10;
             $aces--;
         }
 
@@ -96,9 +78,9 @@ class CardHand
     }
 
     /**
-     * Kolla om handen är "bust" (poäng över 21).
+     * Kollar om handen är bust (över 21 poäng).
      *
-     * @return bool
+     * @return bool True om bust, annars false.
      */
     public function isBust(): bool
     {
@@ -106,19 +88,29 @@ class CardHand
     }
 
     /**
-     * Kolla om spelaren står på denna hand.
+     * Kollar om handen kan splittas (två kort med samma valör).
      *
-     * @return bool
+     * @return bool True om kan splittas, annars false.
      */
-    public function isStanding(): bool
+    public function canSplit(): bool
     {
-        return $this->standing;
+        if (count($this->cards) !== 2) {
+            return false;
+        }
+        return $this->cards[0]->getNumericValue() === $this->cards[1]->getNumericValue();
     }
 
     /**
-     * Sätt om spelaren står på handen.
+     * Om spelaren valt att stå (inte ta fler kort).
      *
-     * @param bool $standing
+     * @var bool
+     */
+    private bool $standing = false;
+
+    /**
+     * Sätter om handen står (spelare står).
+     *
+     * @param bool $standing True om står, annars false.
      * @return void
      */
     public function setStanding(bool $standing): void
@@ -127,16 +119,22 @@ class CardHand
     }
 
     /**
-     * Kolla om handen kan splittas (två kort med samma värde).
+     * Kollar om handen står.
      *
-     * @return bool
+     * @return bool True om står, annars false.
      */
-    public function canSplit(): bool
+    public function isStanding(): bool
     {
-        if (count($this->cards) !== 2) {
-            return false;
-        }
+        return $this->standing;
+    }
 
-        return $this->cards[0]->getNumericValue() === $this->cards[1]->getNumericValue();
+    /**
+     * Kollar om handen är klar (antingen står eller bust).
+     *
+     * @return bool True om klar, annars false.
+     */
+    public function isDone(): bool
+    {
+        return $this->isStanding() || $this->isBust();
     }
 }

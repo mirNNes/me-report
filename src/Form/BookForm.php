@@ -9,16 +9,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookForm extends AbstractType
 {
+    // Skapar formuläret med fyra fält
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('title')
-            ->add('isbn')
-            ->add('author')
-            ->add('image')
-        ;
+        unset($options);
+        $builder->add('title');
+        $builder->add('isbn');
+        $builder->add('author');
+        $builder->add('image');
     }
 
+    // Sätter vilken datatyp som formuläret jobbar med
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

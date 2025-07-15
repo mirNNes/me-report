@@ -3,25 +3,25 @@
 namespace App\Game;
 
 /**
- * Represents a standard playing card with a suit and value.
+ * Representerar ett spelkort med färg och värde.
  */
 class Card
 {
     /**
-     * @var string The suit of the card (e.g., Hearts, Spades).
+     * @var string Kortets färg (t.ex. "hearts", "spades").
      */
-    protected string $suit;
+    private string $suit;
 
     /**
-     * @var int The numeric value of the card (1–13).
+     * @var int Kortets värde (1-13, där 1 = Ess, 11 = Knekt, 12 = Dam, 13 = Kung).
      */
-    protected int $value;
+    private int $value;
 
     /**
-     * Constructor for Card.
+     * Konstruktor.
      *
-     * @param string $suit  The suit of the card.
-     * @param int    $value The numeric value of the card (1 = Ace, 11 = Jack, 12 = Queen, 13 = King).
+     * @param string $suit  Kortets färg.
+     * @param int    $value Kortets värde.
      */
     public function __construct(string $suit, int $value)
     {
@@ -30,9 +30,9 @@ class Card
     }
 
     /**
-     * Get the suit of the card.
+     * Hämtar kortets färg.
      *
-     * @return string The suit of the card.
+     * @return string
      */
     public function getSuit(): string
     {
@@ -40,54 +40,76 @@ class Card
     }
 
     /**
-     * Get the numeric value of the card.
+     * Hämtar kortets värde.
      *
-     * @return int The raw numeric value (1–13).
+     * @return int
      */
-    public function getNumericValue(): int
+    public function getValue(): int
     {
         return $this->value;
     }
 
     /**
-     * Get the value of the card as a displayable string.
+     * Returnerar kortets namn, t.ex. "A", "10", "Q".
      *
-     * @return string 'A', '2'...'10', 'J', 'Q', or 'K'.
+     * @return string
      */
-    public function getValue(): string
+    public function getName(): string
     {
         return match ($this->value) {
-            1  => 'A',
+            1 => 'A',
             11 => 'J',
             12 => 'Q',
             13 => 'K',
-            default => (string) $this->value
+            default => (string) $this->value,
         };
     }
 
     /**
-     * Get the card as a string with value and suit symbol, e.g., [A♥].
+     * Returnerar kortets symbol för färg.
      *
-     * @return string The formatted card string.
-     */
-    public function getAsString(): string
-    {
-        return "[{$this->getValue()}{$this->getSuitSymbol()}]";
-    }
-
-    /**
-     * Get the Unicode symbol for the card's suit.
-     *
-     * @return string The symbol of the suit ('♥', '♦', '♣', '♠', or '?').
+     * @return string
      */
     public function getSuitSymbol(): string
     {
-        return match (strtolower($this->suit)) {
+        return match ($this->suit) {
             'hearts'   => '♥',
             'diamonds' => '♦',
             'clubs'    => '♣',
             'spades'   => '♠',
-            default    => '?'
+            default    => '?',
         };
+    }
+
+    /**
+     * Returnerar en strängrepresentation av kortet, t.ex. "[K♠]".
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return "[{$this->getName()}{$this->getSuitSymbol()}]";
+    }
+
+    /**
+     * Returnerar kortet som en sträng, t.ex. "[K♠]".
+     * Kan användas där man inte vill förlita sig på __toString().
+     *
+     * @return string
+     */
+    public function getAsString(): string
+    {
+        return $this->__toString();
+    }
+
+    /**
+     * Returnerar kortets numeriska värde (1–13).
+     * Används för beräkningar i spel som Blackjack.
+     *
+     * @return int
+     */
+    public function getNumericValue(): int
+    {
+        return $this->value;
     }
 }

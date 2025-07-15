@@ -4,46 +4,47 @@
 <main class="game-container">
     <h1 class="wacky-heading">Blackjack</h1>
 
+    {# === Spelarens händer === #}
     <section class="player-hands">
         {% for handIndex, hand in gameState.playerHands %}
             <div class="hand">
-                <h4>Spelare {{ handIndex + 1 }} 🃏 Poäng: {{ hand.score }}</h4>
+                <h4>Spelare {{ handIndex + 1 }} 🃏 Poäng: {{ hand.getScore() }}</h4>
 
                 <div class="card-container">
-                    {% for card in hand.cards %}
+                    {# Visa alla kort i handen #}
+                    {% for card in hand.getCards() %}
                         {% include 'card/_card.html.twig' with { card: card } %}
                     {% endfor %}
                 </div>
 
-                {% if hand.bust %}
+                {# Status: Bust / Kan Dra kort / Stannar #}
+                {% if hand.isBust() %}
                     <p class="status bust">Bust!</p>
-                {% elseif not hand.standing and gameState.roundActive %}
+                {% elseif not hand.isStanding() and gameState.roundActive %}
                     <form method="post" action="{{ path('proj_blackjack_hit', { hand: handIndex }) }}" style="display:inline;">
                         <button type="submit">Dra kort</button>
                     </form>
                     <form method="post" action="{{ path('proj_blackjack_stand', { hand: handIndex }) }}" style="display:inline;">
                         <button type="submit">Stanna</button>
                     </form>
-                {% elseif hand.standing %}
+                {% elseif hand.isStanding() %}
                     <p class="status stand">Stannar</p>
                 {% endif %}
 
-                {# Visa resultat när rundan är avslutad #}
-                {% if gameState.roundResolved and roundResult is defined and roundResult[handIndex] is defined %}
-                    <p class="result 
-                        {% if roundResult[handIndex] == 'Vinst' %}win
-                        {% elseif roundResult[handIndex] == 'Förlust' %}loss
+                {# Resultat efter avslutad runda #}
+                {% if roundResult is defined and roundResult[handIndex] is defined %}
+                    <p class="result
+                        {% if roundResult[handIndex] == 'Win' %}win
+                        {% elseif roundResult[handIndex] == 'Lose' %}loss
                         {% else %}draw
                         {% endif %}
                     ">
-                        {% if roundResult[handIndex] == 'Vinst' %}
-                            🟢 Du vann! Slump eller skills? Vi låtsas på skills. 😏
-                        {% elseif roundResult[handIndex] == 'Förlust' %}
-                          🔴 Womp womp wooomp... Förlust! 😅
+                        {% if roundResult[handIndex] == 'Win' %}
+                            🟢 Du vann! Bra jobbat!
+                        {% elseif roundResult[handIndex] == 'Lose' %}
+                            🔴 Tyvärr, förlorade den här handen.
                         {% else %}
-                           ⚪ Det här var typ... ett vänskapsresultat? 🤷‍♂️
-
-
+                            ⚪ Oavgjort! Nästa gång kanske.
                         {% endif %}
                     </p>
                 {% endif %}
@@ -52,31 +53,37 @@
         {% endfor %}
     </section>
 
-<section class="dealer-hand">
-    <h2>Dealer:</h2>
+    {# === Dealer-sektionen === #}
+    <section class="dealer-hand">
+        <h2>Dealer:</h2>
 
-    {% if gameState.roundActive %}
-        <div class="card-container">
-            {% include 'card/_card.html.twig' with { card: gameState.dealerHand[0] } %}
-            <div class="card back">
-    <img src="{{ asset('img/card-back.png') }}" alt="Dolt kort" />
-</div>
+        {% set dealerCards = gameState.dealerHand.getCards() %}
 
-    {% else %}
-        <p>Poäng: {{ gameState.dealerScore }}</p>
-        <div class="card-container">
-            {% for card in gameState.dealerHand %}
-                {% include 'card/_card.html.twig' with { card: card } %}
-            {% endfor %}
-        </div>
-    {% endif %}
-</section>
+        {% if gameState.roundActive %}
+            <div class="card-container">
+                {# Visa första kortet öppet, resten dolda #}
+                {% include 'card/_card.html.twig' with { card: dealerCards[0] } %}
+                <div class="card back">
+                    <img src="{{ asset('img/card-back.png') }}" alt="Dolt kort" />
+                </div>
+            </div>
+        {% else %}
+            <p>Poäng: {{ gameState.dealerHand.getScore() }}</p>
+            <div class="card-container">
+                {% for card in dealerCards %}
+                    {% include 'card/_card.html.twig' with { card: card } %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
 
-    {% if not gameState.roundActive and gameState.roundResolved %}
+    {# === Starta ny runda med val av antal händer === #}
+    {% if not gameState.roundActive %}
         <form method="post" action="{{ path('proj_blackjack_start') }}">
-    <button type="submit" class="btn btn-secondary">Starta ny runda</button>
-</form>
-
+            <label for="numHandsNewRound">Välj antal händer för ny runda:</label>
+            <input type="number" id="numHandsNewRound" name="num_hands" min="1" max="3" value="{{ gameState.playerHands|length }}" required>
+            <button type="submit" class="btn btn-secondary">Starta ny runda</button>
+        </form>
     {% endif %}
 </main>
 {% endblock %}

@@ -3,22 +3,22 @@
 namespace App\Game;
 
 /**
- * Represents a full deck of 52 playing cards.
+ * Representerar en standardkortlek med 52 kort.
  */
 class DeckOfCards
 {
     /**
-     * @var Card[] The array of Card objects in the deck.
+     * @var Card[] Kortleken.
      */
     private array $deck = [];
 
     /**
-     * Constructor that initializes the deck with 52 standard playing cards.
+     * Skapar en ny kortlek med 52 kort.
      */
     public function __construct()
     {
         $suits = ['hearts', 'diamonds', 'clubs', 'spades'];
-        $values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1];
+        $values = range(1, 13);
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
@@ -28,9 +28,7 @@ class DeckOfCards
     }
 
     /**
-     * Shuffle the cards in the deck.
-     *
-     * @return void
+     * Blandar kortleken.
      */
     public function shuffle(): void
     {
@@ -38,34 +36,43 @@ class DeckOfCards
     }
 
     /**
-     * Draw a number of cards from the top of the deck.
+     * Drar ett eller flera kort från toppen av kortleken.
      *
-     * @param int $number Number of cards to draw.
-     *
-     * @return Card[] An array of drawn Card objects.
+     * @param int $count Antal kort att dra.
+     * @return Card[] Returnerar en array med kort (kan vara tom om leken är slut).
      */
-    public function draw(int $number = 1): array
+    public function draw(int $count = 1): array
     {
-        return array_splice($this->deck, 0, $number);
+        $cards = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $card = array_shift($this->deck);
+            if ($card === null) {
+                break;
+            }
+            $cards[] = $card;
+        }
+
+        return $cards;
     }
 
     /**
-     * Get the current deck of cards.
+     * Returnerar antal kort kvar i leken.
      *
-     * @return Card[] The current array of cards.
-     */
-    public function getDeck(): array
-    {
-        return $this->deck;
-    }
-
-    /**
-     * Get the number of remaining cards in the deck.
-     *
-     * @return int Number of cards left.
+     * @return int
      */
     public function count(): int
     {
         return count($this->deck);
+    }
+
+    /**
+     * Returnerar hela kortleken.
+     *
+     * @return Card[] Array med alla kvarvarande kort i leken.
+     */
+    public function getDeck(): array
+    {
+        return $this->deck;
     }
 }

@@ -4,205 +4,250 @@ namespace App\BlackJack;
 
 use App\Game\DeckOfCards;
 use App\Game\CardHand;
+use InvalidArgumentException;
 
+/**
+ * Klass för att hantera ett BlackJack-spel med 1 till 3 spelare.
+ */
 class BlackJack
 {
-    private string $playerName;
+    /**
+     * Kortleken som används i spelet.
+     *
+     * @var DeckOfCards
+     */
     private DeckOfCards $deck;
-    private array $playerHands = [];
-    private CardHand $dealerHand;
-    private int $bank;
-    private bool $isRoundActive = false;
-    private bool $roundResolved = false;
-    private array $roundResult = []; // Ny egenskap för resultat
 
-    public function __construct(string $playerName = "Spelare", int $startingBank = 1000)
+    /**
+     * Spelarens händer.
+     *
+     * @var CardHand[]
+     */
+    private array $playerHands = [];
+
+    /**
+     * Dealerns hand.
+     *
+     * @var CardHand
+     */
+    private CardHand $dealerHand;
+
+    /**
+     * Indikerar om rundan är aktiv.
+     *
+     * @var bool
+     */
+    private bool $isRoundActive = false;
+
+    /**
+     * Resultat för varje spelhand efter en avslutad runda.
+     * 'Win', 'Lose' eller 'Draw' per spelhand.
+     *
+     * @var string[]
+     */
+    private array $roundResult = [];
+
+    /**
+     * Indikerar om rundan är avslutad och resultaten är beräknade.
+     *
+     * @var bool
+     */
+    private bool $roundResolved = false;
+
+    /**
+     * Skapar ett nytt BlackJack-spel med en blandad kortlek.
+     */
+    public function __construct()
     {
-        $this->playerName = $playerName;
         $this->deck = new DeckOfCards();
         $this->deck->shuffle();
         $this->dealerHand = new CardHand();
-        $this->bank = $startingBank;
     }
 
-    public function getPlayerName(): string
+    /**
+     * Startar en ny runda av spelet.
+     *
+     * @param int $numberOfHands Antal spelarhänder (1 till 3).
+     * @throws InvalidArgumentException Om antalet händer är ogiltigt.
+     */
+    public function startGame(int $numberOfHands = 1): void
     {
-        return $this->playerName;
-    }
-
-    public function startGame(array $bets): void
-    {
-        if (count($bets) < 1 || count($bets) > 3) {
-            throw new \InvalidArgumentException("Antal händer måste vara mellan 1 och 3.");
+        if ($numberOfHands < 1 || $numberOfHands > 3) {
+            throw new InvalidArgumentException("Antal händer måste vara mellan 1 och 3.");
         }
 
-        foreach ($bets as $bet) {
-            if ($bet > $this->bank) {
-                throw new \Exception("Inte tillräckligt med pengar.");
-            }
-        }
-
-        $this->isRoundActive = true;
-        $this->roundResolved = false;
+        $this->deck = new DeckOfCards();
+        $this->deck->shuffle();
         $this->playerHands = [];
         $this->dealerHand = new CardHand();
-        $this->roundResult = []; // Nollställ resultat vid ny runda
+        $this->roundResult = [];
+        $this->roundResolved = false;
+        $this->isRoundActive = true;
 
-        foreach ($bets as $bet) {
-            $this->bank -= $bet;
+        for ($i = 0; $i < $numberOfHands; $i++) {
             $hand = new CardHand();
-            $hand->setBet($bet);
-            $hand->addCard($this->deck->draw()[0]);
-            $hand->addCard($this->deck->draw()[0]);
+            $hand->addCards($this->deck->draw(2));
             $this->playerHands[] = $hand;
         }
 
-        $this->dealerHand->addCard($this->deck->draw()[0]);
-        $this->dealerHand->addCard($this->deck->draw()[0]);
+        $this->dealerHand->addCards($this->deck->draw(2));
     }
 
-    public function playerHit(int $index = 0): void
+    /**
+     * Spelaren drar ett kort ("Hit") till vald hand.
+     *
+     * @param int $index Index för spelarens hand.
+     */
+    public function playerHit(int $index): void
     {
         if (!$this->isRoundActive || !isset($this->playerHands[$index])) {
-            throw new \LogicException("Fel i spelflödet.");
+            return;
         }
 
-        $this->playerHands[$index]->addCard($this->deck->draw()[0]);
+        $cards = $this->deck->draw(1);
+        if (!empty($cards)) {
+            $this->playerHands[$index]->addCard($cards[0]);
+        }
 
         if ($this->playerHands[$index]->isBust()) {
-            $this->playerStand($index);
+            $this->playerHands[$index]->setStanding(true);
+        }
+
+        if ($this->allPlayersDone()) {
+            $this->dealerTurn();
+            $this->resolveRound();
         }
     }
 
-    public function playerStand(int $index = 0): void
+    /**
+     * Spelaren väljer att stanna ("Stand") på vald hand.
+     *
+     * @param int $index Index för spelarens hand.
+     */
+    public function playerStand(int $index): void
     {
-        if (!isset($this->playerHands[$index])) {
-            throw new \LogicException("Ogiltig hand.");
+        if (!$this->isRoundActive || !isset($this->playerHands[$index])) {
+            return;
         }
 
         $this->playerHands[$index]->setStanding(true);
 
         if ($this->allPlayersDone()) {
             $this->dealerTurn();
-            $this->isRoundActive = false;
-            $this->roundResolved = true;
             $this->resolveRound();
         }
     }
 
-    public function playerSplit(int $index): void
-    {
-        if (!$this->isRoundActive || !isset($this->playerHands[$index])) {
-            throw new \LogicException("Ogiltig hand för split.");
-        }
-
-        $hand = $this->playerHands[$index];
-
-        if (!$hand->canSplit()) {
-            throw new \LogicException("Denna hand kan inte splittas.");
-        }
-
-        $bet = $hand->getBet();
-
-        if ($this->bank < $bet) {
-            throw new \Exception("Inte tillräckligt med pengar för att splitta.");
-        }
-
-        $this->bank -= $bet;
-
-        $cards = $hand->getCards();
-
-        $hand1 = new CardHand();
-        $hand1->setBet($bet);
-        $hand1->addCard($cards[0]);
-        $hand1->addCard($this->deck->draw()[0]);
-
-        $hand2 = new CardHand();
-        $hand2->setBet($bet);
-        $hand2->addCard($cards[1]);
-        $hand2->addCard($this->deck->draw()[0]);
-
-        array_splice($this->playerHands, $index, 1, [$hand1, $hand2]);
-    }
-
+    /**
+     * Dealer drar kort tills den når minst 17 poäng.
+     */
     private function dealerTurn(): void
     {
         while ($this->dealerHand->getScore() < 17) {
-            $this->dealerHand->addCard($this->deck->draw()[0]);
-        }
-    }
-
-    private function resolveRound(): void
-    {
-        $dealerScore = $this->dealerHand->getScore();
-        $this->roundResult = [];
-
-        foreach ($this->playerHands as $index => $hand) {
-            $score = $hand->getScore();
-            $bet = $hand->getBet();
-
-            if ($score > 21) {
-                $this->roundResult[$index] = 'Förlust';
-                continue;
-            }
-
-            $blackjack = ($score === 21 && count($hand->getCards()) === 2);
-
-            if ($dealerScore > 21 || $score > $dealerScore) {
-                $multiplier = $blackjack ? 2.5 : 2;
-                $this->bank += (int)($bet * $multiplier);
-                $this->roundResult[$index] = 'Vinst';
-            } elseif ($score === $dealerScore) {
-                $this->bank += $bet;
-                $this->roundResult[$index] = 'Oavgjort';
-            } else {
-                $this->roundResult[$index] = 'Förlust';
+            $cards = $this->deck->draw(1);
+            if (!empty($cards)) {
+                $this->dealerHand->addCard($cards[0]);
             }
         }
     }
 
+    /**
+     * Kollar om alla spelares händer är färdiga.
+     *
+     * @return bool True om alla spelare är klara (bust eller stått).
+     */
     private function allPlayersDone(): bool
     {
         foreach ($this->playerHands as $hand) {
-            if (!$hand->isStanding() && !$hand->isBust()) {
+            if (!$hand->isDone()) {
                 return false;
             }
         }
         return true;
     }
 
-    public function getGameState(): array
+    /**
+     * Avgör resultatet för varje spelhand jämfört med dealern.
+     */
+    private function resolveRound(): void
     {
-        return [
-            'playerName' => $this->playerName,
-            'playerHands' => $this->getFormattedPlayerHands(),
-            'dealerHand' => $this->roundResolved ? $this->dealerHand->getCards() : [$this->dealerHand->getCards()[0]],
-            'dealerScore' => $this->dealerHand->getScore(),
-            'bank' => $this->bank,
-            'roundActive' => $this->isRoundActive,
-            'roundResolved' => $this->roundResolved,
-        ];
-    }
-
-    private function getFormattedPlayerHands(): array
-    {
-        $result = [];
-        foreach ($this->playerHands as $hand) {
-            $result[] = [
-                'cards' => $hand->getCards(),
-                'score' => $hand->getScore(),
-                'standing' => $hand->isStanding(),
-                'bust' => $hand->isBust(),
-                'bet' => $hand->getBet(),
-                'canSplit' => $hand->canSplit(),
-            ];
+        if ($this->roundResolved) {
+            return;
         }
-        return $result;
+
+        $dealerScore = $this->dealerHand->getScore();
+        $dealerBust = $this->dealerHand->isBust();
+
+        foreach ($this->playerHands as $i => $hand) {
+            $score = $hand->getScore();
+            $bust = $hand->isBust();
+
+            if ($bust) {
+                $this->roundResult[$i] = 'Lose';
+            } elseif ($dealerBust) {
+                $this->roundResult[$i] = 'Win';
+            } elseif ($score > $dealerScore) {
+                $this->roundResult[$i] = 'Win';
+            } elseif ($score === $dealerScore) {
+                $this->roundResult[$i] = 'Draw';
+            } else {
+                $this->roundResult[$i] = 'Lose';
+            }
+        }
+
+        $this->roundResolved = true;
+        $this->isRoundActive = false;
     }
 
-    // Ny getter för rundans resultat
+    /**
+     * Hämtar alla spelarens händer.
+     *
+     * @return CardHand[]
+     */
+    public function getPlayerHands(): array
+    {
+        return $this->playerHands;
+    }
+
+    /**
+     * Hämtar dealerns hand.
+     *
+     * @return CardHand
+     */
+    public function getDealerHand(): CardHand
+    {
+        return $this->dealerHand;
+    }
+
+    /**
+     * Hämtar resultatet för den senaste rundan.
+     *
+     * @return string[] Resultat för varje hand ('Win', 'Lose', 'Draw').
+     */
     public function getRoundResult(): array
     {
         return $this->roundResult;
+    }
+
+    /**
+     * Hämtar hela spelstatusen i form av en array.
+     *
+     * @return array{
+     *     playerHands: CardHand[],
+     *     dealerHand: CardHand,
+     *     roundActive: bool,
+     *     roundResult: string[],
+     *     roundResolved: bool
+     * }
+     */
+    public function getGameState(): array
+    {
+        return [
+            'playerHands' => $this->getPlayerHands(),
+            'dealerHand' => $this->getDealerHand(),
+            'roundActive' => $this->isRoundActive,
+            'roundResult' => $this->getRoundResult(),
+            'roundResolved' => $this->roundResolved,
+        ];
     }
 }

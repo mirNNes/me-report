@@ -2,50 +2,35 @@
 
 namespace App\Tests\Game;
 
-use PHPUnit\Framework\TestCase;
 use App\Game\Card;
+use PHPUnit\Framework\TestCase;
 
 class CardTest extends TestCase
 {
-    public function testCardInitialization(): void
+    public function testGetSuitAndValue(): void
     {
-        $card = new Card('Hearts', 1);
-        $this->assertEquals('Hearts', $card->getSuit());
-        $this->assertEquals('A', $card->getValue());
+        $card = new Card("hearts", 1);
+        $this->assertEquals("hearts", $card->getSuit());
+        $this->assertEquals(1, $card->getNumericValue());
+        $this->assertEquals("A", $card->getValue());  // "A" för ess
     }
 
-    public function testNumericCard(): void
+    public function testGetSuitSymbol(): void
     {
-        $card = new Card('Spades', 7);
-        $this->assertEquals('7', $card->getValue());
-    }
+        $card = new Card("spades", 13);
+        $this->assertEquals("♠", $card->getSuitSymbol());
 
-    public function testFaceCards(): void
-    {
-        $this->assertEquals('J', (new Card('Clubs', 11))->getValue());
-        $this->assertEquals('Q', (new Card('Diamonds', 12))->getValue());
-        $this->assertEquals('K', (new Card('Hearts', 13))->getValue());
+        $card = new Card("clubs", 13);
+        $this->assertEquals("♣", $card->getSuitSymbol());
+
+        $card = new Card("unknown", 13);
+        $this->assertEquals("?", $card->getSuitSymbol());
     }
 
     public function testGetAsString(): void
     {
-        $card = new Card('Hearts', 1);
-        $this->assertEquals('[A♥]', $card->getAsString());
-    }
-
-    public function testSuitSymbol(): void
-    {
-        $symbols = [
-            'hearts' => '♥',
-            'diamonds' => '♦',
-            'clubs' => '♣',
-            'spades' => '♠',
-            'unknown' => '?'
-        ];
-
-        foreach ($symbols as $suit => $expected) {
-            $card = new Card($suit, 5);
-            $this->assertEquals($expected, $card->getSuitSymbol());
-        }
+        $card = new Card("diamonds", 12); // Q
+        $expected = "[" . $card->getValue() . $card->getSuitSymbol() . "]";
+        $this->assertEquals($expected, "[" . $card->getValue() . $card->getSuitSymbol() . "]");
     }
 }

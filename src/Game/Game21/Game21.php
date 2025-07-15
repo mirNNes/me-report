@@ -4,35 +4,18 @@ namespace App\Game\Game21;
 
 use App\Game\DeckOfCards;
 use App\Game\CardHand;
+use App\Game\Card;
 
 /**
- * Game21 handles the logic for a card game where the goal is to get as close to 21 as possible without going over.
+ * Game21 hanterar logiken för ett kortspel där målet är att komma så nära 21 som möjligt utan att gå över.
  */
 class Game21
 {
-    /**
-     * @var DeckOfCards The deck used in the game.
-     */
     private DeckOfCards $deck;
-
-    /**
-     * @var CardHand The player's hand.
-     */
     private CardHand $playerHand;
-
-    /**
-     * @var CardHand The bank's hand.
-     */
     private CardHand $bankHand;
-
-    /**
-     * @var bool Indicates whether the game is over.
-     */
     private bool $isGameOver = false;
 
-    /**
-     * Constructor: Initializes the game with a shuffled deck and empty hands for player and bank.
-     */
     public function __construct()
     {
         $this->deck = new DeckOfCards();
@@ -41,37 +24,26 @@ class Game21
         $this->bankHand = new CardHand();
     }
 
-    /**
-     * Starts the game by drawing two cards for the player.
-     */
     public function startGame(): void
     {
         $this->drawCardToPlayer();
         $this->drawCardToPlayer();
     }
 
-    /**
-     * The player draws a card.
-     */
     public function playerDraw(): void
     {
         $this->drawCardToPlayer();
     }
 
-    /**
-     * The player draws a card and if the score exceeds 21, the bank takes its turn.
-     */
     public function playerDrawAndCheck(): void
     {
         $this->playerDraw();
+
         if ($this->getPlayerScore() > 21) {
             $this->bankTurn();
         }
     }
 
-    /**
-     * The bank's turn to draw cards until at least 17 points are reached or the player busts.
-     */
     public function bankTurn(): void
     {
         $this->drawCardToBank();
@@ -85,15 +57,13 @@ class Game21
     }
 
     /**
-     * Returns the current state of the game, including cards, scores, and the winner if the game is over.
-     *
      * @return array{
-     *     playerHand: list<\App\Game\Card>,
-     *     playerScore: int,
-     *     bankHand: list<\App\Game\Card>,
-     *     bankScore: int|null,
-     *     gameOver: bool,
-     *     winner: string|null
+     *   playerHand: list<Card>,
+     *   playerScore: int,
+     *   bankHand: list<Card>,
+     *   bankScore: int|null,
+     *   gameOver: bool,
+     *   winner: string|null
      * }
      */
     public function getGameState(): array
@@ -108,51 +78,40 @@ class Game21
         ];
     }
 
-
-
-    /**
-     * Gets the player's score.
-     *
-     * @return int
-     */
     public function getPlayerScore(): int
     {
         return $this->playerHand->getScore();
     }
 
-    /**
-     * Gets the bank's score.
-     *
-     * @return int
-     */
     public function getBankScore(): int
     {
         return $this->bankHand->getScore();
     }
 
-    /**
-     * Draws a card to the player.
-     */
     private function drawCardToPlayer(): void
     {
-        $card = $this->deck->draw()[0];
+        $card = $this->deck->draw();
+
+        if ($card === null) {
+            $this->isGameOver = true;
+            return;
+        }
+
         $this->playerHand->addCard($card);
     }
 
-    /**
-     * Draws a card to the bank.
-     */
     private function drawCardToBank(): void
     {
-        $card = $this->deck->draw()[0];
+        $card = $this->deck->draw();
+
+        if ($card === null) {
+            $this->isGameOver = true;
+            return;
+        }
+
         $this->bankHand->addCard($card);
     }
 
-    /**
-     * Determines the winner of the game.
-     *
-     * @return string "Player" or "Bank"
-     */
     public function determineWinner(): string
     {
         $player = $this->getPlayerScore();
