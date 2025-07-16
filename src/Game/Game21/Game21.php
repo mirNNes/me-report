@@ -16,6 +16,9 @@ class Game21
     private CardHand $bankHand;
     private bool $isGameOver = false;
 
+    /**
+     * Skapar ett nytt spel och blandar kortleken.
+     */
     public function __construct()
     {
         $this->deck = new DeckOfCards();
@@ -24,17 +27,32 @@ class Game21
         $this->bankHand = new CardHand();
     }
 
+    /**
+     * Startar spelet genom att ge spelaren två kort.
+     *
+     * @return void
+     */
     public function startGame(): void
     {
         $this->drawCardToPlayer();
         $this->drawCardToPlayer();
     }
 
+    /**
+     * Låter spelaren dra ett kort.
+     *
+     * @return void
+     */
     public function playerDraw(): void
     {
         $this->drawCardToPlayer();
     }
 
+    /**
+     * Låter spelaren dra ett kort och kollar om spelet bör gå över till banken.
+     *
+     * @return void
+     */
     public function playerDrawAndCheck(): void
     {
         $this->playerDraw();
@@ -44,6 +62,11 @@ class Game21
         }
     }
 
+    /**
+     * Banken drar kort tills den når minst 17 poäng.
+     *
+     * @return void
+     */
     public function bankTurn(): void
     {
         $this->drawCardToBank();
@@ -57,6 +80,8 @@ class Game21
     }
 
     /**
+     * Returnerar aktuell spelstatus.
+     *
      * @return array{
      *   playerHand: list<Card>,
      *   playerScore: int,
@@ -78,19 +103,34 @@ class Game21
         ];
     }
 
+    /**
+     * Hämtar spelarens nuvarande poäng.
+     *
+     * @return int
+     */
     public function getPlayerScore(): int
     {
         return $this->playerHand->getScore();
     }
 
+    /**
+     * Hämtar bankens nuvarande poäng.
+     *
+     * @return int
+     */
     public function getBankScore(): int
     {
         return $this->bankHand->getScore();
     }
 
+    /**
+     * Drar ett kort till spelaren.
+     *
+     * @return void
+     */
     private function drawCardToPlayer(): void
     {
-        $card = $this->deck->draw();
+        $card = $this->deck->drawOne();
 
         if ($card === null) {
             $this->isGameOver = true;
@@ -100,9 +140,14 @@ class Game21
         $this->playerHand->addCard($card);
     }
 
+    /**
+     * Drar ett kort till banken.
+     *
+     * @return void
+     */
     private function drawCardToBank(): void
     {
-        $card = $this->deck->draw();
+        $card = $this->deck->drawOne();
 
         if ($card === null) {
             $this->isGameOver = true;
@@ -112,6 +157,11 @@ class Game21
         $this->bankHand->addCard($card);
     }
 
+    /**
+     * Bestämmer vinnaren utifrån poäng.
+     *
+     * @return string "Player" eller "Bank"
+     */
     public function determineWinner(): string
     {
         $player = $this->getPlayerScore();

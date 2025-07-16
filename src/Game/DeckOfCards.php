@@ -29,6 +29,8 @@ class DeckOfCards
 
     /**
      * Blandar kortleken.
+     *
+     * @return void
      */
     public function shuffle(): void
     {
@@ -57,7 +59,17 @@ class DeckOfCards
     }
 
     /**
-     * Returnerar antal kort kvar i leken.
+     * Drar ett enskilt kort från toppen av kortleken.
+     *
+     * @return Card|null Kortet eller null om leken är slut.
+     */
+    public function drawOne(): ?Card
+    {
+        return array_shift($this->deck);
+    }
+
+    /**
+     * Returnerar antal kvarvarande kort i leken.
      *
      * @return int
      */
@@ -67,9 +79,9 @@ class DeckOfCards
     }
 
     /**
-     * Returnerar hela kortleken.
+     * Returnerar hela kvarvarande kortleken.
      *
-     * @return Card[] Array med alla kvarvarande kort i leken.
+     * @return Card[]
      */
     public function getDeck(): array
     {
