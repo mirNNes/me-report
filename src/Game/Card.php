@@ -40,21 +40,21 @@ class Card
     }
 
     /**
-     * Hämtar kortets värde.
+     * Hämtar kortets värde (numeriskt 1–13).
      *
      * @return int
      */
-    public function getValue(): int
+    public function getNumericValue(): int
     {
         return $this->value;
     }
 
     /**
-     * Returnerar kortets namn, t.ex. "A", "10", "Q".
+     * Hämtar kortets värde som symbol: "A", "2", ..., "Q", "K".
      *
      * @return string
      */
-    public function getName(): string
+    public function getValue(): string
     {
         return match ($this->value) {
             1 => 'A',
@@ -72,7 +72,7 @@ class Card
      */
     public function getSuitSymbol(): string
     {
-        return match ($this->suit) {
+        return match (strtolower($this->suit)) {
             'hearts'   => '♥',
             'diamonds' => '♦',
             'clubs'    => '♣',
@@ -88,28 +88,16 @@ class Card
      */
     public function __toString(): string
     {
-        return "[{$this->getName()}{$this->getSuitSymbol()}]";
+        return "[{$this->getValue()}{$this->getSuitSymbol()}]";
     }
 
     /**
      * Returnerar kortet som en sträng, t.ex. "[K♠]".
-     * Kan användas där man inte vill förlita sig på __toString().
      *
      * @return string
      */
     public function getAsString(): string
     {
         return $this->__toString();
-    }
-
-    /**
-     * Returnerar kortets numeriska värde (1–13).
-     * Används för beräkningar i spel som Blackjack.
-     *
-     * @return int
-     */
-    public function getNumericValue(): int
-    {
-        return $this->value;
     }
 }

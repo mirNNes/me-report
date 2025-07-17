@@ -11,7 +11,7 @@ class CardHandTest extends TestCase
     private function createCardMock(string $name, int $numericValue): Card
     {
         $card = $this->createMock(Card::class);
-        $card->method('getName')->willReturn($name);
+        $card->method('getValue')->willReturn($name);
         $card->method('getNumericValue')->willReturn($numericValue);
         return $card;
     }
