@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1752815776">
-  <project timestamp="1752815776">
+<coverage generated="1752816398">
+  <project timestamp="1752816398">
     <file name="/Users/mirnesmrso/dbwebb-kurser/mvc/me/report/src/BlackJack/BlackJack.php">
       <class name="App\BlackJack\BlackJack" namespace="global">
         <metrics complexity="32" methods="11" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="47" elements="80" coveredelements="52"/>
@@ -655,13 +655,13 @@
       <line num="56" type="method" name="playerDrawAndCheck" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="58" type="stmt" count="2"/>
       <line num="60" type="stmt" count="2"/>
-      <line num="61" type="stmt" count="2"/>
-      <line num="70" type="method" name="bankTurn" visibility="public" complexity="2" crap="2" count="4"/>
-      <line num="72" type="stmt" count="4"/>
-      <line num="73" type="stmt" count="4"/>
-      <line num="75" type="stmt" count="4"/>
-      <line num="76" type="stmt" count="3"/>
-      <line num="79" type="stmt" count="4"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="70" type="method" name="bankTurn" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="72" type="stmt" count="3"/>
+      <line num="73" type="stmt" count="3"/>
+      <line num="75" type="stmt" count="3"/>
+      <line num="76" type="stmt" count="2"/>
+      <line num="79" type="stmt" count="3"/>
       <line num="94" type="method" name="getGameState" visibility="public" complexity="4" crap="4" count="4"/>
       <line num="96" type="stmt" count="4"/>
       <line num="97" type="stmt" count="4"/>
@@ -673,20 +673,20 @@
       <line num="103" type="stmt" count="4"/>
       <line num="111" type="method" name="getPlayerScore" visibility="public" complexity="1" crap="1" count="5"/>
       <line num="113" type="stmt" count="5"/>
-      <line num="121" type="method" name="getBankScore" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="123" type="stmt" count="4"/>
+      <line num="121" type="method" name="getBankScore" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="123" type="stmt" count="3"/>
       <line num="131" type="method" name="drawCardToPlayer" visibility="private" complexity="2" crap="2.26" count="8"/>
       <line num="133" type="stmt" count="8"/>
       <line num="135" type="stmt" count="8"/>
       <line num="136" type="stmt" count="0"/>
       <line num="137" type="stmt" count="0"/>
       <line num="140" type="stmt" count="8"/>
-      <line num="148" type="method" name="drawCardToBank" visibility="private" complexity="2" crap="2.26" count="4"/>
-      <line num="150" type="stmt" count="4"/>
-      <line num="152" type="stmt" count="4"/>
+      <line num="148" type="method" name="drawCardToBank" visibility="private" complexity="2" crap="2.26" count="3"/>
+      <line num="150" type="stmt" count="3"/>
+      <line num="152" type="stmt" count="3"/>
       <line num="153" type="stmt" count="0"/>
       <line num="154" type="stmt" count="0"/>
-      <line num="157" type="stmt" count="4"/>
+      <line num="157" type="stmt" count="3"/>
       <line num="165" type="method" name="determineWinner" visibility="public" complexity="4" crap="4.05" count="2"/>
       <line num="167" type="stmt" count="2"/>
       <line num="168" type="stmt" count="2"/>
