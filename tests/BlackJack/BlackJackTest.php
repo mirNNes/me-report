@@ -31,7 +31,7 @@ class BlackJackTest extends TestCase
 
         $playerHand->addCard(new Card('hearts', 10));
         $playerHand->addCard(new Card('spades', 10));
-        $playerHand->addCard(new Card('clubs', 5)); // Total = 25
+        $playerHand->addCard(new Card('clubs', 5));
 
         $this->assertGreaterThan(21, $playerHand->getScore());
     }
@@ -49,16 +49,16 @@ class BlackJackTest extends TestCase
         $this->setPrivateProperty($playerHand, 'cards', []);
         $this->setPrivateProperty($dealerHand, 'cards', []);
 
-        $playerHand->addCard(new Card('hearts', 14)); // Ess (A)
-        $playerHand->addCard(new Card('spades', 13)); // Kung (K)
+        $playerHand->addCard(new Card('hearts', 14));
+        $playerHand->addCard(new Card('spades', 13));
 
         $dealerHand->addCard(new Card('clubs', 10));
-        $dealerHand->addCard(new Card('diamonds', 8)); // Totalt 18
+        $dealerHand->addCard(new Card('diamonds', 8));
 
         $game->playerStand(0);
 
         $result = $game->getRoundResult();
-        $this->assertEquals('Vinst', $result[0]);
+        $this->assertEquals('Win', $result[0]);
     }
 
     public function testInvalidStartGameThrowsException(): void
@@ -66,10 +66,8 @@ class BlackJackTest extends TestCase
         $this->expectException(\TypeError::class);
 
         $game = new BlackJack();
-        $game->startGame(null); // null till int → kastar TypeError
+        $game->startGame(null);
     }
-
-    // === Hjälpmetoder ===
 
     private function getPrivateProperty(object $object, string $propertyName): mixed
     {
