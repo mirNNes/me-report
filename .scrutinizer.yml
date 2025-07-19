@@ -1,31 +1,3 @@
-tools:
-  php_code_coverage: true
-  php_analyzer: true
-  php_mess_detector: true
-  php_code_sniffer: true
-  php_cpd: true
-  php_loc: true
-  php_pdepend: true
-  php_sim: true
-
-imports:
-  - php
-
-filter:
-  excluded_paths: [vendor/*, tests/*]
-
-coding_style:
-  php:
-    braces: true
-    indentation:
-      general:
-        size: 4
-        use_tabs: false
-      switch:
-        indent_case: true
-    spaces: true
-    upper_lower_casing: true
-
 build:
   image: default-bionic
 
@@ -48,8 +20,16 @@ build:
       tests:
         override:
           - command: |
-              php bin/console doctrine:database:create --if-not-exists
-              php bin/console doctrine:migrations:migrate --no-interaction
+              # Ta bort eventuellt testdb (om SQLite)
+              rm -f var/test.db
+
+              # Skapa databas (utan --if-not-exists)
+              php bin/console doctrine:database:create --env=test || true
+
+              # Migrera databasen
+              php bin/console doctrine:migrations:migrate --env=test --no-interaction
+
+              # Kör testerna med kodtäckning
               vendor/bin/phpunit --coverage-clover=var/coverage.clover
             coverage:
               file: var/coverage.clover
