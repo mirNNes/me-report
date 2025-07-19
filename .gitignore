@@ -45,3 +45,8 @@ phpstan.neon
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
+
+# Coverage reports and related docs
+docs/coverage/
+var/coverage.clover
+var/test.db
