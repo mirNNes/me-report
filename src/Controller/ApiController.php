@@ -166,6 +166,4 @@ class ApiController extends AbstractController
             'image' => $book->getImage()
         ]);
     }
-
-
 }

@@ -43,5 +43,4 @@ class Game21Test extends TestCase
         $winner = $game->getGameState()['winner'];
         $this->assertContains($winner, ['Player', 'Bank']);
     }
-
 }
