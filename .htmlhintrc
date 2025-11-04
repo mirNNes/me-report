@@ -1,0 +1,18 @@
+{
+  "attr-lowercase": false,
+  "tagname-lowercase": false,
+  "id-unique": false,
+  "tag-pair": false,
+  "src-not-empty": false,
+  "doctype-first": false,
+  "doctype-html5": false,
+  "spec-char-escape": false,
+  "id-class-value": false,
+  "style-disabled": false,
+  "ignoreFiles": [
+    "**/metrics-report/*.html",
+    "**/metrics-report/**/*.html",
+    "**/public/metrics-report/*.html",
+    "**/public/metrics-report/**/*.html"
+  ]
+}

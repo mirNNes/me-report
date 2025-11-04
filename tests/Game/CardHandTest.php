@@ -21,119 +21,69 @@ class CardHandTest extends TestCase
         $hand = new CardHand();
         $card1 = $this->createCardMock('Two', 2);
         $card2 = $this->createCardMock('Ten', 10);
-
         $hand->addCard($card1);
         $hand->addCard($card2);
-
         $cards = $hand->getCards();
-
         $this->assertCount(2, $cards);
         $this->assertSame($card1, $cards[0]);
         $this->assertSame($card2, $cards[1]);
     }
 
-    public function testGetScoreWithoutAces(): void
+    public function testScoreCalculations(): void
     {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Ten', 10));
-        $hand->addCard($this->createCardMock('Seven', 7));
+        $hand1 = new CardHand();
+        $hand1->addCard($this->createCardMock('Ten', 10));
+        $hand1->addCard($this->createCardMock('Seven', 7));
+        $this->assertEquals(17, $hand1->getScore());
 
-        $this->assertEquals(17, $hand->getScore());
+        $hand2 = new CardHand();
+        $hand2->addCard($this->createCardMock('Ace', 1));
+        $hand2->addCard($this->createCardMock('Five', 5));
+        $this->assertEquals(16, $hand2->getScore());
+
+        $hand3 = new CardHand();
+        $hand3->addCard($this->createCardMock('Ace', 1));
+        $hand3->addCard($this->createCardMock('Ten', 10));
+        $hand3->addCard($this->createCardMock('King', 10));
+        $this->assertEquals(21, $hand3->getScore());
+
+        $hand4 = new CardHand();
+        $hand4->addCard($this->createCardMock('Ace', 1));
+        $hand4->addCard($this->createCardMock('Ace', 1));
+        $hand4->addCard($this->createCardMock('Nine', 9));
+        $this->assertEquals(21, $hand4->getScore());
     }
 
-    public function testGetScoreWithAceAs11(): void
+    public function testCanSplit(): void
     {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Ace', 1)); // Ace
-        $hand->addCard($this->createCardMock('Five', 5));
+        $hand1 = new CardHand();
+        $hand1->addCard($this->createCardMock('Eight', 8));
+        $hand1->addCard($this->createCardMock('Eight', 8));
+        $this->assertTrue($hand1->canSplit());
 
-        // Ace should count as 11 + 5 = 16
-        $this->assertEquals(16, $hand->getScore());
+        $hand2 = new CardHand();
+        $hand2->addCard($this->createCardMock('Eight', 8));
+        $hand2->addCard($this->createCardMock('Nine', 9));
+        $this->assertFalse($hand2->canSplit());
     }
 
-    public function testGetScoreWithAceAs1(): void
+    public function testBustAndDone(): void
     {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Ace', 1));
-        $hand->addCard($this->createCardMock('Ten', 10));
-        $hand->addCard($this->createCardMock('King', 10));
+        $hand1 = new CardHand();
+        $hand1->addCard($this->createCardMock('King', 10));
+        $hand1->addCard($this->createCardMock('Queen', 10));
+        $hand1->addCard($this->createCardMock('Two', 2));
+        $this->assertTrue($hand1->isBust());
+        $this->assertTrue($hand1->isDone());
 
-        // Ace should count as 1 to avoid bust: 1 + 10 + 10 = 21
-        $this->assertEquals(21, $hand->getScore());
-    }
+        $hand2 = new CardHand();
+        $hand2->addCard($this->createCardMock('Ten', 10));
+        $hand2->addCard($this->createCardMock('Seven', 7));
+        $this->assertFalse($hand2->isBust());
+        $this->assertFalse($hand2->isDone());
 
-    public function testMultipleAcesHandledCorrectly(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Ace', 1));
-        $hand->addCard($this->createCardMock('Ace', 1));
-        $hand->addCard($this->createCardMock('Nine', 9));
-
-        // Optimal count: 11 (first ace) + 1 (second ace) + 9 = 21
-        $this->assertEquals(21, $hand->getScore());
-    }
-
-    public function testCanSplitReturnsTrueWhenCardsHaveSameValue(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Eight', 8));
-        $hand->addCard($this->createCardMock('Eight', 8));
-
-        $this->assertTrue($hand->canSplit());
-    }
-
-    public function testCanSplitReturnsFalseWhenCardsHaveDifferentValue(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Eight', 8));
-        $hand->addCard($this->createCardMock('Nine', 9));
-
-        $this->assertFalse($hand->canSplit());
-    }
-
-    public function testIsBustReturnsTrueWhenScoreOver21(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('King', 10));
-        $hand->addCard($this->createCardMock('Queen', 10));
-        $hand->addCard($this->createCardMock('Two', 2));
-
-        $this->assertTrue($hand->isBust());
-    }
-
-    public function testIsBustReturnsFalseWhenScore21OrLess(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Ten', 10));
-        $hand->addCard($this->createCardMock('Seven', 7));
-
-        $this->assertFalse($hand->isBust());
-    }
-
-    public function testIsDoneReturnsTrueWhenStanding(): void
-    {
-        $hand = new CardHand();
-        $hand->setStanding(true);
-
-        $this->assertTrue($hand->isDone());
-    }
-
-    public function testIsDoneReturnsTrueWhenBust(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('King', 10));
-        $hand->addCard($this->createCardMock('Queen', 10));
-        $hand->addCard($this->createCardMock('Two', 2));
-
-        $this->assertTrue($hand->isDone());
-    }
-
-    public function testIsDoneReturnsFalseWhenNotBustOrStanding(): void
-    {
-        $hand = new CardHand();
-        $hand->addCard($this->createCardMock('Ten', 10));
-        $hand->addCard($this->createCardMock('Seven', 7));
-
-        $this->assertFalse($hand->isDone());
+        $hand3 = new CardHand();
+        $hand3->setStanding(true);
+        $this->assertTrue($hand3->isDone());
     }
 }

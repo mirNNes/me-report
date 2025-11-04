@@ -13,6 +13,7 @@
     <exclude-pattern>cache</exclude-pattern>
     <exclude-pattern>node_modules</exclude-pattern>
     <exclude-pattern>vendor</exclude-pattern>
+    <exclude-pattern>migrations</exclude-pattern>
 
     <rule ref="rulesets/design.xml" />
     <rule ref="rulesets/cleancode.xml" />
@@ -32,10 +33,9 @@
 
     <rule ref="rulesets/naming.xml/ShortMethodName">
         <properties>
-            <property name="exceptions" value="t,e" />
+            <property name="exceptions" value="t,e,up,down" />
         </properties>
     </rule>
 
     <rule ref="rulesets/unusedcode.xml" />
-
 </ruleset>
