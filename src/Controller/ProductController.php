@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Controller;
 
 use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
