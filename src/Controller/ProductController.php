@@ -2,64 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use App\Service\ProductManager;
 
-class ProductManager
+class ProductController extends AbstractController
 {
-    private $doctrine;
+    private $productManager;
 
-    public function __construct(ManagerRegistry $doctrine)
+    public function __construct(ProductManager $productManager)
     {
-        $this->doctrine = $doctrine;
+        $this->productManager = $productManager;
     }
 
-    public function createNewProduct(): Product
+    public function index(): Response
     {
-        $entityManager = $this->doctrine->getManager();
+        $product = $this->productManager->createNewProduct();
 
-        $product = new Product();
-        $product->setName('Keyboard_num_' . rand(1, 9));
-        $product->setValue(rand(100, 999));
-
-        $entityManager->persist($product);
-        $entityManager->flush();
-
-        return $product;
-    }
-
-    public function deleteProductById(int $id): void
-    {
-        $entityManager = $this->doctrine->getManager();
-        $product = $entityManager->getRepository(Product::class)->find($id);
-
-        if (!$product) {
-            throw new NotFoundHttpException(sprintf(
-                'No product found for id %d',
-                $id
-            ));
-        }
-
-        $entityManager->remove($product);
-        $entityManager->flush();
-    }
-
-    public function updateProduct(int $id, int $value): Product
-    {
-        $entityManager = $this->doctrine->getManager();
-        $product = $entityManager->getRepository(Product::class)->find($id);
-
-        if (!$product) {
-            throw new NotFoundHttpException(sprintf(
-                'No product found for id %d',
-                $id
-            ));
-        }
-
-        $product->setValue($value);
-        $entityManager->flush();
-
-        return $product;
+        return new Response('New product created: ' . $product->getName());
     }
 }
