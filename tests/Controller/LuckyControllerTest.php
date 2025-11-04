@@ -3,12 +3,13 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class LuckyControllerTest extends WebTestCase
 {
-    private function getLuckyNumberContent(): array
+
+    private function getLuckyNumberContent(KernelBrowser $client): array
     {
-        $client = static::createClient();
         $crawler = $client->request('GET', '/lucky');
 
         $this->assertResponseIsSuccessful();
@@ -21,7 +22,9 @@ class LuckyControllerTest extends WebTestCase
 
     public function testIndex(): void
     {
-        [$number, $content] = $this->getLuckyNumberContent();
+        $client = static::createClient();
+        
+        [$number, $content] = $this->getLuckyNumberContent($client);
 
         $this->assertIsNumeric($number);
         $this->assertGreaterThanOrEqual(1, $number);
@@ -35,10 +38,11 @@ class LuckyControllerTest extends WebTestCase
 
     public function testMultipleRequestsReturnDifferentNumbers(): void
     {
+        $client = static::createClient();
         $numbers = [];
 
         for ($i = 0; $i < 5; $i++) {
-            [$number] = $this->getLuckyNumberContent();
+            [$number] = $this->getLuckyNumberContent($client); 
             $numbers[] = $number;
         }
 
@@ -48,7 +52,9 @@ class LuckyControllerTest extends WebTestCase
 
     public function testImageFileExtensions(): void
     {
-        [, $content] = $this->getLuckyNumberContent();
+        $client = static::createClient();
+        
+        [, $content] = $this->getLuckyNumberContent($client);
         $this->assertMatchesRegularExpression('/\.(png|jpg|jpeg|gif)/i', $content);
     }
 }
