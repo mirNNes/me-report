@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException; // Need this for clean 404
 
 #[Route('/library')]
 final class BookController extends AbstractController
@@ -48,17 +49,36 @@ final class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * FIX: Changed argument from Book $book to int $id to prevent automatic entity lookup failure
+     * when fixtures are not loaded in the test environment.
+     */
     #[Route('/{id}', name: 'app_book_show', methods: ['GET'])]
-    public function show(Book $book): Response
+    public function show(int $id, BookRepository $bookRepository): Response
     {
+        $book = $bookRepository->find($id);
+
+        if (!$book) {
+             throw $this->createNotFoundException('The book does not exist');
+        }
+
         return $this->render('book/show.html.twig', [
             'book' => $book,
         ]);
     }
 
+    /**
+     * FIX: Changed argument from Book $book to int $id.
+     */
     #[Route('/{id}/edit', name: 'app_book_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Book $book, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, int $id, BookRepository $bookRepository, EntityManagerInterface $entityManager): Response
     {
+        $book = $bookRepository->find($id);
+
+        if (!$book) {
+             throw $this->createNotFoundException('The book does not exist');
+        }
+
         $form = $this->createForm(BookForm::class, $book);
         $form->handleRequest($request);
 
@@ -74,9 +94,18 @@ final class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * FIX: Changed argument from Book $book to int $id.
+     */
     #[Route('/{id}', name: 'app_book_delete', methods: ['POST'])]
-    public function delete(Request $request, Book $book, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, int $id, BookRepository $bookRepository, EntityManagerInterface $entityManager): Response
     {
+        $book = $bookRepository->find($id);
+        
+        if (!$book) {
+             throw $this->createNotFoundException('The book does not exist');
+        }
+
         $bookId = $book->getId();
 
         if ($this->isCsrfTokenValid('delete'.$bookId, $request->getPayload()->getString('_token'))) {
