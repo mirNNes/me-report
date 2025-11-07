@@ -5,6 +5,8 @@ namespace App\Tests\Game;
 use PHPUnit\Framework\TestCase;
 use App\Game\Game21\Game21;
 use App\Game\Card;
+use App\Game\CardHand;
+use App\Game\DeckOfCards;
 use ReflectionClass;
 
 class Game21Test extends TestCase
@@ -44,7 +46,6 @@ class Game21Test extends TestCase
         $winner = $game->getGameState()['winner'];
         $this->assertContains($winner, ['Player', 'Bank']);
     }
-
 
     public function testInitialGameState(): void
     {
