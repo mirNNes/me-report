@@ -26,9 +26,21 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+
+        <exclude>
+            <directory>src/Controller</directory>
+            <directory>src/DataFixtures</directory>
+            <directory>src/Entity</directory>
+            <directory>src/Kernel.php</directory>
+            <directory>src/Migrations</directory>
+            <directory>src/Tests</directory>
+            <directory>src/Repository</directory>
+            <directory>src/Service</directory>
+        </exclude>
+
         <report>
             <html outputDirectory="docs/coverage" />
-            <clover outputFile="build/logs/clover.xml"/>  <!-- Viktigt för Scrutinizer -->
+            <clover outputFile="var/coverage.clover" />
         </report>
     </coverage>
 

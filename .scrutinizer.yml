@@ -20,16 +20,9 @@ build:
       tests:
         override:
           - command: |
-              # Ta bort eventuellt testdb (om SQLite)
               rm -f var/test.db
-
-              # Skapa databas (utan --if-not-exists)
               php bin/console doctrine:database:create --env=test || true
-
-              # Migrera databasen
               php bin/console doctrine:migrations:migrate --env=test --no-interaction
-
-              # Kör testerna med kodtäckning
               vendor/bin/phpunit --coverage-clover=var/coverage.clover
             coverage:
               file: var/coverage.clover
@@ -39,3 +32,19 @@ build:
       tests:
         override:
           - php-scrutinizer-run
+
+tools:
+  php_code_coverage:
+    enabled: true
+    filter:
+      excluded_paths:
+        - 'src/Controller/*'
+        - 'src/Entity/*'
+        - 'src/DataFixtures/*'
+        - 'src/Migrations/*'
+        - 'src/Repository/*'
+        - 'src/Service/*'
+        - 'src/Kernel.php'
+        - 'tests/*'
+        - 'vendor/*'
+
