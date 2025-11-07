@@ -2,7 +2,10 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}BlackJack{% endblock %}</title>
+
+    {% block head %}{% endblock %}
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('project') }}
@@ -13,9 +16,8 @@
     <nav>
         <a href="{{ path('proj_landing') }}">Start</a>
         <a href="{{ path('proj_blackjack_start') }}">Spela</a>
-        <a href="{{ path('game_documentation') }}">Om Projektet</a>
+        <a href="{{ path('proj_about') }}">Om Projektet</a>
         <a href="{{ path('home') }}">Tillbaka till verkligheten</a>
-                
     </nav>
 </header>
 

@@ -166,10 +166,51 @@ TIL (Today I Learned)
 Min TIL från det här momentet är:
 Det lönar sig inte att slarva.
 Allt jag hoppade över eller inte tänkte på i början fick jag göra om sen, för att få en bra rapport i Scrutinizer. Det hade sparat tid om jag varit noggrann från början.</p>
-    </section>
     <section>
-     <h2>kmom10</h2>
-    <p></p>
+    <h2>kmom10</h2>
 
-    </section>
+    <h3>Webbplats – Landningssida</h3>
+    <p>
+        Jag skapade en ny landningssida för projektet under <code>/proj</code>. Sidan har en egen navbar med länkar som bara gäller projektet, vilket gör att den skiljer sig från report-sidan. Jag ändrade färger, typsnitt och layout på header och footer för att ge sidan ett eget utseende och skapa en casinokänsla.
+    </p>
+    <p>
+        På sidan finns en kort presentation av projektet, så att besökaren direkt kan se vad projektet handlar om. Jag valde att fokusera på kortspel (Black Jack) och implementerade grundläggande spellogik. Det var i stort sett en uppdatering av Game21-logiken som vi redan hade från tidigare kursmoment. Sidan fungerar och kan startas lokalt med Symfony-servern.
+    </p>
+
+    <h3>Repo och dokumentation</h3>
+    <p>
+        Mitt git-repo har en README.md som beskriver innehållet i projektet, varför det finns och hur man startar det. Jag lade till klickbara badges för Scrutinizer-rapporter som visar build, code quality och code coverage. Dessutom har jag uppdaterat <code>docs/</code> med kodtäckningsrapporter.
+    </p>
+    <p>
+        Detta gör det enkelt för andra att förstå projektet, klona det och köra det själva.
+    </p>
+
+    <h3>Kodtäckning och tester</h3>
+    <p>
+        När det gäller krav 3 skrev jag PHPUnit-tester för spellogiken och vissa hjälpfunktioner. Kodtäckningen för de relevanta filerna ligger runt 83–85 %, vilket är nära kursens mål på 90 %. Jag exkluderade irrelevanta controller-filer som inte påverkar logiken, eftersom dessa annars drar ner täckningen.
+    </p>
+    <p>
+        Den största utmaningen var egentligen att förstå och konfigurera kodtäckning och Scrutinizer korrekt. Jag spenderade mycket tid på att testa även controllers, vilket skapade fel och förvirring. Efter nästan fyra månader lyckades jag slutligen lösa problemen.
+    </p>
+    <p>
+        Jag genererade både textbaserad och HTML-rapport i <code>docs/coverage/</code> för att tydligt visa vilka delar av koden som testas.
+    </p>
+
+    <h3>Allmänt om projektet</h3>
+    <p>
+        Projektet har varit roligt och lärorikt, även om det tog tid att få Scrutinizer och testerna att fungera korrekt. Att skapa en separat projekt-sida med egen navbar och layout gick smidigt. De största utmaningarna låg i att få tester och kodtäckning att fungera tillsammans med Scrutinizer.
+    </p>
+    <p>
+        Projektet var lagom stort och jag lärde mig mycket. Det tog 4–5 månader, men jag är nöjd med resultatet.
+    </p>
+
+    <h3>Tankar om kursen</h3>
+    <p>
+        Från den här tidsdistansen tycker jag att kursen var bra. Det var en bra förberedelse för JS-ramverkskursen till exempel. Materialet och handledningen har varit tydliga och hjälpsamma. Projektuppgifterna var lagom utmanande och gav mig en god förståelse för objektorienterad PHP och MVC.
+    </p>
+    <p>
+        Möjligheten att jobba med tester och Scrutinizer var en bra erfarenhet även om installation och beroenden ibland strulade, men det är det bästa sättet att lära sig. Jag skulle ge kursen 8/10 och rekommenderar den till andra som vill lära sig webbutveckling med PHP och MVC.
+    </p>
+</section>
+
 {% endblock %}
