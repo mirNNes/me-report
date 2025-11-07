@@ -57,7 +57,7 @@ class ProjectController extends AbstractController
 
         if ($game instanceof BlackJack && $game->getGameState()['roundActive']) {
             $game->playerHit($hand);
-            $session->set('blackjack', $game); // Spara tillbaka efter ändring
+            $session->set('blackjack', $game);
         }
 
         return $this->redirectToRoute('proj_blackjack_play');
@@ -70,7 +70,7 @@ class ProjectController extends AbstractController
 
         if ($game instanceof BlackJack && $game->getGameState()['roundActive']) {
             $game->playerStand($hand);
-            $session->set('blackjack', $game); // Spara tillbaka efter ändring
+            $session->set('blackjack', $game);
         }
 
         return $this->redirectToRoute('proj_blackjack_play');

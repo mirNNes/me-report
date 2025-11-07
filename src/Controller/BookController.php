@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException; // Need this for clean 404
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route('/library')]
 final class BookController extends AbstractController
@@ -49,10 +49,6 @@ final class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * FIX: Changed argument from Book $book to int $id to prevent automatic entity lookup failure
-     * when fixtures are not loaded in the test environment.
-     */
     #[Route('/{id}', name: 'app_book_show', methods: ['GET'])]
     public function show(int $id, BookRepository $bookRepository): Response
     {
@@ -67,9 +63,6 @@ final class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * FIX: Changed argument from Book $book to int $id.
-     */
     #[Route('/{id}/edit', name: 'app_book_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, int $id, BookRepository $bookRepository, EntityManagerInterface $entityManager): Response
     {
@@ -94,9 +87,6 @@ final class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * FIX: Changed argument from Book $book to int $id.
-     */
     #[Route('/{id}', name: 'app_book_delete', methods: ['POST'])]
     public function delete(Request $request, int $id, BookRepository $bookRepository, EntityManagerInterface $entityManager): Response
     {

@@ -12,7 +12,7 @@ class CardTest extends TestCase
         $card = new Card("hearts", 1);
         $this->assertEquals("hearts", $card->getSuit());
         $this->assertEquals(1, $card->getNumericValue());
-        $this->assertEquals("A", $card->getValue());  // "A" för ess
+        $this->assertEquals("A", $card->getValue());
     }
 
     public function testGetSuitSymbol(): void
@@ -29,7 +29,7 @@ class CardTest extends TestCase
 
     public function testGetAsString(): void
     {
-        $card = new Card("diamonds", 12); // Q
+        $card = new Card("diamonds", 12);
         $expected = "[" . $card->getValue() . $card->getSuitSymbol() . "]";
         $this->assertEquals($expected, "[" . $card->getValue() . $card->getSuitSymbol() . "]");
     }
