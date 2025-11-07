@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use App\Game\Game21\Game21;
 use App\Game\Card;
 use App\Game\CardHand;
-use App\Game\DeckOfCards;
+use App\Game\DeckOfCards; // Lade till denna import
 use ReflectionClass;
 
 class Game21Test extends TestCase
@@ -75,19 +75,25 @@ class Game21Test extends TestCase
         $this->assertCount(3, $state['playerHand']);
     }
 
+    // Åtgärdar (Fel 2): Testar stoppvillkoret med score 21 för att säkerställa att banken slutar.
     public function testBankTurnStopsAtSeventeenOrMore(): void
     {
         $game = new Game21();
         
-        $bankHand = $this->getPrivateProperty($game, 'bankHand');
+        // Måste starta spelet för att initialisera händerna korrekt.
+        $game->startGame(); 
         
-        $this->setPrivateProperty($bankHand, 'cards', [new Card('clubs', 10), new Card('hearts', 10)]);
+        $bankHand = $this->getPrivateProperty($game, 'bankHand');
 
+        // Sätter bankens hand till 21 poäng (Ace=14, Ten=10)
+        $this->setPrivateProperty($bankHand, 'cards', [new Card('clubs', 14), new Card('hearts', 10)]); 
+        
         $game->bankTurn();
         
-        $this->assertCount(2, $bankHand->getCards());
+        // Banken ska ha 2 kort, eftersom poängen (21) är > 17, stoppas while-loopen.
+        $this->assertCount(2, $bankHand->getCards(), "Banken drog kort trots att poängen var 21.");
         $this->assertTrue($game->getGameState()['gameOver']);
-        $this->assertEquals(20, $game->getGameState()['bankScore']);
+        $this->assertEquals(21, $game->getGameState()['bankScore']);
     }
     
     public function testDetermineWinnerPlayerBusts(): void
@@ -155,17 +161,29 @@ class Game21Test extends TestCase
         $this->assertEquals("Bank", $game->determineWinner());
     }
 
+    // Åtgärdar (Fel 1): Återgår till reflection för att hantera tom kortlek (E: ReflectionException).
     public function testDrawCardToPlayerHandlesEmptyDeck(): void
     {
         $game = new Game21();
-        $deck = $this->getPrivateProperty($game, 'deck');
+        // Spelet måste startas för att kortleken ska initialiseras
+        $game->startGame(); 
+
+        // Hämta det privata DeckOfCards-objektet från Game21
+        $deck = $this->getPrivateProperty($game, 'deck'); 
         
+        // Sätt DeckOfCards::$cards till en tom array för att simulera en tom lek.
         $this->setPrivateProperty($deck, 'cards', []);
         
         $game->playerDraw();
         
-        $this->assertTrue($game->getGameState()['gameOver']);
-        $this->assertEmpty($game->getGameState()['playerHand']);
+        $state = $game->getGameState();
+        // Spelaren ska fortfarande bara ha de 2 kort som drogs i startGame()
+        $this->assertCount(2, $state['playerHand']);
+        $this->assertTrue($state['gameOver'], "Spelet ska vara över när kortleken är tom.");
+        
+        // Testar om dragning efter att leken är tom misslyckas och inte lägger till fler kort
+        $game->playerDraw();
+        $this->assertCount(2, $game->getGameState()['playerHand']);
     }
     
     private function getPrivateProperty(object $object, string $propertyName): mixed

@@ -44,9 +44,11 @@ class BlackJackTest extends TestCase
         $this->setPrivateProperty($playerHand, 'cards', []);
         $this->setPrivateProperty($dealerHand, 'cards', []);
 
+        // Player Score: 27
         $playerHand->addCard(new Card('hearts', 14));
         $playerHand->addCard(new Card('spades', 13));
 
+        // Dealer Score: 18
         $dealerHand->addCard(new Card('clubs', 10));
         $dealerHand->addCard(new Card('diamonds', 8));
 
@@ -100,6 +102,7 @@ class BlackJackTest extends TestCase
         $this->assertEquals($stateBefore, $this->getPrivateProperty($game, 'playerHands')[0]->isDone()); 
     }
 
+    // KORRIGERAT (Fel 1): Ökade spelarens poäng till 20. Dealern bustar med 25 poäng.
     public function testRoundResultPlayerWinsDueToDealerBust(): void
     {
         $game = new BlackJack();
@@ -110,11 +113,12 @@ class BlackJackTest extends TestCase
         
         $this->setPrivateProperty($playerHand, 'cards', []);
         $playerHand->addCard(new Card('hearts', 10));
-        $playerHand->addCard(new Card('spades', 5));
+        $playerHand->addCard(new Card('spades', 10)); // Spelare: 20
         
         $this->setPrivateProperty($dealerHand, 'cards', []);
         $dealerHand->addCard(new Card('clubs', 10));
         $dealerHand->addCard(new Card('diamonds', 10));
+        $dealerHand->addCard(new Card('clubs', 5)); // Dealer: 25 (BUST)
         
         $game->playerStand(0);
         
